@@ -1,5 +1,4 @@
-import Link from 'next/link'
-import React from 'react'
+import Link from 'next/link';
 
 export default function ContactCTASection() {
   return (
@@ -20,5 +19,5 @@ export default function ContactCTASection() {
               </Link>
             </div>
           </section>
-  )
+  );
 }

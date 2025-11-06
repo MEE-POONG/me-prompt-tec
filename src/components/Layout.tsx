@@ -3,7 +3,7 @@
  * ME PROMPT TECHNOLOGY
  */
 
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 
@@ -15,7 +15,7 @@ interface LayoutProps {
 
 export default function Layout({
   children,
-  title = 'มีพร้อมเทคโนโลยี - ME PROMPT TECHNOLOGY',
+  title = 'มีพร้อมท์เทคโนโลยี - ME PROMPT TECHNOLOGY',
   description = 'บริษัทพัฒนาซอฟต์แวร์และโซลูชันดิจิทัล ผู้เชี่ยวชาญด้าน Web & Mobile Development, AI และ Automation',
 }: LayoutProps) {
   return (

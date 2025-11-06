@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function ServicesSection() {
   return (
     <section className="py-20 bg-white">
