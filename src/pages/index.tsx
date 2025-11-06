@@ -13,13 +13,13 @@ import ContactCTASection from '@/container/Home/ContactCTASection';
 
 export default function Home() {
   return (
-    <Layout>ffff
-     <HeroSection/>aaa
-     <ServicesSection/>
-      <FeaturedProjectsSection/>  
-<InternshipCTASection/>  
-<PartnersSection/>  
-<ContactCTASection/>
+    <Layout>
+      <HeroSection />
+      <ServicesSection />
+      <FeaturedProjectsSection />
+      <InternshipCTASection />
+      <PartnersSection />
+      <ContactCTASection />
     </Layout>
   );
 }
