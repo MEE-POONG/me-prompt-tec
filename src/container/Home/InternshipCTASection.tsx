@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function InternshipCTASection() {
   return (
-    <section className="py-20 bg-linear-to-r from-indigo-600 to-purple-600 text-white">
+    <section className="py-20 bg-blue-700 ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
             เข้าร่วมทีมกับเรา
@@ -14,13 +14,15 @@ export default function InternshipCTASection() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-12">
             {[
-              { label: 'โปรเจกต์จริง', icon: '💼' },
-              { label: 'เทคโนโลยีล่าสุด', icon: '🚀' },
-              { label: 'ทีมมืออาชีพ', icon: '👥' },
-              { label: 'ประสบการณ์', icon: '⭐' },
+              { label: 'โปรเจกต์จริง', icon: <img width="48" height="48" src="https://img.icons8.com/fluency/48/blueprint--v1.png" alt="blueprint--v1"/> },
+              { label: 'เทคโนโลยีล่าสุด', icon: <img width="48" height="48" src="https://img.icons8.com/fluency/48/electronics.png" alt="electronics"/> },
+              { label: 'ทีมมืออาชีพ', icon: <img width="48" height="48" src="https://img.icons8.com/fluency/48/group-foreground-selected.png" alt="group-foreground-selected"/> },
+              { label: 'ประสบการณ์', icon: <img width="30" height="30" src="https://img.icons8.com/poly/30/filled-star.png" alt="filled-star"/> },
             ].map((benefit) => (
               <div key={benefit.label} className="text-center">
-                <div className="text-4xl mb-2">{benefit.icon}</div>
+                <div className="inline-flex justify-center items-center w-16 h-16 rounded-full bg-white shadow-xl mb-4 transform hover:scale-105 transition duration-300">
+                <div className="text-3xl leading-none">{benefit.icon}</div> 
+                </div>
                 <div className="font-semibold">{benefit.label}</div>
               </div>
             ))}
