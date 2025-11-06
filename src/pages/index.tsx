@@ -3,7 +3,6 @@
  * ME PROMPT TECHNOLOGY
  */
 
-import Link from 'next/link';
 import Layout from '@/components/Layout';
 import HeroSection from '@/container/Home/HeroSection';
 import ServicesSection from '@/container/Home/ServicesSection';
@@ -15,7 +14,7 @@ import ContactCTASection from '@/container/Home/ContactCTASection';
 export default function Home() {
   return (
     <Layout>ffff
-     <HeroSection/>
+     <HeroSection/>aaa
      <ServicesSection/>
       <FeaturedProjectsSection/>  
 <InternshipCTASection/>  
