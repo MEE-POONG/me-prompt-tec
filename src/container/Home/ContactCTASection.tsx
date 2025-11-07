@@ -13,7 +13,7 @@ export default function ContactCTASection() {
               </p>
               <Link
                 href="/contact"
-                className="inline-block bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+                className="inline-block text-white px-8 py-3 rounded-lg font-semibold transition-all bg-linear-to-r from-yellow-500 via-yellow-500 to-orange-500 hover:from-yellow-600 hover:via-yellow-600 hover:to-orange-600 shadow-md hover:shadow-lg"
               >
                 ติดต่อเรา
               </Link>
