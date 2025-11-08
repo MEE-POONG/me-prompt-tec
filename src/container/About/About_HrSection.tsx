@@ -1,9 +1,44 @@
-import React from 'react'
+import Link from "next/link";
+import Image from "next/image";
+import React from "react";
 
 export default function About_HrSection() {
   return (
-    <div>
-      <h2></h2>
-    </div>
-  )
+    <section className="relative bg-white">
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20"
+        style={{
+          backgroundImage:
+            "url('https://media.istockphoto.com/id/1471683196/vector/black-wavy-lines-isolated-on-white-abstract-background-design.jpg?s=612x612&w=0&k=20&c=OiEcsV3iKnIS96d2fHbVXQS-aWBeWaTfx5o_fY3Q_Rg=')",
+        }}
+      />
+
+      <div className="absolute inset-0 bg-grid-white/[0.05] bg-size-[20px_20px]" />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-55">
+        <div className="text-center">
+          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-blue-500 text-shadow-2xs">
+            เกี่ยวกับเรา
+          </h1>
+          <p className="text-xl md:text-2xl mb-4 text-gray-700 text-shadow-gray-800 text-shadow-2xs">
+            ME PROMPT TECHNOLOGY
+          </p>
+          <p className="text-lg md:text-xl mb-8 text-gray-700 max-w-3xl mx-auto text-shadow-gray-800 text-shadow-2xs">
+            สร้างสรรค์โซลูชันเทคโนโลยีที่ตอบโจทย์ธุรกิจและพัฒนาคนรุ่นใหม่
+          </p>
+        </div>
+
+        
+        {/* arrow head */}
+        <div className="flex justify-center mt-4 ">
+          <img
+            className="animate-bounce"
+            src="/img/arrowhead.png"
+            alt="arrowhead"
+            width={30}
+            height={30}
+          />
+        </div>
+      </div>
+    </section>
+  );
 }
