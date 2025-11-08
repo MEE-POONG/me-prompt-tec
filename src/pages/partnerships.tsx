@@ -1,11 +1,9 @@
 import Layout from "@/components/Layout";
 import React from "react";
 import Image from "next/image";
-// [NEW] ⭐️ Import Link และ FaFacebook (เพราะเราจะใช้การ์ดตัวเต็ม) ⭐️
 import Link from "next/link";
 import { FaFacebook } from "react-icons/fa";
 
-// [FIX] ⭐️ ข้อมูล 3 สาขา (เหมือนเดิม) ⭐️
 const allPartners = [
   { 
     id: 1, 
@@ -28,7 +26,6 @@ const allPartners = [
     altText: 'โลโก้ Multimedia Technology RMUTI',
     facebookUrl: 'https://www.facebook.com/multimedia.rmuti' 
   },
-  // (คุณสามารถเพิ่มพาร์ทเนอร์อื่นๆ ที่นี่ได้ในอนาคต)
 ];
 
 export default function PartnershipsPage() {
@@ -74,10 +71,10 @@ export default function PartnershipsPage() {
                   {/* (B) ส่วน Overlay (เบลอ+เลื่อนขึ้น) */}
                   <div 
                     className="absolute inset-x-0 bottom-0 
-                               h-1/2
+                               h-1/3
                                flex flex-col items-center justify-center p-4 
                                text-center 
-                               bg-gradient-to-t from-black/80 via-black/40 to-transparent
+                               bg-gradient-to-t from-black/20 via-black/40 to-transparent
                                backdrop-blur-sm
                                translate-y-full group-hover:translate-y-0
                                opacity-0 group-hover:opacity-100
@@ -106,7 +103,6 @@ export default function PartnershipsPage() {
             ))}
           </div>
 
-          {/* (B) ส่วน Call to Action (CTA) (เหมือนเดิม) */}
           <div className="mt-24 text-center max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
               สนใจร่วมเป็นพันธมิตรกับเรา?
