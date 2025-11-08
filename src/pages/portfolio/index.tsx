@@ -3,11 +3,14 @@ import Head from 'next/head';
 import Layout from '@/components/Layout';
 import Link from 'next/link';
 import { featuredProjects } from '@/data/portfolio';
-// 🚨 1. นำเข้าข้อมูลจากไฟล์ data (แก้ไข Path และคำสะกด)
 
 export default function Portfolio() {
+    // สร้าง const fetch จำลองการดึงข้อมูลมา ปล.ข้อมูลจาก '@/data/portflio' ก่อนเชื่อม api จริง
+    // set ข้อมูลก่อนทำ loop โชว์
+    // useEffect 
     return (
-        <Layout>
+        <Layout> {/* ⬅️ ใช้ Layout เป็นตัวครอบหลัก */}
+
             <Head>
                 <title>Portfolio | ผลงานทั้งหมดของเรา</title>
                 <meta name="description" content="รวมผลงานที่เราได้พัฒนาให้กับลูกค้า" />
@@ -23,25 +26,14 @@ export default function Portfolio() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
                         {featuredProjects.map((project) => (
                             <div key={project.id} className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow">
-                                
-                                {/* 🚨 2. แก้ไข Class รูปภาพ และ Gradient */}
-                                <div className="h-48 relative bg-gradient-to-br from-blue-400 to-purple-600" >
-                                    <img 
-                                        className="h-full w-full object-cover" // ⬅️ แก้ไขตรงนี้
-                                        src={project.imageSrc} 
-                                        alt={project.title}
-                                    />
+                                <div className="h-48 bg-linear-to-br from-blue-400 to-purple-600" >
+                                    <img className="h-48 w-96 object-unset" src={project.imageSrc} />
                                 </div>
 
                                 <div className="p-6">
                                     <div className="flex flex-wrap gap-2 mb-3">
-                                        {/* 🚨 3. แก้ไข Error การแสดงผล Array (ใช้ .map()) */}
-                                        {project.tags1.map(tag => (
-                                            <span key={tag} className="px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">{tag}</span>
-                                        ))}
-                                        {project.tags2.map(tag => (
-                                            <span key={tag} className="px-3 py-1 bg-green-100 text-green-800 text-xs rounded-full">{tag}</span>
-                                        ))}
+                                        <span className="px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">{project.tags1}</span>
+                                        <span className="px-3 py-1 bg-green-100 text-green-800 text-xs rounded-full">{project.tags2}</span>
                                     </div>
                                     <h3 className="text-xl font-bold text-gray-900 mb-2">
                                         {project.title}
@@ -49,7 +41,7 @@ export default function Portfolio() {
                                     <p className="text-gray-600 mb-4">
                                         {project.description}
                                     </p>
-                                    <Link href={project.link} className="text-blue-600 font-semibold hover:text-blue-700">
+                                    <Link href={`/portfolio/${project.id}`} className="text-blue-600 font-semibold hover:text-blue-700">
                                         ดูรายละเอียด →
                                     </Link>
                                 </div>

@@ -15,12 +15,15 @@ const PortfolioDetailPage: React.FC = () => {
 
     // ✅ เมื่อ id เปลี่ยน ให้ค้นหา project ที่ตรงกัน
     useEffect(() => {
-        if (typeof id === 'string') {
-            // กรณีดึงจากไฟล์ data (แบบ static)
-            const project = featuredProjects.find(() => id === id);
-            setProject(project);
-        }
-    }, [id]);
+    if (typeof id === 'string') {
+        console.log('ID:', id);
+        console.log('Projects:', featuredProjects);
+        const project = featuredProjects.find((proj) => proj.id.toString() === id);
+        console.log('Found project:', project);
+        setProject(project);
+    }
+}, [id]);
+
 
     // ✅ Loading state
     if (!project) {
