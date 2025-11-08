@@ -11,7 +11,7 @@ export default function Navbar() {
               <span className="text-2xl font-bold text-blue-600 transition-all duration-300 hover:scale-110">
                 ME PROMPT
               </span>
-              <span className="text-sm text-yellow-600 font-bold transition-all duration-300 hover:scale-110">
+              <span className="hidden md:flex text-sm text-yellow-600 font-bold transition-all duration-300 hover:scale-110">
                 มีพร้อมเทคโนโลยี
               </span>
             </Link>

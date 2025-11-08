@@ -8,6 +8,7 @@ import Head from "next/head";
 import Link from "next/link";
 import Navbar from "./ui/Navbar";
 import Footer from "./ui/Footer";
+import BackToTop from "./BackToTop";
 
 interface LayoutProps {
   children: ReactNode;
@@ -46,6 +47,9 @@ export default function Layout({
         <main className="grow">{children}</main>
 
         <Footer />
+
+        {/* Back to Top Button */}
+        <BackToTop />
       </div>
     </>
   );
