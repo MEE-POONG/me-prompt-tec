@@ -14,15 +14,14 @@ export default function ContactPage() {
           <h1 className="text-4xl md:text-6xl font-extrabold text-white">
             ติดต่อเรา
           </h1>
-          <p className="mt-4 text-xl text-gray-200 max-w-2xl mx-auto"> 
-            พบปัญหาหรือมีข้อสงสัย กรอกแบบฟอร์มด้านล่าง
+          <p className="mt-4 text-xl text-gray-200 max-w-1xl mx-auto"> 
+            พบปัญหาหรือมีข้อสงสัย กรอกแบบฟอร์มด้านล่าง หรือติดต่อเราผ่านช่องทางอื่นได้เลย
           </p>
-          <p>หรือติดต่อเราผ่านช่องทางอื่นได้เลย</p>
         </div>
       </section>
 
       {/* 2. ส่วนเนื้อหา (การ์ดสีขาว) */}
-      <section className="py-20 bg-linear-to-bl from-lime-400 via-blue-600 to-indigo-800">
+      <section className="pb-20 bg-linear-to-bl from-lime-400 via-blue-600 to-indigo-800">
         <div className="container mx-auto px-4 max-w-6xl">
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 bg-white p-8 md:p-12 rounded-2xl shadow-2xl">
@@ -126,7 +125,7 @@ export default function ContactPage() {
                     ></textarea>
                   </div>
                   <div>
-                    <button type="submit" className="w-full bg-yellow-500 text-white px-8 py-3 rounded-2xl font-semibold hover:bg-yellow-600 border-2 border-white/20 transition-all duration-300 hover:scale-105">
+                    <button type="submit" className="w-full bg-blue-500 text-white px-8 py-3 rounded-2xl font-semibold hover:bg-yellow-500 border-2 border-white/20 transition-all duration-300 hover:scale-105">
                       ส่งข้อความ
                     </button>
                   </div>
