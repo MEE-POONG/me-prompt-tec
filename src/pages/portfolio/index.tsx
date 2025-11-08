@@ -1,36 +1,102 @@
 import React from 'react';
 import Head from 'next/head';
-import FeaturedProjectsSection from '../../container/Home/FeaturedProjectsSection';
+import FeaturedProjectsSection from '../../container/Home/FeaturedProjectsSection'; 
 import Layout from '@/components/Layout';
+import Link from 'next/link';
+const featuredProjects = [
+    { 
+        id: 1, 
+        title: "E-Commerce Platform", 
+        description: "สร้างประสบการณ์ช้อปปิ้งที่ราบรื่นและรวดเร็วบน Next.js",
+         tags1: ["Firebase"], tags2: ["React"], 
+        link: "/portfolio/project-1",
+        imageSrc: "/img/aaa.jpg", // Path รูปภาพที่ 1
+    },
+    { 
+        id: 2, 
+        title: "SaaS Dashboard App", 
+        description: "แดชบอร์ดจัดการข้อมูลผู้ใช้งานแบบเรียลไทม์ด้วย React Hooks.",
+        tags1: ["Firebase"], tags2: ["React"], 
+        link: "/portfolio/project-2",
+        imageSrc: "/img/www.jpg", // Path รูปภาพที่ 2
+    },
+    { 
+        id: 3, 
+        title: "Company Portfolio Site", 
+        description: "เว็บไซต์องค์กรที่เน้นดีไซน์ UI/UX และการทำ SEO ที่ดี.",
+         tags1: ["Firebase"], tags2: ["React"], 
+        link: "/portfolio/project-3",
+        imageSrc: "/img/pic.jpg", // Path รูปภาพที่ 3
+
+    },
+    {
+         id: 4, 
+        title: "Company Portfolio Site", 
+        description: "เว็บไซต์องค์กรที่เน้นดีไซน์ UI/UX และการทำ SEO ที่ดี.",
+         tags1: ["Firebase"], tags2: ["React"], 
+        link: "/portfolio/project-4",
+        imageSrc: "/img/www.jpg", // Path รูปภาพที่ 3
+    },
+    {
+         id: 5, 
+        title: "Company Portfolio Site", 
+        description: "เว็บไซต์องค์กรที่เน้นดีไซน์ UI/UX และการทำ SEO ที่ดี.",
+         tags1: ["Firebase"], tags2: ["React"], 
+        link: "/portfolio/project-5",
+        imageSrc: "/img/aaa.jpg", // Path รูปภาพที่ 3
+    },
+    {
+         id: 6, 
+        title: "Company Portfolio Site", 
+        description: "เว็บไซต์องค์กรที่เน้นดีไซน์ UI/UX และการทำ SEO ที่ดี.",
+         tags1: ["Firebase"], tags2: ["React"], 
+        link: "/portfolio/project-6",
+        imageSrc: "/img/pic.jpg", // Path รูปภาพที่ 3
+    },
+];
 export default function Portfolio() {
     return (
-
-
-        <Layout>
+        <Layout> {/* ⬅️ ใช้ Layout เป็นตัวครอบหลัก */}
 
             <Head>
                 <title>Portfolio | ผลงานทั้งหมดของเรา</title>
                 <meta name="description" content="รวมผลงานที่เราได้พัฒนาให้กับลูกค้า" />
             </Head>
-
-            {/* ⬅️ แทนที่ <Layout> ด้วย <div> ที่มี Class พื้นฐาน */}
-            <div className="min-h-screen flex flex-col">
-
-                {/* ส่วน Header ของหน้า Portfolio */}
-                <div className="bg-white py-20 text-center">
-                    <h1 className="text-5xl font-extrabold text-gray-900 mb-4">
-                        ผลงานทั้งหมด
-                    </h1>
-                    <p className="text-xl text-gray-600 max-w-3xl mx-auto px-4">
-                        เราสร้างสรรค์เว็บไซต์และแอปพลิเคชันที่ตอบโจทย์ธุรกิจของคุณด้วยเทคโนโลยีล่าสุด
-                    </p>
+            <div className="bg-white py-20 text-center ">
+                <h1 className="text-5xl font-extrabold text-gray-900 mb-4">
+                    ผลงานทั้งหมด
+                </h1>
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto px-4 mb-4">
+                    เราสร้างสรรค์เว็บไซต์และแอปพลิเคชันที่ตอบโจทย์ธุรกิจของคุณด้วยเทคโนโลยีล่าสุด
+                </p>
+                <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
+                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+            {featuredProjects.map((project) => (
+              <div key={project.id} className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow">
+                <div className="h-48 bg-linear-to-br from-blue-400 to-purple-600" >
+                <img className="h-48 w-96 object-unset" src={project.imageSrc}/>
                 </div>
 
-                {/* นำเข้าส่วนแสดงผลโปรเจกต์เด่น/ทั้งหมด */}
-                {/* <FeaturedProjectsSection />  */}
-
+                <div className="p-6">
+                  <div className="flex flex-wrap gap-2 mb-3">
+                    <span className="px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full">{project.tags1}</span>
+                    <span className="px-3 py-1 bg-green-100 text-green-800 text-xs rounded-full">{project.tags2}</span>
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-600 mb-4">
+                    {project.description}
+                  </p>
+                  <Link href="/portfolio/portfoliodetail" className="text-blue-600 font-semibold hover:text-blue-700">
+                    ดูรายละเอียด →
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
             </div>
-            {/* ⬅️ จบ div แทน </Layout> */}
+</div>
         </Layout>
     );
 }

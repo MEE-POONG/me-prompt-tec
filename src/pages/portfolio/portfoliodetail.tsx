@@ -1,15 +1,20 @@
 
+import Layout from '@/components/Layout';
 import Link from 'next/link';
 import rea from 'react';
-// กำหนด Type สำหรับ Component Props (ถ้ามี)
-// เนื่องจากใช้ useRouter, เราไม่จำเป็นต้องกำหนด Props ในกรณีนี้
-
+import Image from 'next/image';
+import index from 'next/index';
 const PortfolioDetailPage: React.FC = () => {
     
     return (
-        <>
-           
-        </>
+        <Layout>
+           <div>
+    
+            <head>
+                <title></title>
+            </head>
+           </div>
+        </Layout>
     );
 };
 
