@@ -16,8 +16,8 @@ export default function ContactPage() {
           </h1>
           <p className="mt-4 text-xl text-gray-200 max-w-2xl mx-auto"> 
             พบปัญหาหรือมีข้อสงสัย กรอกแบบฟอร์มด้านล่าง
-            <p>หรือติดต่อเราผ่านช่องทางอื่นได้เลย</p>
           </p>
+          <p>หรือติดต่อเราผ่านช่องทางอื่นได้เลย</p>
         </div>
       </section>
 
