@@ -99,7 +99,7 @@ export default function Internship() {
         </div>
       </section>
       {/* ===== 4. Application Process (ขั้นตอนการสมัคร) ===== */}
-      <section className="py-20 bg-gray-100"> {/* 🚨 7. สลับเป็น bg-gray-100 */}
+      <section className="py-7 bg-gray-100"> {/* 🚨 7. สลับเป็น bg-gray-100 */}
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
                 ขั้นตอนการสมัคร
