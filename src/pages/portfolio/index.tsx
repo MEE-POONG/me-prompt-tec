@@ -1,11 +1,13 @@
 import React from 'react';
 import Head from 'next/head';
-import FeaturedProjectsSection from '../../container/Home/FeaturedProjectsSection';
 import Layout from '@/components/Layout';
 import Link from 'next/link';
-import { featuredProjects } from '@/data/portflio';
+import { featuredProjects } from '@/data/portfolio';
 
 export default function Portfolio() {
+    // สร้าง const fetch จำลองการดึงข้อมูลมา ปล.ข้อมูลจาก '@/data/portflio' ก่อนเชื่อม api จริง
+    // set ข้อมูลก่อนทำ loop โชว์
+    // useEffect 
     return (
         <Layout> {/* ⬅️ ใช้ Layout เป็นตัวครอบหลัก */}
 
