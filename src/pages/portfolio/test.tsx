@@ -2,15 +2,12 @@ import Layout from '@/components/Layout';
 import React from 'react';
 import Head from 'next/head'; 
 import Link from 'next/link'; 
-import Image from 'next/image';
-
-// 🚨 1. Import ไอคอน (ต้องติดตั้ง react-icons ก่อน: npm install react-icons)
-import { FaBriefcase, FaRocket, FaUsers, FaStar } from 'react-icons/fa';
+import Image from 'next/image'; // 🚨 เพิ่ม import Image สำหรับ banner
 
 export default function Internship() {
   return (
     <Layout>
-       <Head>
+      <Head>
         <title>Internship Program | โปรแกรมฝึกงาน</title>
         <meta name="description" content="เข้าร่วมโปรแกรมฝึกงานกับเรา" />
       </Head>
@@ -38,11 +35,20 @@ export default function Internship() {
             href="#open-positions" // ลิงก์ไปยังส่วนตำแหน่งงาน (ใช้ ID)
             className="mt-8 inline-block bg-white text-blue-800 px-8 py-3 rounded-full font-semibold text-lg hover:bg-gray-100 transition-colors shadow-lg"
           >
-            ดูโปรแกรมฝึกงาน
+            ดูตำแหน่งที่เปิดรับ
           </Link>
         </div>
       </section>
 
+      
+      <section className="bg-white py-16 text-center"> {/* 🚨 ปรับลด py */}
+        <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4"> {/* 🚨 ปรับลดขนาดตัวอักษร */}
+          โปรแกรมฝึกงาน (Internship)
+        </h1>
+        <p className="text-lg text-gray-600 max-w-3xl mx-auto px-4"> 
+          เริ่มต้นเส้นทางอาชีพของคุณกับเรา เรียนรู้จากโปรเจกต์จริงและทีมงานมืออาชีพ
+        </p>
+      </section> 
 
       {/* ===== 2. Open Positions (ตำแหน่งที่เปิดรับ) ===== */}
       <section id="open-positions" className="py-20 bg-gray-100"> {/* 🚨 เพิ่ม id="open-positions" */}
@@ -55,10 +61,10 @@ export default function Internship() {
           </h2>
           
           <div className="space-y-6">
-            {/* 🚨 3. เปลี่ยน Card เป็น bg-white (ขาวบนเทา) และเพิ่ม Hover Effect */}
-            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl hover:ring-2 hover:ring-blue-500 transition-all duration-300 flex flex-col md:flex-row justify-between items-start md:items-center">
+            {/* ตำแหน่งที่ 1 */}
+            <div className="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col md:flex-row justify-between items-start md:items-center">
               <div>
-                <h3 className="text-xl font-bold text-blue-800">Frontend Developer (Intern)</h3>
+                <h3 className="text-xl font-bold text-gray-900">Frontend Developer (Intern)</h3>
                 <p className="text-gray-600 mt-1">เรียนรู้ React, Next.js, และ Tailwind CSS</p>
               </div>
               <Link 
@@ -69,9 +75,10 @@ export default function Internship() {
               </Link>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl hover:ring-2 hover:ring-blue-500 transition-all duration-300 flex flex-col md:flex-row justify-between items-start md:items-center">
+            {/* ตำแหน่งที่ 2 */}
+            <div className="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col md:flex-row justify-between items-start md:items-center">
               <div>
-                <h3 className="text-xl font-bold text-blue-800">Backend Developer (Intern)</h3>
+                <h3 className="text-xl font-bold text-gray-900">Backend Developer (Intern)</h3>
                 <p className="text-gray-600 mt-1">เรียนรู้ Node.js, Prisma, และ Database</p>
               </div>
               <Link 
@@ -82,9 +89,10 @@ export default function Internship() {
               </Link>
             </div>
 
-            <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl hover:ring-2 hover:ring-blue-500 transition-all duration-300 flex flex-col md:flex-row justify-between items-start md:items-center">
+            {/* ตำแหน่งที่ 3 */}
+            <div className="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col md:flex-row justify-between items-start md:items-center">
               <div>
-                <h3 className="text-xl font-bold text-blue-800">UI/UX Designer (Intern)</h3>
+                <h3 className="text-xl font-bold text-gray-900">UI/UX Designer (Intern)</h3>
                 <p className="text-gray-600 mt-1">เรียนรู้ Figma, Wireframing, และ Prototyping</p>
               </div>
               <Link 
@@ -98,27 +106,27 @@ export default function Internship() {
           </div>
         </div>
       </section>
-      {/* ===== 4. Application Process (ขั้นตอนการสมัคร) ===== */}
-      <section className="py-20 bg-gray-100"> {/* 🚨 7. สลับเป็น bg-gray-100 */}
+{/* ===== 4. Application Process (ขั้นตอนการสมัคร) ===== */}
+      <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
                 ขั้นตอนการสมัคร
             </h2>
             <div className="flex flex-col md:flex-row justify-between text-center gap-8">
                 {/* ขั้นตอนที่ 1 */}
-                <div className="flex-1 bg-white p-6 rounded-lg shadow-lg">
+                <div className="flex-1">
                     <div className="inline-flex justify-center items-center w-16 h-16 rounded-full bg-blue-100 text-blue-600 font-bold text-2xl mb-4">1</div>
                     <h3 className="text-xl font-semibold text-gray-800 mb-2">ส่ง Resume/Portfolio</h3>
                     <p className="text-gray-600">ส่งเอกสารของคุณผ่านทางอีเมลหรือลิงก์สมัคร</p>
                 </div>
                 {/* ขั้นตอนที่ 2 */}
-                <div className="flex-1 bg-white p-6 rounded-lg shadow-lg">
+                <div className="flex-1">
                     <div className="inline-flex justify-center items-center w-16 h-16 rounded-full bg-blue-100 text-blue-600 font-bold text-2xl mb-4">2</div>
                     <h3 className="text-xl font-semibold text-gray-800 mb-2">สัมภาษณ์ออนไลน์</h3>
                     <p className="text-gray-600">พูดคุยเกี่ยวกับความสนใจและทักษะของคุณ</p>
                 </div>
                 {/* ขั้นตอนที่ 3 */}
-                <div className="flex-1 bg-white p-6 rounded-lg shadow-lg">
+                <div className="flex-1">
                     <div className="inline-flex justify-center items-center w-16 h-16 rounded-full bg-blue-100 text-blue-600 font-bold text-2xl mb-4">3</div>
                     <h3 className="text-xl font-semibold text-gray-800 mb-2">ประกาศผล</h3>
                     <p className="text-gray-600">แจ้งผลการพิจารณาและนัดหมายวันเริ่มงาน</p>
@@ -126,7 +134,31 @@ export default function Internship() {
             </div>
         </div>
       </section>
+{/* 
+      <section className="py-20 bg-gray-100">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-16">
+            สิ่งที่คุณจะได้รับ
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { label: 'โปรเจกต์จริง', icon: '💼' },
+              { label: 'เทคโนโลยีล่าสุด', icon: '🚀' },
+              { label: 'ทีมมืออาชีพ', icon: '👥' },
+              { label: 'ประสบการณ์', icon: '⭐' },
+            ].map((benefit) => (
+              <div key={benefit.label} className="text-center">
+                <div className="inline-flex justify-center items-center w-16 h-16 rounded-full bg-white shadow-lg mb-4 transform hover:scale-105 transition duration-300">
+                  <span className="text-3xl">{benefit.icon}</span>
+                </div>
+                <div className="font-semibold text-gray-800">{benefit.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section> */}
 
+      
     </Layout>
   );
 }
