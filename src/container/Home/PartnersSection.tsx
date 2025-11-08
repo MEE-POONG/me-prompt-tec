@@ -45,7 +45,7 @@ export default function PartnersSection() {
           <div className="text-center mt-12">
             <Link
               href="/partnerships"
-              className="inline-block font-semibold bg-linear-to-r from-green-500 via-cyan-500 to-purple-500 bg-clip-text text-transparent hover:from-green-400 hover:via-cyan-400 hover:to-purple-400"
+              className="inline-block font-semibold text-yellow-5 bg-clip-text text-transparent hover:from-green-400 hover:via-cyan-400 hover:to-purple-400"
             >
               ดูความร่วมมือทั้งหมด →
             </Link>
