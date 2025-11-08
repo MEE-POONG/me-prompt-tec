@@ -105,6 +105,27 @@ export default function PartnershipsPage() {
               </div>
             ))}
           </div>
+
+          {/* (B) ส่วน Call to Action (CTA) (เหมือนเดิม) */}
+          <div className="mt-24 text-center max-w-3xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900">
+              สนใจร่วมเป็นพันธมิตรกับเรา?
+            </h2>
+            <p className="mt-4 text-lg text-gray-600">
+              เรามองหาพันธมิตรใหม่ๆ ทั้งสถาบันการศึกษาและบริษัทเอกชน
+              เพื่อร่วมกันสร้างสรรค์นวัตกรรมและพัฒนาบุคลากรด้านเทคโนโลยี
+              หากคุณสนใจ, ติดต่อเราได้เลย
+            </p>
+            <div className="mt-8">
+              <Link
+                href="/contact"
+                className="inline-block bg-yellow-500 text-white px-8 py-3 rounded-2xl font-semibold hover:bg-yellow-600 border-2 border-white/20 transition-all duration-300 hover:scale-105"
+              >
+                ติดต่อเราเลย
+              </Link>
+            </div>
+          </div>
+
         </div>
       </section>
     </Layout>
