@@ -9,7 +9,6 @@ const PortfolioDetailPage: React.FC = () => {
     return (
         <Layout>
            <div>
-    
             <head>
                 <title></title>
             </head>
