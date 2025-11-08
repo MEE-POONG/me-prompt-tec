@@ -40,21 +40,23 @@ export default function Internship() {
         </div>
       </section>
 
-      {/* ===== 1. Hero Section (ส่วนหัว - ปรับให้สั้นลง) ===== */}
-      <section className="bg-white py-16 text-center"> {/* 🚨 ปรับลด py */}
-        <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4"> {/* 🚨 ปรับลดขนาดตัวอักษร */}
+      {/* <section className="bg-white py-16 text-center"> 
+        <h1 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4"> 
           โปรแกรมฝึกงาน (Internship)
         </h1>
-        <p className="text-lg text-gray-600 max-w-3xl mx-auto px-4"> {/* 🚨 ปรับลดขนาดตัวอักษร */}
+        <p className="text-lg text-gray-600 max-w-3xl mx-auto px-4"> 
           เริ่มต้นเส้นทางอาชีพของคุณกับเรา เรียนรู้จากโปรเจกต์จริงและทีมงานมืออาชีพ
         </p>
-      </section>
+      </section>  */}
 
       {/* ===== 2. Open Positions (ตำแหน่งที่เปิดรับ) ===== */}
-      <section id="open-positions" className="py-20 bg-white"> {/* 🚨 เพิ่ม id="open-positions" */}
+      <section id="open-positions" className="py-20 bg-gray-100"> {/* 🚨 เพิ่ม id="open-positions" */}
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-16">
-            ตำแหน่งที่เปิดรับ
+            โปรแกรมฝึกงาน (Internship)
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto px-4"> {/* 🚨 ปรับลดขนาดตัวอักษร */}
+          เริ่มต้นเส้นทางอาชีพของคุณกับเรา เรียนรู้จากโปรเจกต์จริงและทีมงานมืออาชีพ
+        </p>
           </h2>
           
           <div className="space-y-6">
@@ -131,8 +133,7 @@ export default function Internship() {
             </div>
         </div>
       </section>
-
-      {/* ===== 3. Benefits Section (สิ่งที่คุณจะได้รับ) ===== */}
+{/* 
       <section className="py-20 bg-gray-100">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-16">
@@ -154,7 +155,7 @@ export default function Internship() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       
     </Layout>
