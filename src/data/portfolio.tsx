@@ -1,3 +1,14 @@
+export interface Project {
+    id: number;
+    title: string;
+    description: string;
+    tags1: string[];
+    tags2: string[];
+    link: string;
+    imageSrc: string;
+    techStack: string[];
+    // เพิ่ม field อื่นๆ ที่จำเป็น (gradient, details, etc.)
+}
 
 export const featuredProjects = [
     {
@@ -7,6 +18,7 @@ export const featuredProjects = [
         tags1: ["Firebase"], tags2: ["React"],
         link: "/portfolio/project-1",
         imageSrc: "/img/aaa.jpg", // Path รูปภาพที่ 1
+        techStack: []
     },
     {
         id: 2,
@@ -15,6 +27,7 @@ export const featuredProjects = [
         tags1: ["Firebase"], tags2: ["React"],
         link: "/portfolio/project-2",
         imageSrc: "/img/www.jpg", // Path รูปภาพที่ 2
+        techStack: []
     },
     {
         id: 3,
@@ -24,6 +37,7 @@ export const featuredProjects = [
         link: "/portfolio/project-3",
         imageSrc: "/img/pic.jpg", // Path รูปภาพที่ 3
 
+        techStack: []
     },
     {
         id: 4,
@@ -32,6 +46,7 @@ export const featuredProjects = [
         tags1: ["Firebase"], tags2: ["React"],
         link: "/portfolio/project-4",
         imageSrc: "/img/www.jpg", // Path รูปภาพที่ 3
+        techStack: []
     },
     {
         id: 5,
@@ -40,6 +55,7 @@ export const featuredProjects = [
         tags1: ["Firebase"], tags2: ["React"],
         link: "/portfolio/project-5",
         imageSrc: "/img/aaa.jpg", // Path รูปภาพที่ 3
+        techStack: []
     },
     {
         id: 6,
@@ -48,5 +64,6 @@ export const featuredProjects = [
         tags1: ["Firebase"], tags2: ["React"],
         link: "/portfolio/project-6",
         imageSrc: "/img/pic.jpg", // Path รูปภาพที่ 3
+        techStack: []
     },
 ];
