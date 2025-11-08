@@ -8,7 +8,7 @@ export default function ContactPage() {
     <Layout>
       
       {/* 1. HERO SECTION (Gradient) */}
-      <section className="py-24 md:py-32 text-white bg-gradient-to-r from-green-500 via-cyan-500 to-purple-500">
+      <section className="py-24 md:py-32 text-white bg-linear-to-tl from-lime-400 via-blue-600 to-indigo-800">
 
         <div className="container mx-auto px-4 max-w-6xl text-center">
           <h1 className="text-4xl md:text-6xl font-extrabold text-white">
@@ -16,13 +16,13 @@ export default function ContactPage() {
           </h1>
           <p className="mt-4 text-xl text-gray-200 max-w-2xl mx-auto"> 
             พบปัญหาหรือมีข้อสงสัย กรอกแบบฟอร์มด้านล่าง
-            หรือติดต่อเราผ่านช่องทางอื่นได้เลย
+            <p>หรือติดต่อเราผ่านช่องทางอื่นได้เลย</p>
           </p>
         </div>
       </section>
 
       {/* 2. ส่วนเนื้อหา (การ์ดสีขาว) */}
-      <section className="py-20 bg-gray-100">
+      <section className="py-20 bg-linear-to-bl from-lime-400 via-blue-600 to-indigo-800">
         <div className="container mx-auto px-4 max-w-6xl">
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 bg-white p-8 md:p-12 rounded-2xl shadow-2xl">
