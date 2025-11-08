@@ -1,13 +1,29 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import React from 'react'
+import { FaFacebook } from 'react-icons/fa'; 
 
 const universityPartners = [
   { 
     id: 1, 
-    name: 'มทร.อีสาน', 
-    logoPath: '/img/rmuti.png', 
-    altText: 'แบนเนอร์ต้อนรับนักศึกษาใหม่ มทร.อีสาน' 
+    name: 'Computer Science RMUTI', 
+    logoPath: '/img/logo_cs.jpg',
+    altText: 'โลโก้ Computer Science RMUTI',
+    facebookUrl: 'https://www.facebook.com/csrmuti?rdid=JnkW6ybRPUu45aAf&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F17z7FffR7e%2F#'
+  },
+  { 
+    id: 2, 
+    name: 'Information Systems RMUTI', 
+    logoPath: '/img/logo_is.jpg',
+    altText: 'โลโก้ Information Systems RMUTI',
+    facebookUrl: 'http://facebook.com/is.ba.rmuti' 
+  },
+  { 
+    id: 3, 
+    name: 'Multimedia Technology RMUTI', 
+    logoPath: '/img/logo_mt.jpg',
+    altText: 'โลโก้ Multimedia Technology RMUTI',
+    facebookUrl: 'https://www.facebook.com/multimedia.rmuti' 
   },
 ]
 
@@ -16,7 +32,8 @@ export default function PartnersSection() {
     <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="bg-linear-to-r from-green-500 via-cyan-500 to-purple-500 bg-clip-text text-5xl font-extrabold text-transparent ...">
+            
+            <h2 className="text-5xl font-extrabold text-yellow-500 hover:text-yellow-600">
               ความร่วมมือกับสถาบันการศึกษา
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-4">
@@ -24,20 +41,52 @@ export default function PartnersSection() {
             </p>
           </div>
 
-          <div className="flex justify-center items-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            
             {universityPartners.map((partner) => (
               <div 
-                key={partner.id} 
-                className="relative max-w-3xl bg-gray-100 rounded-lg p-4 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"  
+                key={partner.id}
+                className="bg-white rounded-xl shadow-lg border border-gray-100 
+                           transition-all duration-300 group overflow-hidden 
+                           hover:scale-105 hover:shadow-2xl" 
               >
-                <Image
-                  src={partner.logoPath}
-                  alt={partner.altText}
-                  width={800}
-                  height={300} 
-                  objectFit="cover" 
-                  className="w-full h-full object-cover rounded-md" 
-                />
+                <div className="relative w-full h-56 flex items-center justify-center"> 
+                  <Image
+                    src={partner.logoPath}
+                    alt={partner.altText}
+                    width={200}
+                    height={200}
+                    objectFit="contain" 
+                    className="max-w-full max-h-full" 
+                  />
+                  <div 
+                    className="absolute inset-x-0 bottom-0 
+                               h-1/3 
+                               flex flex-col items-center justify-center p-4 
+                               text-center 
+                               bg-gradient-to-t from-black/20 via-black/40 to-transparent 
+                               backdrop-blur-[2px]
+                               
+                               translate-y-full group-hover:translate-y-0
+                               opacity-0 group-hover:opacity-100
+                               transition-all duration-300 ease-out" 
+                  >
+                    <p className="font-bold text-lg text-white mb-2"> 
+                      {partner.name}
+                    </p>
+                    {partner.facebookUrl && ( 
+                      <Link 
+                        href={partner.facebookUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-white hover:text-blue-500 transition-colors duration-200"
+                      >
+                        <FaFacebook className="text-3xl" />
+                      </Link>
+                    )}
+                  </div>
+
+                </div>
               </div>
             ))}
           </div> 
@@ -45,7 +94,7 @@ export default function PartnersSection() {
           <div className="text-center mt-12">
             <Link
               href="/partnerships"
-              className="inline-block font-semibold text-yellow-500 bg-clip-text  hover:from-green-400 hover:via-cyan-400 hover:to-purple-400 transition-all hover:scale-105 duration-200 "
+              className="inline-block font-semibold text-yellow-500 hover:text-yellow-600 transition-all hover:scale-105 duration-200"
             >
               ดูความร่วมมือทั้งหมด →
             </Link>

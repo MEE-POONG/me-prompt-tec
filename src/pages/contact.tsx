@@ -1,13 +1,11 @@
 import Layout from "@/components/Layout";
 import React from "react";
-// Import ไอคอน (เหมือนเดิม)
 import { FaFacebook, FaYoutube, FaDiscord, FaLine, FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
 
 export default function ContactPage() {
   return (
     <Layout>
       
-      {/* 1. HERO SECTION (Gradient) */}
       <section className="py-24 md:py-32 text-white bg-gradient-to-r from-green-500 via-cyan-500 to-purple-500">
         
         <div className="container mx-auto px-4 max-w-6xl text-center">
@@ -21,18 +19,15 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* 2. ส่วนเนื้อหา (การ์ดสีขาว) ที่อยู่บนพื้นเทา (bg-gray-100) */}
       <section className="py-20 bg-gray-100">
         <div className="container mx-auto px-4 max-w-6xl">
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 bg-white p-8 md:p-12 rounded-2xl shadow-2xl">
             
-            {/* ===== ส่วนข้อมูลติดต่อ (ซ้าย) ===== */}
             <div>
               <h2 className="text-2xl font-bold mb-8 text-gray-800">
                 ข้อมูลการติดต่อ
               </h2>
-              {/* ... (โค้ดส่วนข้อมูลติดต่อ ไม่ต้องแก้) ... */}
               <div className="space-y-6 text-gray-700">
                 <div className="flex items-center gap-4">
                   <FaEnvelope className="text-2xl text-yellow-500" />
@@ -62,7 +57,6 @@ export default function ContactPage() {
               <h2 className="text-2xl font-bold mt-12 mb-6 text-gray-800">
                 ช่องทางโซเชียล
               </h2>
-              {/* ... (โค้ดส่วน Social ไม่ต้องแก้) ... */}
               <div className="flex items-center space-x-6">
                 <a
 
@@ -91,7 +85,6 @@ className="text-gray-400 hover:text-blue-600 transition-all duration-300 hover:s
               </div>
             </div>
 
-            {/* ===== ส่วนฟอร์ม (ขวา) ===== */}
             <div>
               <h2 className="text-2xl font-bold mb-8 text-gray-800">
                 ส่งข้อความถึงเรา
@@ -99,7 +92,6 @@ className="text-gray-400 hover:text-blue-600 transition-all duration-300 hover:s
               <form onSubmit={(e) => e.preventDefault()}>
                 <div className="space-y-6">
                   
-                  {/* [FIX] 1. แก้ไข Input 'ชื่อ-นามสกุล' */}
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
                       ชื่อ-นามสกุล
@@ -112,7 +104,6 @@ className="text-gray-400 hover:text-blue-600 transition-all duration-300 hover:s
                     />
                   </div>
                   
-                  {/* [FIX] 2. แก้ไข Input 'อีเมล' */}
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                       อีเมล
@@ -125,7 +116,6 @@ className="text-gray-400 hover:text-blue-600 transition-all duration-300 hover:s
                     />
                   </div>
                   
-                  {/* [FIX] 3. แก้ไข Textarea 'ข้อความ' */}
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
                       ข้อความ
@@ -159,14 +149,15 @@ className="text-gray-400 hover:text-blue-600 transition-all duration-300 hover:s
               แผนที่และการเดินทาง
             </h2>
             <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
-              บ้านเกาะ ซอย 3 ต.บ้านเกาะ อ.เมืองนครราชสีมา จ.นครราชสีมา 30000
+              {/* (ที่อยู่จริงของคุณ ที่คุณเพิ่งอัปเดต) */}
+              606/3 ม.5 ต.บ้านเกาะ อ.เมืองนครราชสีมา จ.นครราชสีมา
             </p>
           </div>
 
-          {/* [FIX] นี่คือโค้ด iframe "ตัวจริง" ที่แก้ให้แล้วครับ! */}
+          {/* [FIX] ⭐️ นี่คือโค้ด iframe "ตัวจริง" ที่ถูกต้องครับ! ⭐️ */}
           <div className="relative w-full overflow-hidden rounded-2xl shadow-2xl">
             <iframe 
-              src="https://maps.app.goo.gl/JZeMeFnQn3WWWqix6" 
+              src="https://www.google.com/maps/embed?..." 
               className="w-full h-96 md:h-[500px]"
               style={{ border: 0 }} 
               allowFullScreen={true} 
