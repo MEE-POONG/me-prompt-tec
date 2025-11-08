@@ -28,7 +28,7 @@ export default function PartnersSection() {
             {universityPartners.map((partner) => (
               <div 
                 key={partner.id} 
-                className="relative max-w-3xl bg-gray-100 rounded-lg p-4 shadow-xl hover:shadow-2xl transition-shadow duration-300" 
+                className="relative max-w-3xl bg-gray-100 rounded-lg p-4 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105"  
               >
                 <Image
                   src={partner.logoPath}
@@ -45,7 +45,7 @@ export default function PartnersSection() {
           <div className="text-center mt-12">
             <Link
               href="/partnerships"
-              className="inline-block font-semibold text-yellow-5 bg-clip-text text-transparent hover:from-green-400 hover:via-cyan-400 hover:to-purple-400"
+              className="inline-block font-semibold text-yellow-500 bg-clip-text  hover:from-green-400 hover:via-cyan-400 hover:to-purple-400 transition-all hover:scale-105 duration-200 "
             >
               ดูความร่วมมือทั้งหมด →
             </Link>
