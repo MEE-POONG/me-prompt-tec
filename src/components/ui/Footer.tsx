@@ -21,7 +21,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/about"
-                  className="text-gray-700 transition-all duration-300 hover:scale-125 hover:text-yellow-600"
+                  className="text-gray-700 hover:text-yellow-600 transition-all duration-300 hover:scale-110"
                 >
                   เกี่ยวกับเรา
                 </Link>
@@ -29,7 +29,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/portfolio"
-                  className="text-gray-700 transition-all duration-300 hover:scale-125 hover:text-yellow-600"
+                  className="text-gray-700 hover:text-yellow-600 transition-all duration-300 hover:scale-110"
                 >
                   ผลงาน
                 </Link>
@@ -37,7 +37,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/internship"
-                  className="text-gray-700 transition-all duration-300 hover:scale-125 hover:text-yellow-600"
+                  className="text-gray-700 hover:text-yellow-600 transition-all duration-300 hover:scale-110"
                 >
                   ฝึกงาน
                 </Link>
@@ -45,7 +45,7 @@ export default function Footer() {
               <li>
                 <Link
                   href="/partnerships"
-                  className="text-gray-700 transition-all duration-300 hover:scale-125 hover:text-yellow-600"
+                  className="text-gray-700 hover:text-yellow-600 transition-all duration-300 hover:scale-110"
                 >
                   พันธมิตร
                 </Link>
@@ -66,8 +66,8 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold mb-4">ติดต่อเรา</h4>
             <ul className="space-y-2 text-sm text-gray-700 ">
-              <li>Email: contact@meprompt.tech</li>
-              <li>Tel: +66-XX-XXX-XXXX</li>
+              <li>Email: me.prompt.tec@gmail.com</li>
+              <li>Tel: 063-494-1526</li>
               <li className="flex space-x-4 mt-4">
                 <a href="#" className="hover:text-yellow-600 transition-colors">
                   LinkedIn
