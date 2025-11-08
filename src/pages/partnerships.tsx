@@ -1,52 +1,107 @@
 import Layout from "@/components/Layout";
 import React from "react";
 import Image from "next/image";
+// [NEW] ⭐️ Import Link และ FaFacebook (เพราะเราจะใช้การ์ดตัวเต็ม) ⭐️
+import Link from "next/link";
+import { FaFacebook } from "react-icons/fa";
 
-// (สมมติ) เพิ่มข้อมูลพาร์ทเนอร์อื่นๆ เข้ามา
+// [FIX] ⭐️ ข้อมูล 3 สาขา (เหมือนเดิม) ⭐️
 const allPartners = [
-  { id: 1, name: 'มทร.อีสาน', logoPath: '/img/logo-rmuti.png' }, // (ควรใช้โลโก้แทนแบนเนอร์)
-  { id: 2, name: 'สถาบัน ก', logoPath: '/img/logo-a.png' },
-  { id: 3, name: 'สถาบัน ข', logoPath: '/img/logo-b.png' },
-  { id: 4, name: 'บริษัท ค', logoPath: '/img/logo-c.png' },
-  { id: 5, name: 'บริษัท ง', logoPath: '/img/logo-d.png' },
-  { id: 6, name: 'สถาบัน จ', logoPath: '/img/logo-e.png' },
+  { 
+    id: 1, 
+    name: 'Computer Science RMUTI', 
+    logoPath: '/img/logo_cs.jpg',
+    altText: 'โลโก้ Computer Science RMUTI',
+    facebookUrl: 'https://www.facebook.com/csrmuti?rdid=JnkW6ybRPUu45aAf&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F17z7FffR7e%2F#'
+  },
+  { 
+    id: 2, 
+    name: 'Information Systems RMUTI', 
+    logoPath: '/img/logo_is.jpg',
+    altText: 'โลโก้ Information Systems RMUTI',
+    facebookUrl: 'http://facebook.com/is.ba.rmuti' 
+  },
+  { 
+    id: 3, 
+    name: 'Multimedia Technology RMUTI', 
+    logoPath: '/img/logo_mt.jpg',
+    altText: 'โลโก้ Multimedia Technology RMUTI',
+    facebookUrl: 'https://www.facebook.com/multimedia.rmuti' 
+  },
+  // (คุณสามารถเพิ่มพาร์ทเนอร์อื่นๆ ที่นี่ได้ในอนาคต)
 ];
 
 export default function PartnershipsPage() {
   return (
     <Layout>
+      
+      {/* [NEW] ⭐️ 1. เพิ่ม Hero Section (ยืมจากหน้า Contact) ⭐️ */}
+      <section className="py-24 md:py-32 text-white bg-gradient-to-r from-green-500 via-cyan-500 to-purple-500">
+        <div className="container mx-auto px-4 max-w-6xl text-center">
+          <h1 className="text-4xl md:text-6xl font-extrabold text-white">
+            พันธมิตรของเรา
+          </h1>
+          <p className="mt-4 text-xl text-gray-200 max-w-2xl mx-auto">
+            เราร่วมมือกับสถาบันการศึกษาและองค์กรชั้นนำมากมาย
+          </p>
+        </div>
+      </section>
+
+      {/* 2. ส่วนแสดงผลการ์ด */}
       <section className="py-20 bg-gray-50 min-h-screen">
         <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900">
-              พันธมิตรของเรา
-            </h1>
-            <p className="mt-4 text-lg text-gray-600">
-              เราร่วมมือกับสถาบันการศึกษาและองค์กรชั้นนำมากมาย
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          
+          {/* [FIX] ⭐️ 3. อัปเกรดการ์ดให้มีลูกเล่น (ยืมจาก PartnersSection) ⭐️ */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {allPartners.map((partner) => (
-              <div
+              <div 
                 key={partner.id}
-                className="bg-white p-6 rounded-xl shadow-md border border-gray-100 flex flex-col items-center justify-center transition-all duration-300 hover:shadow-xl hover:scale-105"
+                className="bg-white rounded-xl shadow-lg border border-gray-100 
+                           transition-all duration-300 group overflow-hidden 
+                           hover:scale-105 hover:shadow-2xl" 
               >
-                {/* ในหน้านี้ แนะนำให้ใช้ "โลโก้" (เช่น 150x150) 
-                  แทน "แบนเนอร์" (800x300) ที่ใช้ในหน้าแรก 
-                */}
-                <div className="relative h-24 w-full flex items-center justify-center">
+                {/* (A) ส่วนของรูปภาพ */}
+                <div className="relative w-full h-56 flex items-center justify-center"> 
                   <Image
                     src={partner.logoPath}
                     alt={partner.name}
-                    width={150}
-                    height={100}
-                    objectFit="contain" // ใช้ contain เพื่อให้โลโก้ไม่บิดเบี้ยว
+                    width={200}
+                    height={200}
+                    objectFit="contain" 
+                    className="max-w-full max-h-full" 
                   />
+
+                  {/* (B) ส่วน Overlay (เบลอ+เลื่อนขึ้น) */}
+                  <div 
+                    className="absolute inset-x-0 bottom-0 
+                               h-1/2
+                               flex flex-col items-center justify-center p-4 
+                               text-center 
+                               bg-gradient-to-t from-black/80 via-black/40 to-transparent
+                               backdrop-blur-sm
+                               translate-y-full group-hover:translate-y-0
+                               opacity-0 group-hover:opacity-100
+                               transition-all duration-300 ease-out" 
+                  >
+                    {/* (C) ชื่อสาขา */}
+                    <p className="font-bold text-lg text-white mb-2"> 
+                      {partner.name}
+                    </p>
+                    
+                    {/* (D) ไอคอน Facebook */}
+                    {partner.facebookUrl && ( 
+                      <Link 
+                        href={partner.facebookUrl} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-white hover:text-blue-500 transition-colors duration-200"
+                      >
+                        <FaFacebook className="text-3xl" />
+                      </Link>
+                    )}
+                  </div>
+
                 </div>
-                <p className="mt-4 font-semibold text-gray-700 text-center">
-                  {partner.name}
-                </p>
               </div>
             ))}
           </div>
