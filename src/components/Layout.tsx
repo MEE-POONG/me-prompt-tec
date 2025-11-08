@@ -14,6 +14,7 @@ interface LayoutProps {
   children: ReactNode;
   title?: string;
   description?: string;
+
 }
 
 export default function Layout({
@@ -40,7 +41,7 @@ export default function Layout({
         <meta name="twitter:description" content={description} />
       </Head>
 
-      <div className="min-h-screen flex flex-col">
+      <div className="min-h-screen flex flex-col bg-white">
         <Navbar />
 
         {/* Main Content */}
