@@ -1,6 +1,6 @@
 
 import Link from 'next/link';
-
+import rea from 'react';
 // กำหนด Type สำหรับ Component Props (ถ้ามี)
 // เนื่องจากใช้ useRouter, เราไม่จำเป็นต้องกำหนด Props ในกรณีนี้
 
