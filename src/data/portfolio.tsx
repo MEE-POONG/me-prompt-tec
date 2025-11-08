@@ -27,7 +27,7 @@ export const featuredProjects: Project[] = [
     tags1: ["Firebase"],
     tags2: ["React"],
     link: "/portfolio/project-1",
-    imageSrc: "/img/aaa.jpg",
+    imageSrc: "/img/sunflower.jpg",
     techStack: ["Next.js", "TypeScript", "Firebase", "TailwindCSS"],
   },
   {
@@ -71,7 +71,7 @@ export const featuredProjects: Project[] = [
     tags1: ["Next.js"],
     tags2: ["Markdown"],
     link: "/portfolio/project-5",
-    imageSrc: "/img/aaa.jpg",
+    imageSrc: "/img/sunflower.jpg",
     techStack: ["Next.js", "TypeScript", "TailwindCSS"],
   },
   {
