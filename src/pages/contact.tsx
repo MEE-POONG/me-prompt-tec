@@ -83,8 +83,6 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* ===== ส่วนฟอร์ม (ขวา) ===== */}
-            {/* (Form ของคุณถูกต้องแล้ว) */}
             <div>
               <h2 className="text-2xl font-bold mb-8 text-gray-800">
                 ส่งข้อความถึงเรา
