@@ -108,7 +108,7 @@ const PortfolioDetailPage: React.FC = () => {
                             ภาพรวมโครงการ
                         </h2>
                         <p className="text-gray-700 leading-relaxed text-lg">
-                            {project.description} {/* รายละเอียดภาพรวม */}
+                            {project.detail} {/* รายละเอียดภาพรวม */}
                         </p>
                     </div>
 
