@@ -27,7 +27,7 @@ export const featuredProjects: Project[] = [
     tags1: ["Firebase"],
     tags2: ["React"],
     link: "/portfolio/project-1",
-    imageSrc: "/img/sunflower.jpg",
+    imageSrc: "/img/ciry.jpg",
     techStack: ["Next.js", "TypeScript", "Firebase", "TailwindCSS"],
   },
   {
@@ -38,7 +38,7 @@ export const featuredProjects: Project[] = [
     tags1: ["Firebase"],
     tags2: ["React"],
     link: "/portfolio/project-2",
-    imageSrc: "/img/www.jpg",
+    imageSrc: "/img/dada.jpg",
     techStack: ["React", "Firebase", "TailwindCSS", "Vite"],
   },
   {
@@ -49,7 +49,7 @@ export const featuredProjects: Project[] = [
     tags1: ["Firebase"],
     tags2: ["React"],
     link: "/portfolio/project-3",
-    imageSrc: "/img/pic.jpg",
+    imageSrc: "/img/uix.jpg",
     techStack: ["Next.js", "SEO", "TailwindCSS"],
   },
   {
@@ -60,7 +60,7 @@ export const featuredProjects: Project[] = [
     tags1: ["Firebase"],
     tags2: ["React"],
     link: "/portfolio/project-4",
-    imageSrc: "/img/www.jpg",
+    imageSrc: "/img/wow.jpg",
     techStack: ["React", "Firebase", "ChakraUI"],
   },
   {
@@ -71,7 +71,7 @@ export const featuredProjects: Project[] = [
     tags1: ["Next.js"],
     tags2: ["Markdown"],
     link: "/portfolio/project-5",
-    imageSrc: "/img/sunflower.jpg",
+    imageSrc: "/img/unnamed.jpg",
     techStack: ["Next.js", "TypeScript", "TailwindCSS"],
   },
   {

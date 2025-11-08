@@ -7,14 +7,14 @@ const featuredProjects = [
         description: "สร้างประสบการณ์ช้อปปิ้งที่ราบรื่นและรวดเร็วบน Next.js",
          tags1: ["Firebase"], tags2: ["React"], 
         link: "/portfolio/project-1",
-        imageSrc: "/img/aaa.jpg", // Path รูปภาพที่ 1
+        imageSrc: "/img/ciry.jpg", // Path รูปภาพที่ 1
     },
     { 
         id: 2, 
         title: "SaaS Dashboard App", 
         description: "แดชบอร์ดจัดการข้อมูลผู้ใช้งานแบบเรียลไทม์ด้วย React Hooks.",
         tags1: ["Firebase"], tags2: ["React"], 
-        imageSrc: "/img/www.jpg", // Path รูปภาพที่ 2
+        imageSrc: "/img/dada.jpg", // Path รูปภาพที่ 2
     },
     { 
         id: 3, 
@@ -22,7 +22,7 @@ const featuredProjects = [
         description: "เว็บไซต์องค์กรที่เน้นดีไซน์ UI/UX และการทำ SEO ที่ดี.",
          tags1: ["Firebase"], tags2: ["React"], 
         link: "/portfolio/project-3",
-        imageSrc: "/img/pic.jpg", // Path รูปภาพที่ 3
+        imageSrc: "/img/uix.jpg", // Path รูปภาพที่ 3
     },
 ];
 export default function FeaturedProjectsSection() {
