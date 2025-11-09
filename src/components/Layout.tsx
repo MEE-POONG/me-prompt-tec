@@ -6,8 +6,7 @@
 import { ReactNode } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import Navbar from "./ui/Navbar";
-import Footer from "./ui/Footer";
+import { Navbar, Footer } from "./ui";
 import BackToTop from "./BackToTop";
 
 interface LayoutProps {

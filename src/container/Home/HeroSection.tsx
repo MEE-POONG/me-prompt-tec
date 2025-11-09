@@ -10,13 +10,12 @@ export default function HeroSection() {
     <section className="relative bg-linear-to-br from-green-400 via-blue-600 to-purple-800 text-white">
  
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-30"
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
         style={{
-          backgroundImage: "url('https://media.istockphoto.com/id/1471683196/vector/black-wavy-lines-isolated-on-white-abstract-background-design.jpg?s=612x612&w=0&k=20&c=OiEcsV3iKnIS96d2fHbVXQS-aWBeWaTfx5o_fY3Q_Rg=')",
+          backgroundImage: "url('/img/linepattern2.png')",
         }}
       />
-      
-      <div className="absolute inset-0 bg-linear-to-br from-green-400/50 via-blue-600/50 to-purple-800/50" />
+  
       <div className="absolute inset-0 bg-grid-white/[0.05] bg-size-[20px_20px]" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
           <div className="text-center">

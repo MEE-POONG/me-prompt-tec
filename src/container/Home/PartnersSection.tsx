@@ -33,7 +33,7 @@ export default function PartnersSection() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             
-            <h2 className="text-5xl font-extrabold text-yellow-500 hover:text-yellow-600">
+            <h2 className="text-5xl font-extrabold text-blue-600">
               ความร่วมมือกับสถาบันการศึกษา
             </h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto mt-4">
@@ -64,7 +64,7 @@ export default function PartnersSection() {
                                h-1/3 
                                flex flex-col items-center justify-center p-4 
                                text-center 
-                               bg-gradient-to-t from-black/20 via-black/40 to-transparent 
+                               bg-linear-to-t from-black/20 via-black/40 to-transparent 
                                backdrop-blur-[2px]
                                
                                translate-y-full group-hover:translate-y-0
@@ -94,9 +94,9 @@ export default function PartnersSection() {
           <div className="text-center mt-12">
             <Link
               href="/partnerships"
-              className="inline-block font-semibold text-yellow-500 hover:text-yellow-600 transition-all hover:scale-105 duration-200"
+              className="inline-block font-semibold text-blue-600 hover:text-yellow-500 transition-all hover:scale-105 duration-200"
             >
-              ดูความร่วมมือทั้งหมด →
+              ดูความร่วมมือทั้งหมด
             </Link>
           </div>
         </div>

@@ -30,7 +30,7 @@ export default function InternshipCTASection() {
 
           <Link
             href="/internship"
-            className="inline-block bg-white text-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-indigo-50 transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg"
+            className="inline-block bg-white text-gray-600 px-8 py-3 rounded-2xl font-semibold hover:bg-yellow-500 hover:text-amber-50 transition-all duration-300 hover:scale-110"
           >
             ดูข้อมูลโปรแกรมฝึกงาน
           </Link>

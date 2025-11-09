@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function ContactCTASection() {
   return (
-    <section className="py-20 relative bg-linear-to-br from-green-400 via-blue-600 to-purple-800 text-white">
+    <section className="py-20 relative bg-linear-to-tr from-cyan-400 via-blue-600 to-purple-800 text-white">
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                พร้อมที่จะเริ่มต้นโปรเจกต์ของคุณ?
