@@ -33,7 +33,7 @@ export default function PartnershipsPage() {
     <Layout>
       
       {/* [NEW] ⭐️ 1. เพิ่ม Hero Section (ยืมจากหน้า Contact) ⭐️ */}
-      <section className="py-24 md:py-32 text-white bg-gradient-to-r from-green-500 via-cyan-500 to-purple-500">
+      <section className="py-24 md:py-32 text-white bg-linear-to-r from-green-500 via-cyan-500 to-purple-500">
         <div className="container mx-auto px-4 max-w-6xl text-center">
           <h1 className="text-4xl md:text-6xl font-extrabold text-white">
             พันธมิตรของเรา
@@ -64,8 +64,8 @@ export default function PartnershipsPage() {
                     alt={partner.name}
                     width={200}
                     height={200}
-                    objectFit="contain" 
                     className="max-w-full max-h-full" 
+                    style={{ objectFit: "contain" }}
                   />
 
                   {/* (B) ส่วน Overlay (เบลอ+เลื่อนขึ้น) */}
@@ -74,7 +74,7 @@ export default function PartnershipsPage() {
                                h-1/3
                                flex flex-col items-center justify-center p-4 
                                text-center 
-                               bg-gradient-to-t from-black/20 via-black/40 to-transparent
+                               bg-linear-to-t from-black/20 via-black/40 to-transparent
                                backdrop-blur-sm
                                translate-y-full group-hover:translate-y-0
                                opacity-0 group-hover:opacity-100
