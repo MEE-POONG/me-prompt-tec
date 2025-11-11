@@ -5,7 +5,7 @@ export default function MapSection_Contact() {
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
-          <h2 className="text-5xl font-extrabold text-blue-600">
+          <h2 className="text-4xl font-extrabold text-blue-600">
             แผนที่และการเดินทาง
           </h2>
           {/* <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
