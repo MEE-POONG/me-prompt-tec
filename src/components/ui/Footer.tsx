@@ -20,7 +20,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
-                  href="/about"
+                  href="/"
                   className="text-gray-700 hover:text-yellow-600 transition-all duration-300 hover:scale-110"
                 >
                   เกี่ยวกับเรา
