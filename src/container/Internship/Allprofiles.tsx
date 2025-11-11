@@ -84,15 +84,16 @@ export default function ProfileSection() {
                        <FaGithub size={24} />
                      </a>
                    )}
-                   {profile.linkedin && (
+                   {/* 🚨 2. (แก้ไข) เปลี่ยนจาก linkedin เป็น portfolio */}
+                   {profile.portfolio && ( 
                      <a 
-                       href={profile.linkedin} 
+                       href={profile.portfolio} // ⬅️ แก้ไข
                        target="_blank" 
                        rel="noopener noreferrer" 
                        className="text-white/80 hover:text-white transition-all duration-300 ease-in-out hover:-translate-y-1"
-                       aria-label={`${profile.name} LinkedIn`} // 🚨 (ปรับปรุง) เพิ่ม Accessibility
+                       aria-label={`${profile.name} Portfolio`} // ⬅️ แก้ไข
                      >
-                       <FaLinkedin size={24} />
+                       <FaBriefcase size={24} /> {/* ⬅️ แก้ไข */}
                      </a>
                    )}
                  </div>
