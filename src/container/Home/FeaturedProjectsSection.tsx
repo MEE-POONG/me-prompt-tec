@@ -48,7 +48,7 @@ export default function FeaturedProjectsSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {featuredProjects.map((project) => (
             // 2. ⬇️ เพิ่มเอฟเฟกต์ "ยกตัวขึ้น" (Hover) ที่นี่
-            <div
+            (<div
               key={project.id}
               className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-2"
             >
@@ -60,7 +60,6 @@ export default function FeaturedProjectsSection() {
                   alt={project.title}
                 />
               </div>
-
               <div className="p-6">
                 <div className="flex flex-wrap gap-2 mb-3">
                   {/* 4. ⬇️ แก้ไข Error การแสดงผล Array (ใช้ .map()) */}
@@ -94,7 +93,7 @@ export default function FeaturedProjectsSection() {
                   ดูรายละเอียด →
                 </Link>
               </div>
-            </div>
+            </div>)
           ))}
         </div>
 
