@@ -1,20 +1,18 @@
 import React from 'react';
 import Image from 'next/image';
 
+// 1. 🚨 นำเข้าข้อมูล (ตรวจสอบ Path ให้ถูกต้อง)
+import { allProfiles, Profile } from '@/data/profiles'; // (สมมติว่า Path นี้ถูกต้อง)
 
-// 🚨 1. แก้ไข Import:
-// ต้อง Import 'allProfiles' และ 'Profile' (ที่เป็น named exports)
-// และระบุ Path ที่ถูกต้องไปยังไฟล์ data (สมมติว่าใช้ @/data/profiles)
-import { allProfiles, Profile } from '@/data/profiles'; // ⬅️ (แก้ Path นี้ถ้าจำเป็น)
+// 2. 🚨 นำเข้าไอคอน (ต้อง npm install react-icons)
+import { FaInstagram, FaGithub, FaLinkedin } from 'react-icons/fa';
 
-// 2. 🚨 เปลี่ยนชื่อ Component ให้สื่อความหมาย (เช่น ProfileSection)
 export default function ProfileSection() { 
   
   return (
-    // 3. 🚨 แก้ไข Section ให้รองรับ Grid
     <section className="py-20 bg-gray-100">
       
-      {/* (แนะนำ) เพิ่มส่วนหัวสำหรับ Section นี้ */}
+      {/* (ส่วนหัว Section - เหมือนเดิม) */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 text-center">
          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
            นักศึกษาฝึกงาน (Intern)
@@ -24,45 +22,85 @@ export default function ProfileSection() {
          </p>
       </div>
 
-      {/* 4. 🚨 สร้าง Grid Layout เพื่อรองรับหลาย Card */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
            
-           {/* 5. 🚨 ใช้ .map() เพื่อวนลูปสร้าง Card จาก Array */}
-           {allProfiles.map((profile: Profile) => ( // ⬅️ 2. (แนะนำ) ระบุ Type 'Profile'
+           {/* 3. ใช้ .map() วนลูปข้อมูล */}
+           {allProfiles.map((profile: Profile) => ( 
              
-             // นี่คือ Profile Card (นำ JSX เดิมของคุณมาใส่ใน .map())
              <div 
                key={profile.id} 
-               className="bg-white rounded-2xl overflow-hidden shadow-xl w-full transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl"
+               // 4. Card หลัก (relative, aspect-ratio, group)
+               className="relative aspect-[9/12] rounded-2xl overflow-hidden shadow-xl w-full transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl group"
              >
                
-               <div className="h-32 bg-gradient-to-br from-blue-400 to-purple-600" />
+               {/* 5. รูปภาพ (Background) */}
+               <Image
+                 className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-110" // (ใช้ group-hover)
+                 src={profile.imageSrc} 
+                 alt={profile.name}
+                 layout="fill" 
+                 priority={profile.id <= 4} // 🚨 (ปรับปรุง) โหลด 4 ภาพแรกเร็วขึ้น
+               />
 
-               <div className="relative -mt-16 flex justify-center">
-                 <Image
-                   className="rounded-full border-4 border-white shadow-lg object-cover" 
-                   src={profile.imageSrc} 
-                   alt={profile.name}
-                   width={128} 
-                   height={128}
-                 />
-               </div>
-
-               <div className="p-6 text-center mt-4">
-                 <h2 className="text-2xl font-bold text-gray-900 mb-1">
+              {/* 6. (แก้ไข) ส่วนเนื้อหา (วางซ้อนด้านล่าง) */}
+               <div className="absolute bottom-0 left-0 right-0 p-6 
+                               bg-gradient-to-t from-black/80 via-black/60 to-transparent 
+                               backdrop-blur-sm text-white
+                               
+                               transition-all duration-500 ease-in-out
+                               translate-y-full
+                               group-hover:translate-y-0"
+               >
+                 
+                 <h2 className="text-2xl font-bold text-white mb-1">
                    {profile.name}
                  </h2>
-                 <p className="text-md font-medium text-blue-600 mb-4">
+                 <p className="text-md font-medium text-blue-300 mb-4">
                    {profile.title}
                  </p>
-                 <p className="text-gray-600 text-sm">
-                   {profile.bio}
-                 </p>
+                 
+                 {/* 7. ไอคอน Social Media */}
+                 <div className="flex justify-center gap-5 mt-4">
+                   {profile.instagram && (
+                     <a 
+                       href={profile.instagram} 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       className="text-white/80 hover:text-white transition-all duration-300 ease-in-out hover:-translate-y-1"
+                       aria-label={`${profile.name} Instagram`} // 🚨 (ปรับปรุง) เพิ่ม Accessibility
+                     >
+                       <FaInstagram size={24} />
+                     </a>
+                   )}
+                   {profile.github && (
+                     <a 
+                       href={profile.github} 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       className="text-white/80 hover:text-white transition-all duration-300 ease-in-out hover:-translate-y-1"
+                       aria-label={`${profile.name} GitHub`} // 🚨 (ปรับปรุง) เพิ่ม Accessibility
+                     >
+                       <FaGithub size={24} />
+                     </a>
+                   )}
+                   {profile.linkedin && (
+                     <a 
+                       href={profile.linkedin} 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       className="text-white/80 hover:text-white transition-all duration-300 ease-in-out hover:-translate-y-1"
+                       aria-label={`${profile.name} LinkedIn`} // 🚨 (ปรับปรุง) เพิ่ม Accessibility
+                     >
+                       <FaLinkedin size={24} />
+                     </a>
+                   )}
+                 </div>
+
                </div>
                
              </div>
-           ))} {/* ⬅️ จบ .map() */}
+           ))} 
            
          </div>
       </div>
