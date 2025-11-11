@@ -7,11 +7,11 @@ export default function PermissionSection() {
       <div id="permission" className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         <div className="flex justify-center md:justify-start">
           <Image
-            src="/img/logo.png"
+            src="/image/logo.png"
             alt="Our Commitment"
             width={500}
             height={400}
-            className="rounded-2xl shadow-lg object-cover w-full max-w-sm md:max-w-none"
+            className=" object-cover w-full max-w-sm md:max-w-none"
           />
         </div>
 

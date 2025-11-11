@@ -9,17 +9,17 @@ export default function Portfolio() {
     // set ข้อมูลก่อนทำ loop โชว์
     // useEffect 
     return (
-        <Layout>
+        <Layout> {/* ⬅️ ใช้ Layout เป็นตัวครอบหลัก */}
 
             <Head>
                 <title>Portfolio | ผลงานทั้งหมดของเรา</title>
                 <meta name="description" content="รวมผลงานที่เราได้พัฒนาให้กับลูกค้า" />
             </Head>
-            <div className="bg-white py-20 text-center ">
-                <h1 className="text-5xl font-extrabold text-gray-900 mb-4">
+            <div className="bg-white py-30 text-center ">
+                <h1 className="text-5xl font-extrabold text-blue-600 mb-4 ">
                     ผลงานทั้งหมด
                 </h1>
-                <p className="text-xl text-gray-600 max-w-3xl mx-auto px-4 mb-4">
+                <p className="text-xl text-gray-600 max-w-3xl mx-auto px-4 mb-16">
                     เราสร้างสรรค์เว็บไซต์และแอปพลิเคชันที่ตอบโจทย์ธุรกิจของคุณด้วยเทคโนโลยีล่าสุด
                 </p>
                 <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
