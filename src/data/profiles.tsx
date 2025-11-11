@@ -31,15 +31,15 @@ export const allProfiles: Profile[] = [
     title: "นักศึกษาฝึกงาน (Intern)",
     bio: "มหาวิทยาลัยเทคโนโลยีราชมงคลอีสาน สาขาระบบสารสนเทศ",
     imageSrc: "/image/pic1.jpg",
-    instagram: "https://instagram.com",
-    github: "https://github.com",
+    instagram: "https://www.instagram.com/nx_sxpan?igsh=MWo0cDBuZGV1cTIwaA%3D%3D&utm_source=qr",
+    github: "https://github.com/Supansa09",
     linkedin: "https://linkedin.com",
 
   },
   {
     id: 3,
     name: "ศิวกร พล่ำแก้ว",
-    title: "นักศึกษาฝึกงาน",
+    title: "นักศึกษาฝึกงาน (Intern)",
     bio: "มหาวิทยาลัยเทคโนโลยีราชมงคลอีสาน สาขาวิทยาการคอมพิวเตอร์",
     imageSrc: "/image/pic2.jpg",
     instagram: "https://instagram.com",
@@ -49,7 +49,7 @@ export const allProfiles: Profile[] = [
   {
     id: 4,
     name: "ธาวิน กาฬสินธุ์",
-    title: "นักศึกษาฝึกงาน",
+    title: "นักศึกษาฝึกงาน (Intern)",
     bio: "มหาวิทยาลัยเทคโนโลยีราชมงคลอีสาน สาขาเทคโนโลยีมัลติมีเดีย",
     imageSrc: "/image/pic3.jpg", // (รูปเปล่า)
     instagram: "https://instagram.com",
