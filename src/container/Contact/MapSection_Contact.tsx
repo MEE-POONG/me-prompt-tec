@@ -5,7 +5,7 @@ export default function MapSection_Contact() {
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-extrabold text-gray-900">
+          <h2 className="text-5xl font-extrabold text-blue-600">
             แผนที่และการเดินทาง
           </h2>
           {/* <p className="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">
@@ -30,7 +30,7 @@ export default function MapSection_Contact() {
             href="https://maps.app.goo.gl/kjmZ9AhgsygSzFTUA"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-yellow-500 text-white px-8 py-3 rounded-2xl font-semibold hover:bg-yellow-600 border-2 border-white/20 transition-all duration-300 hover:scale-105"
+            className="w-full bg-blue-500 text-white px-8 py-3 rounded-2xl font-semibold hover:bg-yellow-500 border-2 border-white/20 transition-all duration-300 hover:scale-105"
           >
             คลิกเพื่อนำทาง (Google Maps)
           </a>
