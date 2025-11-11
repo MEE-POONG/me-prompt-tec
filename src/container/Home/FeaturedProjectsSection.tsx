@@ -10,7 +10,7 @@ const featuredProjects = [
     tags1: ["Firebase"],
     tags2: ["React"],
     link: "/portfolio/1", // ⬅️ แก้ไข Link ให้เป็น Dynamic
-    imageSrc: "/img/ciry.jpg",
+    imageSrc: "/image/ciry.jpg",
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const featuredProjects = [
     tags1: ["Supabase"],
     tags2: ["React"],
     link: "/portfolio/2", // ⬅️ แก้ไข Link ให้เป็น Dynamic
-    imageSrc: "/img/dada.jpg",
+    imageSrc: "/image/dada.jpg",
   },
   {
     id: 3,
@@ -28,7 +28,7 @@ const featuredProjects = [
     tags1: ["Prisma"],
     tags2: ["Next.js"],
     link: "/portfolio/3", // ⬅️ แก้ไข Link ให้เป็น Dynamic
-    imageSrc: "/img/uix.jpg",
+    imageSrc: "/image/uix.jpg",
   },
 ];
 
