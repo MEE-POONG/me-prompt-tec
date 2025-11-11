@@ -46,9 +46,7 @@ export default function PartnersSection() {
             {universityPartners.map((partner) => (
               <div 
                 key={partner.id}
-                className="bg-white rounded-xl shadow-lg border border-gray-100 
-                           transition-all duration-300 group overflow-hidden 
-                           hover:scale-105 hover:shadow-2xl" 
+                className="bg-white rounded-xl shadow-lg border border-gray-100  transition-all duration-300 group overflow-hidden  hover:scale-105 hover:shadow-2xl" 
               >
                 <div className="relative w-full h-56 flex items-center justify-center"> 
                   <Image
@@ -56,20 +54,10 @@ export default function PartnersSection() {
                     alt={partner.altText}
                     width={200}
                     height={200}
-                    objectFit="contain" 
                     className="max-w-full max-h-full" 
                   />
                   <div 
-                    className="absolute inset-x-0 bottom-0 
-                               h-1/3 
-                               flex flex-col items-center justify-center p-4 
-                               text-center 
-                               bg-linear-to-t from-black/20 via-black/40 to-transparent 
-                               backdrop-blur-[2px]
-                               
-                               translate-y-full group-hover:translate-y-0
-                               opacity-0 group-hover:opacity-100
-                               transition-all duration-300 ease-out" 
+                    className="absolute inset-x-0 bottom-0 h-1/3  flex flex-col items-center justify-center p-4  text-center  bg-linear-to-t from-black/20 via-black/40 to-transparent  backdrop-blur-[2px] translate-y-full group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out" 
                   >
                     <p className="font-bold text-lg text-white mb-2"> 
                       {partner.name}

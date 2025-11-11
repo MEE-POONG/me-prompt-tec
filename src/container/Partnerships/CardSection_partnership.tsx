@@ -48,15 +48,7 @@ const CardSection_partnership = () => {
                   style={{ objectFit: "contain" }}
                 />
                 <div
-                  className="absolute inset-x-0 bottom-0 
-                             h-1/3 
-                             flex flex-col items-center justify-center p-4 
-                             text-center 
-                             bg-linear-to-t from-black/20 via-black/40 to-transparent 
-                             backdrop-blur-[2px]
-                             translate-y-full group-hover:translate-y-0
-                             opacity-0 group-hover:opacity-100
-                             transition-all duration-300 ease-out"
+                  className="absolute inset-x-0 bottom-0  h-1/3  flex flex-col items-center justify-center p-4  text-center  bg-linear-to-t from-black/20 via-black/40 to-transparent  backdrop-blur-[2px] translate-y-full group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out"
                 >
                   <p className="font-bold text-lg text-white mb-2">
                     {partner.name}

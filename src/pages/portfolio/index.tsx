@@ -9,7 +9,7 @@ export default function Portfolio() {
     // set ข้อมูลก่อนทำ loop โชว์
     // useEffect 
     return (
-        <Layout> {/* ⬅️ ใช้ Layout เป็นตัวครอบหลัก */}
+        <Layout>
 
             <Head>
                 <title>Portfolio | ผลงานทั้งหมดของเรา</title>

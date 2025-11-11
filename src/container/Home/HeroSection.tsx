@@ -12,7 +12,7 @@ export default function HeroSection() {
       <div
         className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
         style={{
-          backgroundImage: "url('/img/linepattern.png')",
+          backgroundImage: "url('/image/linepattern.png')",
         }}
       />
 
@@ -43,7 +43,7 @@ export default function HeroSection() {
             </Link>
           </div>
           <div className="flex justify-center mt-30 ">
-            <a href="#PermissionSection">
+            <a href="#permission" className="text-white hover:text-yellow-300">
               <div className="animate-bounce w-6 h-6">
                 <ChevronDown size={50} fontWeight={70} />
               </div>

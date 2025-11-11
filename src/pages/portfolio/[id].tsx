@@ -60,8 +60,8 @@ const PortfolioDetailPage: React.FC = () => {
                     <Image
                         src={project.imageSrc} // ที่อยู่รูปภาพ
                         alt={`Cover image for ${project.title}`} // ข้อความ alt สำหรับ accessibility
-                        layout="fill" // ให้รูปภาพขยายเต็ม container ที่ครอบไว้
-                        objectFit="cover" // ให้รูปภาพครอบเต็มพื้นที่โดยไม่ผิดสัดส่วน
+                        fill // ใช้ fill แทน layout="fill"
+                        style={{ objectFit: 'cover' }} // ให้รูปภาพครอบเต็มพื้นที่โดยไม่ผิดสัดส่วน
                         className="z-10" // z-index
                         priority // โหลดรูปภาพนี้ก่อนหน้าอื่น ๆ (เพื่อประสิทธิภาพ)
                     />
