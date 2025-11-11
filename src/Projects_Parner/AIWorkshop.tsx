@@ -22,6 +22,7 @@ export default function AIWorkshopPage() {
           objectFit="cover"
           className="opacity-50" // ทำให้รูปจางลง
         />
+        
         <div className="absolute inset-0 flex items-center justify-center text-center">
           <div className="container mx-auto px-4 max-w-6xl">
             <h1 className="text-4xl md:text-6xl font-extrabold text-white">
@@ -42,7 +43,7 @@ export default function AIWorkshopPage() {
           </p>
           <div className="mt-12 border-t pt-8">
             <Link href="/partnerships" className="font-semibold text-blue-600 hover:text-blue-700">
-              ← กลับไปหน้าพันธมิตร
+              ← กลับไปหน้าพันธมิตร ฟดฟกด
             </Link>
           </div>
         </div>
