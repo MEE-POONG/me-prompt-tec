@@ -27,11 +27,13 @@ export default function ProfileSection() {
   };
 
   return (
-    <section className="py-20 bg-gray-100 relative"> 
+    // 4. 🚨 เพิ่ม 'relative'
+    <section className="py-20 bg-white relative"> 
+
       
       {/* (ส่วนหัว Section - เหมือนเดิม) */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 text-center">
-         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+         <h2 className="text-3xl md:text-4xl font-bold text-blue-600 mb-4">
            นักศึกษาฝึกงาน (Intern)
          </h2>
          <p className="text-lg text-gray-600 max-w-2xl mx-auto">

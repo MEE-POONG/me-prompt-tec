@@ -3,11 +3,11 @@ import React from "react";
 
 export default function OpenPositions_Internship() {
   return (
-    <section id="open-positions" className="py-20 bg-gray-100">
+    <section id="open-positions" className="py-20 bg-white">
       {" "}
       {/* 🚨 เพิ่ม id="open-positions" */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center text-gray-900 mb-16">
+        <h2 className="text-3xl font-bold text-center text-blue-600 mb-16">
           โปรแกรมฝึกงาน (Internship)
           <p className="text-lg text-gray-600 max-w-3xl mx-auto px-4">
             {" "}
