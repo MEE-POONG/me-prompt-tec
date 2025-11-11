@@ -29,7 +29,7 @@ const universityPartners = [
 
 export default function PartnersSection() {
   return (
-    <section className="py-20 bg-white">
+    <section className=" bg-white min-h-screen py-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             
