@@ -22,7 +22,7 @@ export const allProfiles: Profile[] = [
     imageSrc: "/image/pat2.jpg", // ⬅️ ใช้ Path String
     instagram: "https://www.instagram.com/tanaaa_pattt/", // ⬅️ เพิ่ม Link
     github: "https://github.com/Ggg-tanapatt",
-    portfolio: "https://linkedin.com",
+    portfolio: "https://wondrous-tulumba-da430d.netlify.app/",
   },
   {
     id: 2,
@@ -32,7 +32,7 @@ export const allProfiles: Profile[] = [
     imageSrc: "/image/pic1.jpg",
     instagram: "https://www.instagram.com/nx_sxpan?igsh=MWo0cDBuZGV1cTIwaA%3D%3D&utm_source=qr",
     github: "https://github.com/Supansa09",
-    portfolio: "https://linkedin.com",
+    portfolio: " https://cute-daffodil-356357.netlify.app/",
 
   },
   {
@@ -53,6 +53,6 @@ export const allProfiles: Profile[] = [
     imageSrc: "/image/pic3.jpg", // (รูปเปล่า)
     instagram: "https://instagram.com",
     github: "https://github.com",
-    portfolio: "https://linkedin.com",
+    portfolio: "https://curious-blancmange-c833fb.netlify.app/",
   },
 ];
