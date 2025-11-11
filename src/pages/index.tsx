@@ -15,7 +15,6 @@ import PermissionSection from "@/container/Home/PermissionSection";
 export default function Home() {
   return (
     <Layout>
-<<<<<<< Updated upstream
       <HeroSection />
       <PermissionSection />
       <ServicesSection />
@@ -23,14 +22,6 @@ export default function Home() {
       <InternshipCTASection />
       <PartnersSection />
       <NewsletterSection />
-=======
-     <HeroSection/>
-     <ServicesSection/>
-      <FeaturedProjectsSection/>  
-<InternshipCTASection/>  
-<PartnersSection/>  
-<ContactCTASection/>
->>>>>>> Stashed changes
     </Layout>
   );
 }
