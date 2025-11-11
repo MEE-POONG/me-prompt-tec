@@ -44,7 +44,7 @@ export const allProfiles: Profile[] = [
     imageSrc: "/image/pic2.jpg",
     instagram: "https://instagram.com",
     github: "https://github.com",
-    linkedin: "https://linkedin.com",
+    linkedin: "https://superb-cat-e3792e.netlify.app/",
   },
   {
     id: 4,
