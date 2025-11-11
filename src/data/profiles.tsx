@@ -15,7 +15,7 @@ export interface Profile {
 export const allProfiles: Profile[] = [
   {
     id: 1,
-    name: "",
+    name: "พัด",
     title: "Intern",
     bio: "นักศึกษาฝึกงาน",
     imageSrc: "/image/pat2.jpg", // ⬅️ ใช้ Path String (แบบนี้ถูกต้อง)
