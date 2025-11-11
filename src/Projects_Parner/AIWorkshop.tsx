@@ -7,7 +7,7 @@ import Link from 'next/link';
 const project = {
   title: 'AI Workshop 2024',
   description: 'จัดอบรมเชิงปฏิบัติการด้าน AI และ Machine Learning ให้นักศึกษา CS RMUTI',
-  imageUrl: '/img/AI.png', 
+  imageUrl: '/image/AI.png', 
 }
 
 export default function AIWorkshopPage() {

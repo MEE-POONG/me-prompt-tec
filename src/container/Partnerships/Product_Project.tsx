@@ -7,19 +7,19 @@ const mockProjects = [
     id: 1,
     title: 'AI Workshop 2024',
     description: 'จัดอบรมเชิงปฏิบัติการด้าน AI และ Machine Learning ให้นักศึกษา CS RMUTI',
-    imageUrl: '/img/AI.png', 
+    imageUrl: '/image/AI.png', 
   },
   {
     id: 2,
     title: 'Internship Program Project',
     description: 'โครงการพัฒนาระบบจัดการข้อมูลภายใน (Internal Tool) ร่วมกับนักศึกษาฝึกงาน',
-    imageUrl: '/img/Inter.png', 
+    imageUrl: '/image/Inter.png', 
   },
   {
     id: 3,
     title: 'Smart Campus Hackathon',
     description: 'เป็นกรรมการและ Mentor ในกิจกรรม Hackathon เพื่อพัฒนามหาวิทยาลัยอัจฉริยะ',
-    imageUrl: '/img/smart.png', 
+    imageUrl: '/image/smart.png', 
   },
 ]
 
