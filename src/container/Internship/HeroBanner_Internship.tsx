@@ -1,8 +1,8 @@
 import Link from "next/link";
 import React from "react";
-
 export default function HeroBanner_Internship() {
   return (
+   
     <section className="py-20 h-96 relative bg-linear-to-tr from-cyan-400 via-blue-600 to-purple-800 text-white overflow-hidden drop-shadow-lg">
       {/* 🚨 รูปภาพ Banner (คุณต้องเตรียมไฟล์ภาพไว้ใน public/img/ หรือ path อื่นๆ) */}
       {/* <Image 

@@ -5,7 +5,7 @@ import Link from "next/link";
 import HeroBanner_Internship from "@/container/Internship/HeroBanner_Internship";
 import OpenPositions_Internship from "@/container/Internship/OpenPositions_Internship";
 import ApplicationProcess_Internship from "@/container/Internship/ApplicationProcess_Internship";
-
+import Allprofiles from "@/container/Internship/Allprofiles";
 export default function Internship() {
   return (
     <Layout>
@@ -14,6 +14,7 @@ export default function Internship() {
         <meta name="description" content="เข้าร่วมโปรแกรมฝึกงานกับเรา" />
       </Head>
       <HeroBanner_Internship />
+      <Allprofiles/>
       <OpenPositions_Internship />
       <ApplicationProcess_Internship />
     </Layout>
