@@ -6,7 +6,13 @@
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 
-export default function HeroSection() {
+interface HeroSectionProps {
+  onScrollToNextSection: () => void;
+}
+
+export default function HeroSection({
+  onScrollToNextSection,
+}: HeroSectionProps) {
   return (
     <section className="relative min-h-screen flex items-center bg-linear-to-br from-green-400 via-blue-600 to-purple-800 text-white">
       <div
@@ -43,11 +49,14 @@ export default function HeroSection() {
             </Link>
           </div>
           <div className="flex justify-center mt-30 ">
-            <a href="#permission" className="text-white hover:text-yellow-300">
+            <div 
+              onClick={onScrollToNextSection} // 3. เรียกใช้ฟังก์ชันที่ส่งมาจาก Parent
+              className="text-white hover:text-yellow-300 cursor-pointer" // เพิ่ม cursor-pointer เพื่อบ่งบอกว่าคลิกได้
+            >
               <div className="animate-bounce w-6 h-6">
                 <ChevronDown size={50} fontWeight={70} />
               </div>
-            </a>
+            </div>
           </div>
         </div>
       </div>

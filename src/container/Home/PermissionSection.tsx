@@ -1,10 +1,10 @@
-import React from "react";
+import React, { ForwardedRef, forwardRef } from "react";
 import Image from "next/image";
 
-export default function PermissionSection() {
+const PermissionSection = forwardRef((props, ref: ForwardedRef<HTMLDivElement>) => {
   return (
     <section className="relative bg-white py-30 px-4 sm:px-6 lg:px-8">
-      <div id="permission" className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+      <div ref={ref} className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         <div className="flex justify-center md:justify-start">
           <Image
             src="/image/logo.png"
@@ -44,4 +44,8 @@ export default function PermissionSection() {
       </div>
     </section>
   );
-}
+});
+
+PermissionSection.displayName = 'PermissionSection';
+
+export default PermissionSection;
