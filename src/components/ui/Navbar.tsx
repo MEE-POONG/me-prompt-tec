@@ -27,7 +27,7 @@ export default function Navbar() {
           <div className="hidden md:block justify-item-center space-x-10">
             <div className="ml-10 flex items-baseline space-x-4">
               <Link
-                href="/about"
+                href="/"
                 className="text-gray-700 hover:text-yellow-600 transition-all duration-300 hover:scale-110 font-bold"
               >
                 เกี่ยวกับเรา
