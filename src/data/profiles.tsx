@@ -21,8 +21,8 @@ export const allProfiles: Profile[] = [
     title: "นักศึกษาฝึกงาน (Intern)",
     bio: "มหาวิทยาลัยเทคโนโลยีราชมงคลอีสาน สาขาระบบสารสนเทศ",
     imageSrc: "/image/pat2.jpg", // ⬅️ ใช้ Path String
-    instagram: "https://instagram.com", // ⬅️ เพิ่ม Link
-    github: "https://github.com",
+    instagram: "https://www.instagram.com/tanaaa_pattt/", // ⬅️ เพิ่ม Link
+    github: "https://github.com/Ggg-tanapatt",
     linkedin: "https://linkedin.com",
   },
   {
