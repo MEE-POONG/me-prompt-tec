@@ -61,12 +61,7 @@ export default function Product_Project() {
                 <p className="text-gray-600 text-base mb-4">
                   {project.description}
                 </p>
-                <Link
-                  href={project.href}
-                  className="font-semibold text-blue-600 hover:text-blue-700"
-                >
-                  ดูรายละเอียด →
-                </Link>
+                
               </div>
             </div>
           ))}
