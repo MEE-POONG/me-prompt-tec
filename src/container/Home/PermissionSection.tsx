@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function PermissionSection() {
   return (
-    <section className="relative bg-white py-20 px-4 sm:px-6 lg:px-8">
+    <section className="relative bg-white py-30 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
         <div className="flex justify-center md:justify-start">
           <Image
