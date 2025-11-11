@@ -2,9 +2,9 @@ import Link from 'next/link';
 
 export default function InternshipCTASection() {
   return (
-    <section className="py-20 bg-blue-700 ">
+    <section className="py-20 relative bg-linear-to-tr from-cyan-400 via-blue-600 to-purple-800 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4  text-white">
             เข้าร่วมทีมกับเรา
           </h2>
           <p className="text-xl mb-8 text-indigo-100 max-w-3xl mx-auto">
@@ -12,7 +12,7 @@ export default function InternshipCTASection() {
             พัฒนาทักษะเพื่ออนาคตในอุตสาหกรรมเทคโนโลยี
           </p>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-12">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-12 text-white">
             {[
               { label: 'โปรเจกต์จริง', icon: <img width="48" height="48" src="https://img.icons8.com/fluency/48/blueprint--v1.png" alt="blueprint--v1"/> },
               { label: 'เทคโนโลยีล่าสุด', icon: <img width="48" height="48" src="https://img.icons8.com/fluency/48/electronics.png" alt="electronics"/> },
