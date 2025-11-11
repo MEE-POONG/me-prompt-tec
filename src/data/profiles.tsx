@@ -39,7 +39,7 @@ export const allProfiles: Profile[] = [
   {
     id: 3,
     name: "ศิวกร พล่ำแก้ว",
-    title: "นักศึกษาฝึกงาน (Intern)",
+    title: "นักศึกษาฝึกงาน",
     bio: "มหาวิทยาลัยเทคโนโลยีราชมงคลอีสาน สาขาวิทยาการคอมพิวเตอร์",
     imageSrc: "/image/pic2.jpg",
     instagram: "https://instagram.com",
@@ -48,10 +48,10 @@ export const allProfiles: Profile[] = [
   },
   {
     id: 4,
-    name: "Project Manager",
+    name: "ธาวิน กาฬสินธุ์",
     title: "นักศึกษาฝึกงาน",
-    bio: "นำทีมและบริหารโปรเจกต์ให้สำเร็จ",
-    imageSrc: "/image/.jpg", // (รูปเปล่า)
+    bio: "มหาวิทยาลัยเทคโนโลยีราชมงคลอีสาน สาขาเทคโนโลยีมัลติมีเดีย",
+    imageSrc: "/image/pic3.jpg", // (รูปเปล่า)
     instagram: "https://instagram.com",
     github: "https://github.com",
     linkedin: "https://linkedin.com",
