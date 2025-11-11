@@ -15,24 +15,24 @@ export interface Profile {
 export const allProfiles: Profile[] = [
   {
     id: 1,
-    name: "พัด",
-    title: "Intern",
+    name: "นายธนภัทร โพธิ์ศรี",
+    title: "นักศึกษาฝึกงาน (Intern)",
     bio: "นักศึกษาฝึกงาน",
     imageSrc: "/image/pat2.jpg", // ⬅️ ใช้ Path String (แบบนี้ถูกต้อง)
   },
   {
     id: 2,
-    name: "พัด",
-    title: "Intern",
+    name: "นางสาวสุพรรษา ดีดวงแก้ว",
+    title: "นักศึกษาฝึกงาน (Intern)",
     bio: "นักศึกษาฝึกงาน",
-    imageSrc: "/image/pat1.jpg", // ⬅️ ใช้ Path String
+    imageSrc: "/image/pic1.jpg", // ⬅️ ใช้ Path String
   },
   {
     id: 3,
-    name: "",
-    title: "Intern",
+    name: "ศิวกร พลคำแก้ว",
+    title: "นักศึกษาฝึกงาน (Intern)",
     bio: "นักศึกษาฝึกงาน",
-    imageSrc: "/image/pat3.jpg", // ⬅️ ใช้ Path String
+    imageSrc: "/image/pic2.jpg", // ⬅️ ใช้ Path String
   },
   {
     id: 4,
