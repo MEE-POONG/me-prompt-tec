@@ -14,11 +14,9 @@ export default function Navbar() {
           {/* logo */}
           <div className="shrink-0">
             <Link href="/" className="flex items-center space-x-2">
-              <span className="text-2xl font-bold text-blue-600 transition-all duration-300 hover:scale-110">
-                ME PROMPT
-              </span>
-              <span className="hidden md:flex text-sm text-yellow-600 font-bold transition-all duration-300 hover:scale-110">
-                มีพร้อมเทคโนโลยี
+              <img src="/image/logo.png" alt="logo" className=" transition-all duration-300 hover:scale-110" height={70} width={70}/>
+              <span className="text-xl font-bold text-blue-600 transition-all duration-300 hover:scale-110">
+                ME PROMPT <span className="text-orange-400">TEC</span>
               </span>
             </Link>
           </div>
@@ -91,47 +89,47 @@ export default function Navbar() {
           </div>
         </div>
         {/* mobile responsive */}
-          {isMenuOpen && (
-            <div className="md:hidden">
-              <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200 bg-white">
-                <Link
-                  href="/about"
-                  className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
-                  onClick={toggleMenu}
-                >
-                  เกี่ยวกับเรา
-                </Link>
-                <Link
-                  href="/portfolio"
-                  className="text-gray-700 block px-3 py-2 rounded-md text-base font-medium transition-all duration-200"
-                  onClick={toggleMenu}
-                >
-                  ผลงาน
-                </Link>
-                <Link
-                  href="/internship"
-                  className="text-gray-700 block px-3 py-2 rounded-md text-base font-medium transition-all duration-200"
-                  onClick={toggleMenu}
-                >
-                  ฝึกงาน
-                </Link>
-                <Link
-                  href="/partnerships"
-                  className="text-gray-700 block px-3 py-2 rounded-md text-base font-medium transition-all duration-200"
-                  onClick={toggleMenu}
-                >
-                  พันธมิตร
-                </Link>
-                <Link
-                  href="/contact"
-                  className="text-gray-700 block px-3 py-2 rounded-md text-base font-medium transition-all duration-200"
-                  onClick={toggleMenu}
-                >
-                  ติดต่อเรา
-                </Link>
-              </div>
+        {isMenuOpen && (
+          <div className="md:hidden">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200 bg-white">
+              <Link
+                href="/about"
+                className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
+                onClick={toggleMenu}
+              >
+                เกี่ยวกับเรา
+              </Link>
+              <Link
+                href="/portfolio"
+                className="text-gray-700 block px-3 py-2 rounded-md text-base font-medium transition-all duration-200"
+                onClick={toggleMenu}
+              >
+                ผลงาน
+              </Link>
+              <Link
+                href="/internship"
+                className="text-gray-700 block px-3 py-2 rounded-md text-base font-medium transition-all duration-200"
+                onClick={toggleMenu}
+              >
+                ฝึกงาน
+              </Link>
+              <Link
+                href="/partnerships"
+                className="text-gray-700 block px-3 py-2 rounded-md text-base font-medium transition-all duration-200"
+                onClick={toggleMenu}
+              >
+                พันธมิตร
+              </Link>
+              <Link
+                href="/contact"
+                className="text-gray-700 block px-3 py-2 rounded-md text-base font-medium transition-all duration-200"
+                onClick={toggleMenu}
+              >
+                ติดต่อเรา
+              </Link>
             </div>
-          )}
+          </div>
+        )}
       </div>
     </nav>
   );

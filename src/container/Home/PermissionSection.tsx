@@ -11,7 +11,7 @@ const PermissionSection = forwardRef((props, ref: ForwardedRef<HTMLDivElement>) 
             alt="Our Commitment"
             width={500}
             height={400}
-            className=" object-cover w-full max-w-sm md:max-w-none"
+            className=" object-cover w-full max-w-sm md:max-w-none transition-all duration-300 hover:scale-110"
           />
         </div>
 
