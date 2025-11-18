@@ -26,7 +26,7 @@ export const allProfiles: Profile[] = [
   },
   {
     id: 2,
-    name: "สุพรรษา ฉีดวงแก้ว",
+    name: "สุพรรษา ดีดวงแก้ว",
     title: "นักศึกษาฝึกงาน (Intern)",
     bio: "มหาวิทยาลัยเทคโนโลยีราชมงคลอีสาน สาขาระบบสารสนเทศ",
     imageSrc: "/image/pic1.jpg",
