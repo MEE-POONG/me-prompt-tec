@@ -18,7 +18,7 @@ export default function ProfileSection() {
   // 3. 🚨 (เพิ่ม) ฟังก์ชันสำหรับเปิด Modal
   const openModal = (url: string | undefined | null) => {
     setModalUrl(url ?? null);
-    setViewMode('desktop'); // ⬅️ Reset เป็น Desktop ทุกครั้งที่เปิด
+    setViewMode('desktop'); // ⬅️ Reset เป็น Desktop ทุกครั้งที่เปิดd
   };
 
   // 4. 🚨 (เพิ่ม) ฟังก์ชันสำหรับปิด Modal
@@ -47,7 +47,7 @@ export default function ProfileSection() {
            {allProfiles.map((profile: Profile) => (
              <div
                key={profile.id}
-               className="relative aspect-[9/12] rounded-2xl overflow-hidden shadow-xl w-full transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl group"
+               className="relative aspect-9/12 rounded-2xl overflow-hidden shadow-xl w-full transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl group"
              >
                
                {/* (Image - เหมือนเดิม) */}
@@ -62,12 +62,7 @@ export default function ProfileSection() {
                />
                
                {/* (Overlay - เหมือนเดิม) */}
-               <div className="absolute bottom-0 left-0 right-0 p-6 
-                               bg-gradient-to-t from-black/80 via-black/60 to-transparent 
-                               backdrop-blur-sm text-white
-                               transition-all duration-500 ease-in-out
-                               translate-y-full
-                               group-hover:translate-y-0"
+               <div className="absolute bottom-0 left-0 right-0 p-6 bg-linear-to-t from-black/80 via-black/60 to-transparent backdrop-blur-sm text-white transition-all duration-500 ease-in-out translate-y-full group-hover:translate-y-0"
                >
                  
                  <h2 className="text-2xl font-bold text-white mb-1">
