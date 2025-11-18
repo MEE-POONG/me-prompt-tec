@@ -1,8 +1,6 @@
-// ME PROMPT TECHNOLOGY - Prisma Schema
-// Database: MongoDB
-
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -10,268 +8,57 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// ==================== USER MANAGEMENT ====================
-
-model User {
-  id            String    @id @default(auto()) @map("_id") @db.ObjectId
-  email         String    @unique
-  passwordHash  String
-  name          String
-  role          Role      @default(VIEWER)
-  status        UserStatus @default(ACTIVE)
-  lastLogin     DateTime?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-
-  // Relations
-  memberId      String?   @db.ObjectId
-  member        Member?   @relation(fields: [memberId], references: [id])
-
-  @@map("users")
+type ProjectLinks {
+  label String
+  url   String
 }
-
-enum Role {
-  ADMIN
-  STAFF
-  STUDENT
-  VIEWER
-}
-
-enum UserStatus {
-  ACTIVE
-  INACTIVE
-  SUSPENDED
-}
-
-// ==================== COMPANY & TEAM ====================
-
-model Company {
-  id              String    @id @default(auto()) @map("_id") @db.ObjectId
-  nameTH          String
-  nameEN          String
-  brandTH         String    // "มีพร้อมเทคโนโลยี"
-  mission         String
-  vision          String
-  values          String[]
-  address         String
-  phone           String
-  email           String
-  socialLinks     Json      // { linkedin, facebook, github }
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-
-  @@map("company")
-}
-
-model Member {
-  id              String    @id @default(auto()) @map("_id") @db.ObjectId
-  name            String
-  position        String
-  bio             String?
-  email           String?
-  phone           String?
-  photoUrl        String?
-  skills          String[]
-  socialLinks     Json?     // { linkedin, github, etc. }
-  status          MemberStatus @default(ACTIVE)
-  joinedDate      DateTime?
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-
-  // Relations
-  users           User[]
-  projectMemberIds String[]  @db.ObjectId
-  projectMembers  ProjectMember[] @relation(fields: [projectMemberIds], references: [id])
-
-  @@map("members")
-}
-
-enum MemberStatus {
-  ACTIVE
-  INACTIVE
-  ALUMNI
-}
-
-// ==================== INTERNSHIP ====================
-
-model Intern {
-  id                String    @id @default(auto()) @map("_id") @db.ObjectId
-  name              String
-  email             String?
-  phone             String?
-  photoUrl          String?
-  university        String
-  faculty           String
-  major             String
-  expectedGrad      String    // e.g., "2026"
-  bio               String?
-  skills            String[]
-  portfolioSlug     String    @unique  // URL-friendly slug for profile page
-  customPortfolioUrl String?   // External portfolio if exists
-  githubUrl         String?
-  linkedinUrl       String?
-  startDate         DateTime
-  endDate           DateTime?
-  program           InternProgram
-  status            InternStatus @default(ACTIVE)
-  createdAt         DateTime  @default(now())
-  updatedAt         DateTime  @updatedAt
-
-  // Relations
-  projectInternIds  String[]  @db.ObjectId
-  projectInterns    ProjectIntern[] @relation(fields: [projectInternIds], references: [id])
-
-  @@map("interns")
-}
-
-enum InternProgram {
-  INTERNSHIP        // ฝึกงาน
-  COOP              // สหกิจศึกษา
-}
-
-enum InternStatus {
-  ACTIVE
-  COMPLETED
-  DISCONTINUED
-}
-
-// ==================== PROJECTS ====================
 
 model Project {
-  id              String    @id @default(auto()) @map("_id") @db.ObjectId
-  title           String
-  slug            String    @unique
-  description     String
-  problemStatement String?
-  solution        String?
-  client          String?   // Client name (optional, can be confidential)
-  industry        String?   // E-commerce, Healthcare, Education, etc.
-  techStack       String[]  // ["Next.js", "MongoDB", "Docker"]
-  status          ProjectStatus
-  featuredImage   String?
-  gallery         String[]  // Array of image URLs
-  demoUrl         String?
-  isPublic        Boolean   @default(true)
-  startDate       DateTime?
-  endDate         DateTime?
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-
-  // Relations
-  projectMemberIds String[]  @db.ObjectId
-  projectMembers  ProjectMember[] @relation(fields: [projectMemberIds], references: [id])
-  projectInternIds String[]  @db.ObjectId
-  projectInterns  ProjectIntern[] @relation(fields: [projectInternIds], references: [id])
-
-  @@map("projects")
+  id          String         @id @default(auto()) @map("_id") @db.ObjectId
+  cover       String
+  createdAt   DateTime       @db.Date
+  description String
+  /// Could not determine type: the field only had null or empty values in the sample set.
+  endDate     Json?
+  featured    Boolean
+  /// Could not determine type: the field only had null or empty values in the sample set.
+  gallery     Json?
+  links       ProjectLinks[]
+  slug        String         @unique
+  /// Could not determine type: the field only had null or empty values in the sample set.
+  startDate   Json?
+  status      String
+  summary     String
+  tags        String[]
+  /// Could not determine type: the field only had null or empty values in the sample set.
+  techStack   Json?
+  title       String
+  updatedAt   DateTime       @db.Date
 }
 
-enum ProjectStatus {
-  PLANNING
-  IN_PROGRESS
-  COMPLETED
-  ON_HOLD
+model User {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  /// Field referred in an index, but found no data to define the type.
+  email Json?  @unique
 }
 
-// ==================== MANY-TO-MANY JOINS ====================
-
-model ProjectMember {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  projectId   String    @db.ObjectId
-  memberId    String    @db.ObjectId
-  role        String?   // "Lead Developer", "Designer", etc.
-
-  projectIds  String[]  @db.ObjectId
-  projects    Project[] @relation(fields: [projectIds], references: [id])
-  memberIds   String[]  @db.ObjectId
-  members     Member[]  @relation(fields: [memberIds], references: [id])
-
-  @@map("project_members")
-}
-
-model ProjectIntern {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  projectId   String    @db.ObjectId
-  internId    String    @db.ObjectId
-  role        String?   // "Frontend Developer", "QA", etc.
-
-  projectIds  String[]  @db.ObjectId
-  projects    Project[] @relation(fields: [projectIds], references: [id])
-  internIds   String[]  @db.ObjectId
-  interns     Intern[]  @relation(fields: [internIds], references: [id])
-
-  @@map("project_interns")
-}
-
-// ==================== PARTNERSHIPS (MOU) ====================
-
-model MOU {
-  id              String    @id @default(auto()) @map("_id") @db.ObjectId
-  institutionName String
-  faculty         String
-  department      String
-  contactPerson   String?
-  contactEmail    String?
-  contactPhone    String?
-  description     String?
-  scope           String[]  // ["Student Internship", "Joint Research", "Guest Lectures"]
-  documentUrl     String?   // PDF of signed MOU
-  startDate       DateTime
-  endDate         DateTime
-  status          MOUStatus
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
-
-  @@map("mou")
-}
-
-enum MOUStatus {
-  ACTIVE
-  EXPIRED
-  PENDING_RENEWAL
-  TERMINATED
-}
-
-// ==================== CONTACT MESSAGES ====================
-
-model ContactMessage {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  name        String
-  email       String
-  company     String?
-  subject     String
-  message     String
-  status      MessageStatus @default(NEW)
-  repliedAt   DateTime?
-  replyMessage String?
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-
-  @@map("contact_messages")
-}
-
-enum MessageStatus {
-  NEW
-  READ
-  REPLIED
-  ARCHIVED
-}
-
-// ==================== MEDIA ASSETS ====================
-
-model MediaAsset {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  filename    String
-  originalName String
-  mimeType    String
-  size        Int       // bytes
-  url         String
-  path        String
-  alt         String?
-  usedIn      String[]  // ["project:abc123", "member:def456"]
-  uploadedBy  String?   @db.ObjectId  // User ID
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
-
-  @@map("media_assets")
+model projects {
+  id               String    @id @default(auto()) @map("_id") @db.ObjectId
+  client           String?
+  createdAt        DateTime  @db.Date
+  demoUrl          String?
+  description      String
+  endDate          DateTime? @db.Date
+  featuredImage    String
+  gallery          String[]
+  industry         String
+  isPublic         Boolean
+  problemStatement String
+  slug             String
+  solution         String
+  startDate        DateTime  @db.Date
+  status           String
+  techStack        String[]
+  title            String
+  updatedAt        DateTime  @db.Date
 }
