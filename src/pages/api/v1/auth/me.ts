@@ -6,7 +6,7 @@
 
 import type { NextApiResponse } from 'next';
 import { authenticate, AuthRequest } from '@/middleware/auth';
-import prisma from '@/lib/prisma';
+import { prisma } from '@/lib/prisma';
 
 async function handler(req: AuthRequest, res: NextApiResponse) {
   if (req.method !== 'GET') {
@@ -31,17 +31,15 @@ async function handler(req: AuthRequest, res: NextApiResponse) {
       select: {
         id: true,
         email: true,
-        name: true,
         role: true,
-        status: true,
-        lastLogin: true,
+        isActive: true,
         createdAt: true,
         member: {
           select: {
             id: true,
             name: true,
-            position: true,
-            photoUrl: true,
+            title: true,
+            photo: true,
           },
         },
       },

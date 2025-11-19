@@ -1,11 +1,11 @@
 /**
- * GET /api/v1/public/projects
- * Get public projects with filtering
+ * GET /api/v1/public/interns
+ * Get public intern profiles
  * ME PROMPT TECHNOLOGY
  */
 
 import type { NextApiRequest, NextApiResponse } from 'next';
-import prisma from '@/lib/prisma';
+import { prisma } from '@/lib/prisma'; 
 
 export default async function handler(
   req: NextApiRequest,
@@ -20,11 +20,10 @@ export default async function handler(
 
   try {
     const {
-      industry,
-      tech,
       status,
+      coopType,
       page = '1',
-      limit = '10',
+      limit = '100',
     } = req.query;
 
     const pageNum = parseInt(page as string, 10);
@@ -32,48 +31,51 @@ export default async function handler(
     const skip = (pageNum - 1) * limitNum;
 
     // Build filter
-    const where: any = { isPublic: true };
+    const where: any = {};
 
-    if (industry) {
-      where.industry = industry;
-    }
-
+    // Filter by status (default to published only)
     if (status) {
       where.status = status;
+    } else {
+      where.status = 'published'; // แสดงเฉพาะที่ published
     }
 
-    if (tech) {
-      where.techStack = { has: tech };
+    // Filter by coop type
+    if (coopType) {
+      where.coopType = coopType;
     }
 
-    // Get projects and total count
-    const [projects, total] = await Promise.all([
-      prisma.project.findMany({
+    // Get interns and total count
+    const [interns, total] = await Promise.all([
+      prisma.intern.findMany({
         where,
         skip,
         take: limitNum,
         orderBy: { createdAt: 'desc' },
         select: {
           id: true,
-          title: true,
-          slug: true,
-          description: true,
-          client: true,
-          industry: true,
-          techStack: true,
+          name: true,
+          university: true,
+          faculty: true,
+          major: true,
+          studentId: true,
+          coopType: true,
+          contact: true,
+          resume: true,
+          avatar: true,
+          portfolioSlug: true,
           status: true,
-          featuredImage: true,
-          startDate: true,
-          endDate: true,
+          createdAt: true,
+          updatedAt: true,
         },
       }),
-      prisma.project.count({ where }),
+      prisma.intern.count({ where }),
     ]);
 
     return res.status(200).json({
       success: true,
       data: {
-        projects,
+        interns,
         pagination: {
           total,
           page: pageNum,
@@ -83,7 +85,7 @@ export default async function handler(
       },
     });
   } catch (error) {
-    console.error('Get projects error:', error);
+    console.error('Get interns error:', error);
     return res.status(500).json({
       success: false,
       error: 'Internal server error',

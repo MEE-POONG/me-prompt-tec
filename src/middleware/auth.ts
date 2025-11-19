@@ -4,7 +4,7 @@
  */
 
 import { NextApiRequest, NextApiResponse } from 'next';
-import { Role } from '@prisma/client';
+import { Role } from '../generated/prisma/client';
 import { extractTokenFromHeader, verifyAccessToken, JWTPayload } from '@/lib/auth';
 
 // Extend NextApiRequest to include user
