@@ -1,20 +1,50 @@
-import React, { useState } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { Member } from '@/types/member';
 
 // 1. 🚨 (แก้ไข) Import ไอคอนเพิ่ม
-import { FaInstagram, FaGithub } from 'react-icons/fa';
+import { FaInstagram, FaGithub, FaLinkedin, FaFacebook } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
 // (ต้อง npm install lucide-react ถ้ายังไม่มี)
 import { FolderKanban, X, Smartphone, Monitor } from 'lucide-react'; // ⬅️ เพิ่ม Monitor, Smartphone
-import { Team, team_member } from '@/data/team_member';
 
-export default function TeamSection() { 
-  
+export default function TeamSection() {
+
+  // State สำหรับข้อมูล Members จาก API
+  const [members, setMembers] = useState<Member[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
   // (State เดิมสำหรับ URL)
   const [modalUrl, setModalUrl] = useState<string | null>(null);
-  
+
   // 2. 🚨 (เพิ่ม) State สำหรับสลับหน้าจอ (PC/Mobile)
   const [viewMode, setViewMode] = useState<'desktop' | 'mobile'>('desktop');
-  
+
+  // Fetch members data from API
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('/api/v1/public/members');
+        const data = await response.json();
+
+        if (data.success) {
+          setMembers(data.data.members);
+        } else {
+          setError('ไม่สามารถดึงข้อมูลได้');
+        }
+      } catch (err) {
+        setError('เกิดข้อผิดพลาดในการดึงข้อมูล');
+        console.error('Error fetching members:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMembers();
+  }, []);
+
   // 3. 🚨 (เพิ่ม) ฟังก์ชันสำหรับเปิด Modal
   const openModal = (url: string | undefined | null) => {
     setModalUrl(url ?? null);
@@ -25,6 +55,28 @@ export default function TeamSection() {
   const closeModal = () => {
     setModalUrl(null);
   };
+
+  // Loading state
+  if (loading) {
+    return (
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-lg text-gray-600">กำลังโหลดข้อมูล...</p>
+        </div>
+      </section>
+    );
+  }
+
+  // Error state
+  if (error) {
+    return (
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-lg text-red-600">{error}</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     // 4. 🚨 เพิ่ม 'relative'
@@ -46,80 +98,115 @@ export default function TeamSection() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-           
-           {team_member.map((team: Team) => (
-             <div
-               key={team.id}
-               className="relative aspect-9/12 rounded-2xl overflow-hidden shadow-xl w-full transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl group"
-             >
-               
-               {/* (Image - เหมือนเดิม) */}
-               <Image
-                 className="transition-transform duration-500 ease-in-out group-hover:scale-110"
-                 src={team.imageSrc}
-                 alt={team.name}
-                 fill 
-                 style={{ objectFit: "cover" }}
-                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                 priority={team.id <= 4}
-               />
-               
-               {/* (Overlay - เหมือนเดิม) */}
-               <div className="absolute bottom-0 left-0 right-0 p-6 
-                               bg-linear-to-t from-black/80 via-black/60 to-transparent 
-                               backdrop-blur-sm text-white
-                               transition-all duration-500 ease-in-out
-                               translate-y-full
-                               group-hover:translate-y-0"
-               >
-                 
-                 <h2 className="text-2xl font-bold text-white mb-1">
-                   {team.name}
-                 </h2>
-                 <p className="text-md font-medium text-blue-300 mb-4">
-                   {team.title}
-                 </p>
 
-                 {/* 5. 🚨 (แก้ไข) ไอคอน Social Media (เปลี่ยน onClick) */}
-                 <div className="flex justify-center gap-5 mt-4">
-                   {/* Instagram (เปิดแท็บใหม่) */}
-                   {team.instagram && (
-                     <a
-                       href={team.instagram}
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       className="text-white/80 hover:text-white transition-all duration-300 ease-in-out hover:-translate-y-1"
-                       aria-label={`${team.name} Instagram`}
-                     >
-                       <FaInstagram size={24} />
-                     </a>
-                   )}
-                   {/* GitHub (เปิดแท็บใหม่) */}
-                   {team.github && (
-                     <a
-                       href={team.github}
-                       target="_blank"
-                       rel="noopener noreferrer"
-                       className="text-white/80 hover:text-white transition-all duration-300 ease-in-out hover:-translate-y-1"
-                       aria-label={`${team.name} GitHub`}
-                     >
-                       <FaGithub size={24} />
-                     </a>
-                   )}
-                   {/* Portfolio (เปิด Modal) */}
-                   {team.portfolio && (
-                     <button
-                       onClick={() => openModal(team.portfolio)} // ⬅️ ใช้ฟังก์ชันใหม่
-                       className="text-white/80 hover:text-white transition-all duration-300 ease-in-out hover:-translate-y-1"
-                       aria-label={`${team.name} Portfolio`} 
-                     >
-                       <FolderKanban size={24} />
-                     </button>
-                   )}
+           {members.map((member) => {
+             const displayName = member.name.display || `${member.name.first} ${member.name.last}`;
+             const portfolioUrl = member.socials?.website;
+
+             return (
+               <div
+                 key={member.id}
+                 className="relative aspect-9/12 rounded-2xl overflow-hidden shadow-xl w-full transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl group"
+               >
+
+                 {/* (Image - เหมือนเดิม) */}
+                 <Image
+                   className="transition-transform duration-500 ease-in-out group-hover:scale-110"
+                   src={member.photo || '/image/default-avatar.jpg'}
+                   alt={displayName}
+                   fill
+                   style={{ objectFit: "cover" }}
+                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                   priority={false}
+                 />
+
+                 {/* (Overlay - เหมือนเดิม) */}
+                 <div className="absolute bottom-0 left-0 right-0 p-6 bg-linear-to-t from-black/80 via-black/60 to-transparent backdrop-blur-sm text-white transition-all duration-500 ease-in-out translate-y-full group-hover:translate-y-0" >
+
+                   <h2 className="text-2xl font-bold text-white mb-1">
+                     {displayName}
+                   </h2>
+                   <p className="text-md font-medium text-blue-300 mb-4">
+                     {member.title || member.department || 'Team Member'}
+                   </p>
+
+                   {/* 5. 🚨 (แก้ไข) ไอคอน Social Media (เปลี่ยน onClick) */}
+                   <div className="flex justify-center gap-5 mt-4">
+                     {/* Facebook */}
+                     {member.socials?.facebook && (
+                       <a
+                         href={member.socials.facebook}
+                         target="_blank"
+                         rel="noopener noreferrer"
+                         className="text-white/80 hover:text-white transition-all duration-300 ease-in-out hover:-translate-y-1"
+                         aria-label={`${displayName} Facebook`}
+                       >
+                         <FaFacebook size={24} />
+                       </a>
+                     )}
+                     {/* Instagram (เปิดแท็บใหม่) */}
+                     {member.socials?.instagram && (
+                       <a
+                         href={member.socials.instagram}
+                         target="_blank"
+                         rel="noopener noreferrer"
+                         className="text-white/80 hover:text-white transition-all duration-300 ease-in-out hover:-translate-y-1"
+                         aria-label={`${displayName} Instagram`}
+                       >
+                         <FaInstagram size={24} />
+                       </a>
+                     )}
+                     {/* X/Twitter */}
+                     {member.socials?.x && (
+                       <a
+                         href={member.socials.x}
+                         target="_blank"
+                         rel="noopener noreferrer"
+                         className="text-white/80 hover:text-white transition-all duration-300 ease-in-out hover:-translate-y-1"
+                         aria-label={`${displayName} X`}
+                       >
+                         <FaXTwitter size={24} />
+                       </a>
+                     )}
+                     {/* LinkedIn */}
+                     {member.socials?.linkedin && (
+                       <a
+                         href={member.socials.linkedin}
+                         target="_blank"
+                         rel="noopener noreferrer"
+                         className="text-white/80 hover:text-white transition-all duration-300 ease-in-out hover:-translate-y-1"
+                         aria-label={`${displayName} LinkedIn`}
+                       >
+                         <FaLinkedin size={24} />
+                       </a>
+                     )}
+                     {/* GitHub (เปิดแท็บใหม่) */}
+                     {member.socials?.github && (
+                       <a
+                         href={member.socials.github}
+                         target="_blank"
+                         rel="noopener noreferrer"
+                         className="text-white/80 hover:text-white transition-all duration-300 ease-in-out hover:-translate-y-1"
+                         aria-label={`${displayName} GitHub`}
+                       >
+                         <FaGithub size={24} />
+                       </a>
+                     )}
+                     {/* Portfolio (เปิด Modal) */}
+                     {portfolioUrl && (
+                       <button
+                         onClick={() => openModal(portfolioUrl)} // ⬅️ ใช้ฟังก์ชันใหม่
+                         className="text-white/80 hover:text-white transition-all duration-300 ease-in-out hover:-translate-y-1"
+                         aria-label={`${displayName} Portfolio`}
+                       >
+                         <FolderKanban size={24} />
+                       </button>
+                     )}
+                   </div>
                  </div>
                </div>
-             </div>
-           ))}
+             );
+           })}
            
          </div>
       </div>
