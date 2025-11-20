@@ -19,7 +19,7 @@ const PortfolioDetailPage: React.FC = () => {
             const fetchProject = async () => {
                 try {
                     setLoading(true);
-                    const response = await fetch('/api/v1/public/projects');
+                    const response = await fetch('/api/projects');
                     const data = await response.json();
 
                     if (data.success) {

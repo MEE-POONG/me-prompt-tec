@@ -25,7 +25,7 @@ export default function ProfileSection() {
     const fetchInterns = async () => {
       try {
         setLoading(true);
-        const response = await fetch('/api/v1/public/interns');
+        const response = await fetch('/api/interns');
         const data = await response.json();
 
         if (data.success) {

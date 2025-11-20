@@ -21,29 +21,28 @@ export default function TeamSection() {
   // 2. 🚨 (เพิ่ม) State สำหรับสลับหน้าจอ (PC/Mobile)
   const [viewMode, setViewMode] = useState<'desktop' | 'mobile'>('desktop');
 
-  // Fetch members data from API
-  // useEffect(() => {
-  //   const fetchMembers = async () => {
-  //     try {
-  //       setLoading(true);
-  //       const response = await fetch('/api/v1/public/members');
-  //       const data = await response.json();
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('/api/members');
+        const data = await response.json();
 
-  //       if (data.success) {
-  //         setMembers(data.data.members);
-  //       } else {
-  //         setError('ไม่สามารถดึงข้อมูลได้');
-  //       }
-  //     } catch (err) {
-  //       setError('เกิดข้อผิดพลาดในการดึงข้อมูล');
-  //       console.error('Error fetching members:', err);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
+        if (data.success) {
+          setMembers(data.data.members);
+        } else {
+          setError('ไม่สามารถดึงข้อมูลได้');
+        }
+      } catch (err) {
+        setError('เกิดข้อผิดพลาดในการดึงข้อมูล');
+        console.error('Error fetching members:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  //   fetchMembers();
-  // }, []);
+    fetchMembers();
+  }, []);
 
   // 3. 🚨 (เพิ่ม) ฟังก์ชันสำหรับเปิด Modal
   const openModal = (url: string | undefined | null) => {

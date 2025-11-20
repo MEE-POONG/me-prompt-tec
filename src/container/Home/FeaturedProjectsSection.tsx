@@ -4,21 +4,21 @@ import React, { useState, useEffect } from "react";
 export default function FeaturedProjectsSection() {
   const [projects, setProjects] = useState<any[]>([]);
 
-  // useEffect(() => {
-  //   const fetchProjects = async () => {
-  //     try {
-  //       const response = await fetch("/api/v1/public/projects");
-  //       const data = await response.json();
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch("/api/projects");
+        const data = await response.json();
 
-  //       if (data.success) {
-  //         setProjects(data.data.projects.slice(0, 3)); // ดึงแค่ 3 โครงการแรก
-  //       }
-  //     } catch (error) {
-  //       console.error("Error fetching featured projects:", error);
-  //     }
-  //   }
-  //   fetchProjects();;
-  // }, []);
+        if (data.success) {
+          setProjects(data.data.projects.slice(0, 3)); // ดึงแค่ 3 โครงการแรก
+        }
+      } catch (error) {
+        console.error("Error fetching featured projects:", error);
+      }
+    }
+    fetchProjects();;
+  }, []);
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
