@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { UploadCloud, Send, ArrowLeft, CheckCircle } from "lucide-react";
-
+import Layout from "@/components/Layout";
 export default function ApplyPage() {
   const router = useRouter();
   const { position_id } = router.query;
@@ -101,7 +101,7 @@ export default function ApplyPage() {
 
   // --- View: ฟอร์มสมัคร ---
   return (
-    <div>
+    <Layout>
       <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto">
           
@@ -118,120 +118,174 @@ export default function ApplyPage() {
             </div>
 
             <form onSubmit={handleSubmit} className="p-8 space-y-6">
-              
-              {/* 1. ข้อมูลส่วนตัว */}
-              <div>
-                <h3 className="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">ข้อมูลส่วนตัว</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">ชื่อจริง <span className="text-red-500">*</span></label>
-                    <input required name="firstName" onChange={handleChange} type="text" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-black" placeholder="สมชาย" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">นามสกุล <span className="text-red-500">*</span></label>
-                    <input required name="lastName" onChange={handleChange} type="text" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-black" placeholder="ใจดี" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">อีเมล <span className="text-red-500">*</span></label>
-                    <input required name="email" onChange={handleChange} type="email" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-black" placeholder="somchai@example.com" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">เบอร์โทรศัพท์ <span className="text-red-500">*</span></label>
-                    <input required name="phone" onChange={handleChange} type="tel" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-black" placeholder="08x-xxx-xxxx" />
-                  </div>
-                </div>
-              </div>
+  
+  {/* 1. ข้อมูลส่วนตัว */}
+  <div>
+    <h3 className="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">ข้อมูลส่วนตัว</h3>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">ชื่อจริง <span className="text-red-500">*</span></label>
+        <input 
+            required 
+            name="firstName" 
+            onChange={handleChange} 
+            type="text" 
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-black placeholder-gray-400" 
+            placeholder="ระบุชื่อจริง (ภาษาไทย)" 
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">นามสกุล <span className="text-red-500">*</span></label>
+        <input 
+            required 
+            name="lastName" 
+            onChange={handleChange} 
+            type="text" 
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-black placeholder-gray-400" 
+            placeholder="ระบุนามสกุล (ภาษาไทย)" 
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">อีเมล <span className="text-red-500">*</span></label>
+        <input 
+            required 
+            name="email" 
+            onChange={handleChange} 
+            type="email" 
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-black placeholder-gray-400" 
+            placeholder="ระบุอีเมลที่ติดต่อได้สะดวก" 
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">เบอร์โทรศัพท์ <span className="text-red-500">*</span></label>
+        <input 
+            required 
+            name="phone" 
+            onChange={handleChange} 
+            type="tel" 
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-black placeholder-gray-400" 
+            placeholder="ระบุหมายเลขโทรศัพท์มือถือ" 
+        />
+      </div>
+    </div>
+  </div>
 
-              {/* 2. การศึกษา & ตำแหน่ง */}
-              <div>
-                <h3 className="text-lg font-semibold text-gray-800 mb-4 border-b pb-2 mt-6">การศึกษา & ตำแหน่ง</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">มหาวิทยาลัย <span className="text-red-500">*</span></label>
-                    <input required name="university" onChange={handleChange} type="text" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-black" placeholder="ชื่อมหาวิทยาลัย" />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">คณะ / สาขา <span className="text-red-500">*</span></label>
-                    <input required name="faculty" onChange={handleChange} type="text" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-black" placeholder="เช่น วิทยาการคอมพิวเตอร์" />
-                  </div>
-                  <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">ตำแหน่งที่ต้องการฝึก <span className="text-red-500">*</span></label>
-                    <select 
-                      required 
-                      name="position" 
-                      value={formData.position} 
-                      onChange={handleChange} 
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-black bg-white"
-                    >
-                      <option value="">-- เลือกตำแหน่ง --</option>
-                      {positions.map(p => (
-                        <option key={p.id} value={p.name}>{p.name}</option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-              </div>
+  {/* 2. การศึกษา & ตำแหน่ง */}
+  <div>
+    <h3 className="text-lg font-semibold text-gray-800 mb-4 border-b pb-2 mt-6">การศึกษา & ตำแหน่ง</h3>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">มหาวิทยาลัย <span className="text-red-500">*</span></label>
+        <input 
+            required 
+            name="university" 
+            onChange={handleChange} 
+            type="text" 
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-black placeholder-gray-400" 
+            placeholder="ระบุชื่อมหาวิทยาลัยหรือสถาบันการศึกษา" 
+        />
+      </div>
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">คณะ / สาขา <span className="text-red-500">*</span></label>
+        <input 
+            required 
+            name="faculty" 
+            onChange={handleChange} 
+            type="text" 
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-black placeholder-gray-400" 
+            placeholder="ระบุคณะและสาขาวิชาที่ศึกษาอยู่" 
+        />
+      </div>
+      <div className="md:col-span-2">
+        <label className="block text-sm font-medium text-gray-700 mb-1">ตำแหน่งที่ต้องการฝึก <span className="text-red-500">*</span></label>
+        <select 
+          required 
+          name="position" 
+          value={formData.position} 
+          onChange={handleChange} 
+          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-black bg-white placeholder-gray-400"
+        >
+          <option value="">-- กรุณาเลือกตำแหน่งที่ต้องการสมัคร --</option>
+          {positions.map(p => (
+            <option key={p.id} value={p.name}>{p.name}</option>
+          ))}
+        </select>
+      </div>
+    </div>
+  </div>
 
-              {/* 3. เอกสารประกอบ */}
-              <div>
-                <h3 className="text-lg font-semibold text-gray-800 mb-4 border-b pb-2 mt-6">เอกสารประกอบ</h3>
-                
-                <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Resume / CV (PDF) <span className="text-red-500">*</span></label>
-                  <div className="flex items-center justify-center w-full">
-                    <label className={`flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer hover:bg-gray-50 transition ${resumeFile ? "border-green-400 bg-green-50" : "border-gray-300 bg-gray-50"}`}>
-                      <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                        {resumeFile ? (
-                           <>
-                             <CheckCircle className="w-8 h-8 text-green-500 mb-2" />
-                             <p className="text-sm text-green-600 font-medium">{resumeFile.name}</p>
-                             <p className="text-xs text-gray-400 mt-1">คลิกเพื่อเปลี่ยนไฟล์</p>
-                           </>
-                        ) : (
-                           <>
-                             <UploadCloud className="w-8 h-8 text-gray-400 mb-2" />
-                             <p className="text-sm text-gray-500"><span className="font-semibold">คลิกเพื่ออัปโหลด</span> หรือลากไฟล์มาวาง</p>
-                             <p className="text-xs text-gray-500">PDF file only (Max 5MB)</p>
-                           </>
-                        )}
-                      </div>
-                      <input type="file" accept=".pdf" className="hidden" onChange={handleFileChange} required />
-                    </label>
-                  </div>
-                </div>
+  {/* 3. เอกสารประกอบ */}
+  <div>
+    <h3 className="text-lg font-semibold text-gray-800 mb-4 border-b pb-2 mt-6">เอกสารประกอบ</h3>
+    
+    <div className="mb-6">
+      <label className="block text-sm font-medium text-gray-700 mb-2">Resume / CV (PDF) <span className="text-red-500">*</span></label>
+      <div className="flex items-center justify-center w-full">
+        <label className={`flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer hover:bg-gray-50 transition ${resumeFile ? "border-green-400 bg-green-50" : "border-gray-300 bg-gray-50"}`}>
+          <div className="flex flex-col items-center justify-center pt-5 pb-6">
+            {resumeFile ? (
+               <>
+                 <CheckCircle className="w-8 h-8 text-green-500 mb-2" />
+                 <p className="text-sm text-green-600 font-medium">{resumeFile.name}</p>
+                 <p className="text-xs text-gray-400 mt-1">คลิกเพื่อเปลี่ยนไฟล์</p>
+               </>
+            ) : (
+               <>
+                 <UploadCloud className="w-8 h-8 text-gray-400 mb-2" />
+                 <p className="text-sm text-gray-500"><span className="font-semibold">คลิกเพื่ออัปโหลด</span> หรือลากไฟล์มาวางที่นี่</p>
+                 <p className="text-xs text-gray-500">รองรับไฟล์ PDF (ขนาดไม่เกิน 5MB)</p>
+               </>
+            )}
+          </div>
+          <input type="file" accept=".pdf" className="hidden" onChange={handleFileChange} required />
+        </label>
+      </div>
+    </div>
 
-                <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Link Portfolio / GitHub / Website</label>
-                  <input name="portfolioUrl" onChange={handleChange} type="url" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-black" placeholder="https://..." />
-                </div>
+    <div className="mb-6">
+      <label className="block text-sm font-medium text-gray-700 mb-1">Link Portfolio / GitHub / Website</label>
+      <input 
+        name="portfolioUrl" 
+        onChange={handleChange} 
+        type="url" 
+        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-black placeholder-gray-400" 
+        placeholder="ระบุลิงก์ผลงาน (Google Drive, GitHub หรือ Website)" 
+      />
+    </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">ข้อความถึงทีมงาน (Cover Letter)</label>
-                  <textarea name="message" onChange={handleChange} rows={4} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-black resize-none" placeholder="แนะนำตัวสั้นๆ หรือบอกเหตุผลที่อยากฝึกงานที่นี่..."></textarea>
-                </div>
-              </div>
+    <div>
+      <label className="block text-sm font-medium text-gray-700 mb-1">ข้อความถึงทีมงาน (Cover Letter)</label>
+      <textarea 
+        name="message" 
+        onChange={handleChange} 
+        rows={4} 
+        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-black resize-none placeholder-gray-400" 
+        placeholder="ระบุเหตุผลที่สนใจร่วมงาน หรือสิ่งที่คาดหวังจากการฝึกงานในครั้งนี้..."
+      ></textarea>
+    </div>
+  </div>
 
-              {/* Submit Button */}
-              <div className="pt-4">
-                <button 
-                  type="submit" 
-                  disabled={isSubmitting}
-                  className={`w-full flex items-center justify-center py-3 px-4 rounded-lg text-white font-semibold text-lg shadow-md transition-all
-                    ${isSubmitting ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700 hover:-translate-y-1"}
-                  `}
-                >
-                  {isSubmitting ? (
-                    <>กำลังส่งข้อมูล...</>
-                  ) : (
-                    <> <Send className="mr-2 w-5 h-5" /> ส่งใบสมัคร </>
-                  )}
-                </button>
-              </div>
+  {/* Submit Button */}
+  <div className="pt-4">
+    <button 
+      type="submit" 
+      disabled={isSubmitting}
+      className={`w-full flex items-center justify-center py-3 px-4 rounded-lg text-white font-semibold text-lg shadow-md transition-all
+        ${isSubmitting ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700 hover:-translate-y-1"}
+      `}
+    >
+      {isSubmitting ? (
+        <>กำลังดำเนินการส่งข้อมูล...</>
+      ) : (
+        <> <Send className="mr-2 w-5 h-5" /> ยืนยันการสมัคร </>
+      )}
+    </button>
+  </div>
 
-            </form>
+</form>
           </div>
         </div>
       </div>
-    </div>
+    </Layout>
   );
 }
