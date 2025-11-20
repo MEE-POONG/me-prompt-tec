@@ -29,7 +29,7 @@ export default function OpenPositions_Internship() {
               </p>
             </div>
             <Link
-              href="/apply/frontend"
+              href="/Sigup_Intern"
               className="bg-blue-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors mt-4 md:mt-0"
             >
               สมัคร
@@ -46,7 +46,7 @@ export default function OpenPositions_Internship() {
               </p>
             </div>
             <Link
-              href="/apply/backend"
+              href="/Sigup_Intern"
               className="bg-blue-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors mt-4 md:mt-0"
             >
               สมัคร
@@ -63,7 +63,7 @@ export default function OpenPositions_Internship() {
               </p>
             </div>
             <Link
-              href="/apply/uiux"
+              href="/Sigup_Intern"
               className="bg-blue-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-blue-700 transition-colors mt-4 md:mt-0"
             >
               สมัคร
