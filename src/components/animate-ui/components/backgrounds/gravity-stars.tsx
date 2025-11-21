@@ -268,7 +268,7 @@ function GravityStarsBackground({
   const drawStars = React.useCallback(
     (ctx: CanvasRenderingContext2D) => {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-      const color = readColor();
+      const color = '#ffffff'; 
       for (const p of starsRef.current) {
         ctx.save();
         ctx.shadowColor = color;

@@ -26,31 +26,31 @@ export default function Navbar() {
             <div className="ml-10 flex items-baseline space-x-4">
               <Link
                 href="/"
-                className="text-gray-700 hover:text-yellow-600 transition-all duration-300 hover:scale-110 font-bold"
+                className="text-gray-700 hover:text-fuchsia-700 transition-all duration-300 hover:scale-110 font-bold"
               >
                 เกี่ยวกับเรา
               </Link>
               <Link
                 href="/portfolio"
-                className="text-gray-700 hover:text-yellow-600 transition-all duration-300 hover:scale-110 font-bold"
+                className="text-gray-700 hover:text-fuchsia-700 transition-all duration-300 hover:scale-110 font-bold"
               >
                 ผลงาน
               </Link>
               <Link
                 href="/internship"
-                className="text-gray-700 hover:text-yellow-600 transition-all duration-300 hover:scale-110 font-bold"
+                className="text-gray-700 hover:text-fuchsia-700 transition-all duration-300 hover:scale-110 font-bold"
               >
                 ฝึกงาน
               </Link>
               <Link
                 href="/partnerships"
-                className="text-gray-700 hover:text-yellow-600 transition-all duration-300 hover:scale-110 font-bold"
+                className="text-gray-700 hover:text-fuchsia-700 transition-all duration-300 hover:scale-110 font-bold"
               >
                 พันธมิตร
               </Link>
               <Link
                 href="/contact"
-                className="text-gray-700 hover:text-yellow-600 transition-all duration-300 hover:scale-110 font-bold"
+                className="text-gray-700 hover:text-fuchsia-700 transition-all duration-300 hover:scale-110 font-bold"
               >
                 ติดต่อเรา
               </Link>
