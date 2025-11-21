@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from "react";
 import {
   FaDiscord,
@@ -9,8 +8,31 @@ import {
   FaPhone,
   FaYoutube,
 } from "react-icons/fa";
+import * as React from "react";
 
-export default function Card_Contact() {
+import {
+  AlertDialog,
+  AlertDialogTrigger,
+  AlertDialogPopup,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogCancel,
+  AlertDialogAction,
+  type AlertDialogPopupProps,
+} from "@/components/animate-ui/components/base/alert-dialog";
+import { Button } from "@/components/ui/Button";
+
+interface BaseAlertDialogDemoProps {
+  from: AlertDialogPopupProps["from"];
+}
+
+export const Card_Contact = ({ from }: BaseAlertDialogDemoProps) => {
+  const [open, setOpen] = useState(false);
+  const [isSuccess, setIsSuccess] = useState<boolean | null>(null);
+  const [loading, setLoading] = useState(false);
+
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -27,23 +49,33 @@ export default function Card_Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true); // เริ่มหมุน spinner
 
-    const res = await fetch("/api/Contact/contactmessage", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        ...form,
-        source: "website", // default
-      }),
-    });
+    try {
+      const res = await fetch("/api/Contact/contactmessage", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...form,
+          source: "website",
+        }),
+      });
 
-    const data = await res.json();
-    console.log(data);
+      const data = await res.json();
+      console.log(data);
 
-    if (res.ok) {
-      alert("ส่งข้อความสำเร็จ!");
-    } else {
-      alert("เกิดข้อผิดพลาด");
+      setIsSuccess(res.ok); // true/false ตาม res.ok
+      setOpen(true); // เปิด dialog
+
+      if (res.ok) {
+        setForm({ name: "", email: "", phone: "", subject: "", message: "" }); // ล้างฟอร์ม
+      }
+    } catch (error) {
+      console.error(error);
+      setIsSuccess(false);
+      setOpen(true);
+    } finally {
+      setLoading(false); // ปิด spinner
     }
   };
 
@@ -221,13 +253,37 @@ export default function Card_Contact() {
                     onChange={handleChange}
                   />
                 </div>
-              
+
+                <AlertDialog open={open} onOpenChange={setOpen}>
+                  <AlertDialogPopup className="sm:max-w-[425px]">
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>
+                        {isSuccess ? "ส่งข้อความสำเร็จ" : "เกิดข้อผิดพลาด"}
+                      </AlertDialogTitle>
+
+                      <AlertDialogDescription>
+                        {isSuccess
+                          ? "ขอบคุณที่ติดต่อเรา!"
+                          : "โปรดลองใหม่อีกครั้งภายหลัง"}
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+
+                    <AlertDialogFooter>
+                      <AlertDialogAction onClick={() => setOpen(false)}>
+                        ปิด
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogPopup>
+                </AlertDialog>
+
                 {/* Submit */}
                 <div>
                   <button
                     type="submit"
-                    className="w-full bg-blue-500 text-white px-8 py-3 rounded-2xl font-semibold hover:bg-yellow-500 transition-all"
+                    className="w-full bg-blue-500 text-white px-8 py-3 rounded-2xl font-semibold hover:bg-yellow-500 transition-all flex justify-center items-center gap-2"
+                    disabled={loading}
                   >
+                    {loading && <span className="loader" />} {/* ใส่ spinner */}
                     ส่งข้อความ
                   </button>
                 </div>
@@ -238,4 +294,4 @@ export default function Card_Contact() {
       </div>
     </section>
   );
-}
+};
