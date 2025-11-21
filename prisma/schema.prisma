@@ -371,3 +371,4 @@ model ProjectIntern {
 
   @@unique([projectId, internId])
 }
+

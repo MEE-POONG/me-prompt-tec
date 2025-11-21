@@ -37,6 +37,7 @@ module.exports = {
   },
   // 4. ส่วน Plugin (สำคัญมาก!)
   plugins: [
+    require('tailwindcss-animate'),
     require('tailwindcss-animation-delay'),
   ],
 }

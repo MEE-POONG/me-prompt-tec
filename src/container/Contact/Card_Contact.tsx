@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import {
   FaDiscord,
   FaEnvelope,
@@ -10,6 +11,42 @@ import {
 } from "react-icons/fa";
 
 export default function Card_Contact() {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setForm({ ...form, [e.target.id]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const res = await fetch("/api/Contact/contactmessage", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...form,
+        source: "website", // default
+      }),
+    });
+
+    const data = await res.json();
+    console.log(data);
+
+    if (res.ok) {
+      alert("ส่งข้อความสำเร็จ!");
+    } else {
+      alert("เกิดข้อผิดพลาด");
+    }
+  };
+
   return (
     <section className="pb-20 bg-linear-to-bl from-lime-400 via-blue-600 to-indigo-800">
       <div className="container mx-auto px-4 max-w-6xl">
@@ -93,8 +130,9 @@ export default function Card_Contact() {
             <h2 className="text-2xl font-bold mb-8 text-gray-800">
               ส่งข้อความถึงเรา
             </h2>
-            <form onSubmit={(e) => e.preventDefault()}>
+            <form onSubmit={handleSubmit}>
               <div className="space-y-6">
+                {/* Name */}
                 <div>
                   <label
                     htmlFor="name"
@@ -103,12 +141,16 @@ export default function Card_Contact() {
                     ชื่อ-นามสกุล
                   </label>
                   <input
-                    type="text"
                     id="name"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 text-gray-900 placeholder:text-gray-400"
+                    type="text"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-black"
                     placeholder="ชื่อ-นามสกุล"
+                    value={form.name}
+                    onChange={handleChange}
                   />
                 </div>
+
+                {/* Email */}
                 <div>
                   <label
                     htmlFor="email"
@@ -117,12 +159,52 @@ export default function Card_Contact() {
                     อีเมล
                   </label>
                   <input
-                    type="email"
                     id="email"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 text-gray-900 placeholder:text-gray-400"
+                    type="email"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-black"
                     placeholder="email@example.com"
+                    value={form.email}
+                    onChange={handleChange}
                   />
                 </div>
+
+                {/* Phone */}
+                <div>
+                  <label
+                    htmlFor="phone"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    เบอร์โทรศัพท์
+                  </label>
+                  <input
+                    id="phone"
+                    type="text"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-black"
+                    placeholder="เบอร์โทร"
+                    value={form.phone}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                {/* Subject */}
+                <div>
+                  <label
+                    htmlFor="subject"
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    หัวข้อ
+                  </label>
+                  <input
+                    id="subject"
+                    type="text"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-black"
+                    placeholder="สอบถามเรื่องอะไร?"
+                    value={form.subject}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                {/* Message */}
                 <div>
                   <label
                     htmlFor="message"
@@ -133,14 +215,18 @@ export default function Card_Contact() {
                   <textarea
                     id="message"
                     rows={5}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 text-gray-900 placeholder:text-gray-400"
-                    placeholder="สอบถามเรื่อง..."
-                  ></textarea>
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg text-black"
+                    placeholder="รายละเอียด..."
+                    value={form.message}
+                    onChange={handleChange}
+                  />
                 </div>
+              
+                {/* Submit */}
                 <div>
                   <button
                     type="submit"
-                    className="w-full bg-blue-500 text-white px-8 py-3 rounded-2xl font-semibold hover:bg-yellow-500 border-2 border-white/20 transition-all duration-300 hover:scale-105"
+                    className="w-full bg-blue-500 text-white px-8 py-3 rounded-2xl font-semibold hover:bg-yellow-500 transition-all"
                   >
                     ส่งข้อความ
                   </button>
