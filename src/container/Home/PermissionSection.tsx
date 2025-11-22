@@ -17,7 +17,7 @@ const PermissionSection = forwardRef((props, ref: ForwardedRef<HTMLDivElement>) 
 
         {/* เนื้อหาด้านขวา */}
         <div className="text-center md:text-left">
-          <h2 className="text-3xl md:text-4xl font-bold text-blue-600 mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text- mb-4 bg-linear-to-r from-blue-600 from-35% via-violet-700  to-red-400 bg-clip-text text-transparent">
             คำมั่นของเรา
           </h2>
           <p className="text-lg text-gray-700 mb-4 leading-relaxed max-w-xl mx-auto md:mx-0">

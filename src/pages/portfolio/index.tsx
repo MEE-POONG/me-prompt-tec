@@ -69,7 +69,7 @@ export default function Portfolio() {
                 <meta name="description" content="รวมผลงานที่เราได้พัฒนาให้กับลูกค้า" />
             </Head>
             <div className="bg-white py-30 text-center ">
-                <h1 className="text-5xl font-extrabold text-blue-600 mb-4 ">
+                <h1 className="text-5xl font-extrabold bg-linear-to-r from-blue-600 from-35% via-violet-700  to-red-400 bg-clip-text text-transparent mb-4 ">
                     ผลงานทั้งหมด
                 </h1>
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto px-4 mb-16">

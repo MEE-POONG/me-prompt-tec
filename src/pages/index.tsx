@@ -9,6 +9,7 @@ import PartnersSection from "@/container/Home/PartnersSection";
 import NewsletterSection from "@/container/Home/NewsletterSection";
 import PermissionSection from "@/container/Home/PermissionSection";
 import TeamSection from "@/container/Home/TeamSection";
+import SectionWrapper from "@/components/SectionWrapper";
 
 export default function Home() {
   const permissionRef = useRef<HTMLDivElement>(null);
@@ -17,77 +18,39 @@ export default function Home() {
     permissionRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-  };
-
   return (
     <Layout>
-        <HeroSection onScrollToNextSection={scrollToPermission} />
-      <motion.div
-        ref={permissionRef}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionVariants}
-      >
-        <PermissionSection />
-      </motion.div>
+      <HeroSection onScrollToNextSection={scrollToPermission} />
 
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionVariants}
-      >
+      <SectionWrapper>
+        <div ref={permissionRef}>
+          <PermissionSection />
+        </div>
+      </SectionWrapper>
+
+      <SectionWrapper>
         <TeamSection />
-      </motion.div>
+      </SectionWrapper>
 
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionVariants}
-      >
+      <SectionWrapper>
         <ServicesSection />
-      </motion.div>
+      </SectionWrapper>
 
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionVariants}
-      >
+      <SectionWrapper>
         <FeaturedProjectsSection />
-      </motion.div>
+      </SectionWrapper>
 
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionVariants}
-      >
+      <SectionWrapper>
         <InternshipCTASection />
-      </motion.div>
+      </SectionWrapper>
 
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionVariants}
-      >
+      <SectionWrapper>
         <PartnersSection />
-      </motion.div>
+      </SectionWrapper>
 
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={sectionVariants}
-      >
+      <SectionWrapper>
         <NewsletterSection />
-      </motion.div>
+      </SectionWrapper>
     </Layout>
   );
 }
