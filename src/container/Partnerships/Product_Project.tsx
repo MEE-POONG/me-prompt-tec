@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { GravityStarsBackground } from '@/components/animate-ui/components/backgrounds/gravity-stars'
 
 // 1. 👇 (อัปเดต) แก้ลิงก์ "href" ให้เป็นตัวพิมพ์เล็กทั้งหมด
 const mockProjects = [
@@ -31,6 +32,7 @@ const mockProjects = [
 export default function Product_Project() {
   return (
     <section className="py-20 relative bg-linear-to-tr from-cyan-400 via-blue-600 to-purple-800 text-white">
+      
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-6xl font-extrabold text-white">

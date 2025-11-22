@@ -1,3 +1,4 @@
+import { GravityStarsBackground } from "@/components/animate-ui/components/backgrounds/gravity-stars";
 import Link from "next/link";
 import React from "react";
 export default function HeroBanner_Internship() {

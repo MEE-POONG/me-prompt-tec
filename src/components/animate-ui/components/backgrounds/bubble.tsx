@@ -9,6 +9,7 @@ import {
 } from 'motion/react';
 
 import { cn } from '@/lib/utils';
+import { StarsBackground } from './stars';
 
 type BubbleColors = {
   first: string;
@@ -108,11 +109,12 @@ function BubbleBackground({
       ref={containerRef}
       data-slot="bubble-background"
       className={cn(
-        'relative size-full overflow-hidden bg-linear-to-br from-fuchsia-700 to-blue-700',
+        'relative size-full overflow-hidden bg-linear-to-tr from-cyan-300 via-blue-600 to-purple-700',
         className,
       )}
       {...props}
     >
+      <StarsBackground />
       <style>
         {`
             :root {
@@ -150,7 +152,7 @@ function BubbleBackground({
 
       <div
         className="absolute inset-0"
-        style={{ filter: 'url(#goo) blur(40px)' }}
+        style={{ filter: 'url(#goo)' }}
       >
         <motion.div
           className="absolute rounded-full size-[80%] top-[10%] left-[10%] mix-blend-hard-light bg-[radial-gradient(circle_at_center,rgba(var(--first-color),0.8)_0%,rgba(var(--first-color),0)_50%)]"

@@ -7,7 +7,7 @@ export default function OpenPositions_Internship() {
       {" "}
       {/* 🚨 เพิ่ม id="open-positions" */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center text-blue-600 mb-16">
+        <h2 className="text-center py-3 text-6xl md:text-4xl font-bold text- mb-4 bg-linear-to-r from-blue-600 from-35% via-violet-700  to-red-400 bg-clip-text text-transparent">
           โปรแกรมฝึกงาน (Internship)
           <p className="text-lg text-gray-600 max-w-3xl mx-auto px-4">
             {" "}

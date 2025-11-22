@@ -59,6 +59,7 @@ export default async function handler(
           faculty: true,
           major: true,
           studentId: true,
+          gen: true,
           coopType: true,
           contact: true,
           resume: true,

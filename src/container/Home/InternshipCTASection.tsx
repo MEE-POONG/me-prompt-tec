@@ -1,3 +1,5 @@
+import { GravityStarsBackground } from "@/components/animate-ui/components/backgrounds/gravity-stars";
+import { StarsBackground } from "@/components/animate-ui/components/backgrounds/stars";
 import { BookCopy, Cpu, Star, UserRound,  } from "lucide-react";
 import Link from "next/link";
 
@@ -23,6 +25,7 @@ const joinicons = [
 export default function InternshipCTASection() {
   return (
     <section className="py-20 relative bg-linear-to-tr from-cyan-400 via-blue-600 to-purple-800 text-white">
+    
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-4  text-white">
           เข้าร่วมทีมกับเรา

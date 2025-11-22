@@ -1,3 +1,4 @@
+import { GravityStarsBackground } from "@/components/animate-ui/components/backgrounds/gravity-stars";
 import Layout from "@/components/Layout";
 import CardSection_partnership from "@/container/Partnerships/CardSection_partnership";
 import Product_Project from "@/container/Partnerships/Product_Project";

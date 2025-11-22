@@ -6,6 +6,7 @@ import { GravityStarsBackground } from "@/components/animate-ui/components/backg
 import { BubbleBackground } from "@/components/animate-ui/components/backgrounds/bubble";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
+import { StarsBackground } from "@/components/animate-ui/components/backgrounds/stars";
 
 interface HeroSectionProps {
   onScrollToNextSection: () => void;
@@ -18,9 +19,6 @@ export default function HeroSection({
     <section className="relative min-h-screen flex items-center text-white overflow-hidden">
       {/* Layer 1: Bubble Background */}
       <BubbleBackground interactive={true} className="absolute inset-0" />
-
-      {/* Layer 2: Gravity Stars Background */}
-      <GravityStarsBackground className="absolute inset-0" />
 
       {/* Optional overlay เพื่อให้เนื้อหาอ่านง่าย */}
       <div className="absolute inset-0 bg-black/20" />

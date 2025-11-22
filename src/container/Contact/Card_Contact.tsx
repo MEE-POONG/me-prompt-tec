@@ -23,6 +23,7 @@ import {
   type AlertDialogPopupProps,
 } from "@/components/animate-ui/components/base/alert-dialog";
 import { Button } from "@/components/ui/Button";
+import { GravityStarsBackground } from "@/components/animate-ui/components/backgrounds/gravity-stars";
 
 interface BaseAlertDialogDemoProps {
   from: AlertDialogPopupProps["from"];

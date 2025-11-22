@@ -2,11 +2,11 @@ import React from "react";
 
 export default function ApplicationProcess_Internship() {
   return (
-    <section className="pt-20 bg-white pb-40">
+    <section className="pt-20 bg-linear-to-tr from-cyan-400 via-blue-600 to-purple-800 pb-40">
       {" "}
       {/* 🚨 7. สลับเป็น bg-gray-100 */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-bold text-center text-blue-600 mb-12">
+        <h2 className="text-6xl text-center md:text-4xl font-bold text- mb-4 text-white bg-clip-text bg-transparent drop-shadow-lg">
           ขั้นตอนการสมัคร
         </h2>
         <div className="flex flex-col md:flex-row justify-between text-center gap-8">

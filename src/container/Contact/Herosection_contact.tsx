@@ -1,3 +1,4 @@
+import { GravityStarsBackground } from "@/components/animate-ui/components/backgrounds/gravity-stars";
 import React from "react";
 
 export default function Herosection_contact() {

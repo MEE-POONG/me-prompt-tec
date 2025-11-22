@@ -1,8 +1,11 @@
+import { GravityStarsBackground } from "@/components/animate-ui/components/backgrounds/gravity-stars";
+import { StarsBackground } from "@/components/animate-ui/components/backgrounds/stars";
 import React from "react";
 
 export default function NewsletterSection() {
   return (
     <section className="relative bg-linear-to-bl from-green-400 via-blue-600 to-purple-800 py-20 px-4 sm:px-6 lg:px-8">
+      
       <div className="max-w-3xl mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
           รับข่าวสารล่าสุดจากเรา
