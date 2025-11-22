@@ -82,6 +82,7 @@ export interface Intern {
   status: string;
   createdAt: string;
   updatedAt: string;
+  gen: number;
 }
 
 export interface InternsResponse {

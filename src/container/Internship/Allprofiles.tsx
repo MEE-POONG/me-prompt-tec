@@ -1,60 +1,66 @@
+"use client";
+
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import { FaInstagram, FaGithub } from "react-icons/fa";
+import { FolderKanban, X, Smartphone, Monitor } from "lucide-react";
 import { Intern } from "@/types/intern";
 
-// 1. 🚨 (แก้ไข) Import ไอคอนเพิ่ม
-import { FaInstagram, FaGithub } from "react-icons/fa";
-// (ต้อง npm install lucide-react ถ้ายังไม่มี)
-import { FolderKanban, X, Smartphone, Monitor } from "lucide-react"; // ⬅️ เพิ่ม Monitor, Smartphone
+interface AllProfilesProps {
+  interns: Intern[];
+}
 
-export default function ProfileSection() {
-  // State สำหรับข้อมูล Interns จาก API
+export default function AllProfiles({}: AllProfilesProps) {
   const [interns, setInterns] = useState<Intern[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
-  // (State เดิมสำหรับ URL)
   const [modalUrl, setModalUrl] = useState<string | null>(null);
-
-  // 2. 🚨 (เพิ่ม) State สำหรับสลับหน้าจอ (PC/Mobile)
   const [viewMode, setViewMode] = useState<"desktop" | "mobile">("desktop");
+  const [visibleGenCount, setVisibleGenCount] = useState(2);
 
-  // Fetch interns data from API
+  // Fetch interns
   useEffect(() => {
     const fetchInterns = async () => {
       try {
         setLoading(true);
-        const response = await fetch("/api/interns");
-        const data = await response.json();
-
+        const res = await fetch("/api/interns");
+        const data = await res.json();
         if (data.success) {
           setInterns(data.data.interns);
         } else {
           setError("ไม่สามารถดึงข้อมูลได้");
         }
       } catch (err) {
+        console.error(err);
         setError("เกิดข้อผิดพลาดในการดึงข้อมูล");
-        console.error("Error fetching interns:", err);
       } finally {
         setLoading(false);
       }
     };
-
     fetchInterns();
   }, []);
 
-  // 3. 🚨 (เพิ่ม) ฟังก์ชันสำหรับเปิด Modal
-  const openModal = (url: string | undefined | null) => {
-    setModalUrl(url ?? null);
-    setViewMode("desktop"); // ⬅️ Reset เป็น Desktop ทุกครั้งที่เปิดd
-  };
+  // Group by gen
+  const groupedInterns: Record<number, Intern[]> = {};
+  interns
+    .sort(
+      (a, b) =>
+        (b.gen || 0) - (a.gen || 0) ||
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    )
+    .forEach((intern) => {
+      const gen = intern.gen || 0;
+      if (!groupedInterns[gen]) groupedInterns[gen] = [];
+      groupedInterns[gen].push(intern);
+    });
 
-  // 4. 🚨 (เพิ่ม) ฟังก์ชันสำหรับปิด Modal
-  const closeModal = () => {
-    setModalUrl(null);
-  };
+  const genKeys = Object.keys(groupedInterns)
+    .map(Number)
+    .sort((a, b) => b - a);
 
-  // Loading state
+  const openModal = (url: string | null) => setModalUrl(url);
+  const closeModal = () => setModalUrl(null);
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
@@ -72,20 +78,15 @@ export default function ProfileSection() {
               opacity: 0.6;
             }
           }
-          .animate-tech-spin {
-            animation: tech-spin 1.2s ease-in-out infinite;
-          }
         `}</style>
-
         <div className="relative w-12 h-12">
           <div className="absolute inset-0 rounded-full border-2 border-gray-300"></div>
-          <div className="absolute inset-0 rounded-full border-2 border-blue-500 border-t-transparent animate-tech-spin"></div>
+          <div className="absolute inset-0 rounded-full border-2 border-blue-500 border-t-transparent animate-[tech-spin_1.2s_ease-in-out_infinite]"></div>
         </div>
       </div>
     );
   }
 
-  // Error state
   if (error) {
     return (
       <section className="py-20 bg-white">
@@ -97,11 +98,10 @@ export default function ProfileSection() {
   }
 
   return (
-    // 4. 🚨 เพิ่ม 'relative'
     <section className="py-20 bg-white relative">
-      {/* (ส่วนหัว Section - เหมือนเดิม) */}
+      {/* Header */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16 text-center">
-        <h2 className="text-6xl md:text-4xl font-bold text- mb-4 bg-linear-to-r from-blue-600 from-35% via-violet-700  to-red-400 bg-clip-text text-transparent">
+        <h2 className="text-6xl md:text-4xl font-bold mb-4 bg-linear-to-r from-blue-600 from-35% via-violet-700 to-red-400 bg-clip-text text-transparent">
           นักศึกษาฝึกงาน (Intern)
         </h2>
         <p className="text-lg text-gray-600 max-w-2xl mx-auto">
@@ -109,109 +109,118 @@ export default function ProfileSection() {
         </p>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {interns.map((intern) => {
-            const displayName =
-              intern.name.display || `${intern.name.first} ${intern.name.last}`;
-            const portfolioUrl = intern.portfolioSlug
-              ? `https://portfolio.example.com/${intern.portfolioSlug}`
-              : null;
-            const instagramUrl = intern.contact?.email
-              ? `https://instagram.com/${intern.contact.email}`
-              : null;
-            const githubUrl = intern.resume?.links?.find((link) =>
-              link.label.toLowerCase().includes("github")
-            )?.url;
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+        {genKeys.slice(0, visibleGenCount).map((gen) => (
+          <div key={gen}>
+            <div className="relative flex items-center my-8">
+              <div className="grow border-t border-blue-600"></div>
+              <span className="mx-4 text-xl font-bold bg-white px-4 bg-clip-text text-transparent bg-linear-to-r from-blue-600 via-violet-700 to-red-400">
+                นักศึกษาฝึกงาน Gen {gen}
+              </span>
+              <div className="grow border-t border-blue-600"></div>
+            </div>
 
-            return (
-              <div
-                key={intern.id}
-                className="relative aspect-9/12 rounded-2xl overflow-hidden shadow-xl w-full transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl group"
-              >
-                {/* (Image - เหมือนเดิม) */}
-                <Image
-                  className="transition-transform duration-500 ease-in-out group-hover:scale-110"
-                  src={intern.avatar || "/image/default-avatar.jpg"}
-                  alt={displayName}
-                  fill
-                  style={{ objectFit: "cover" }}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  priority={false}
-                />
+            <div className="grid gap-8 justify-center grid-cols-[repeat(auto-fit,minmax(280px,auto))]">
+              {groupedInterns[gen].map((intern) => {
+                const displayName =
+                  intern.name.display ||
+                  `${intern.name.first} ${intern.name.last}`;
+                const portfolioUrl = intern.portfolioSlug
+                  ? `https://portfolio.example.com/${intern.portfolioSlug}`
+                  : null;
+                const instagramUrl = intern.contact?.email
+                  ? `https://instagram.com/${intern.contact.email}`
+                  : null;
+                const githubUrl = intern.resume?.links?.find((link) =>
+                  link.label.toLowerCase().includes("github")
+                )?.url;
 
-                {/* (Overlay - เหมือนเดิม) */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 bg-linear-to-t from-black/80 via-black/60 to-transparent backdrop-blur-sm text-white transition-all duration-500 ease-in-out translate-y-full group-hover:translate-y-0">
-                  <h2 className="text-2xl font-bold text-white mb-1">
-                    {displayName}
-                  </h2>
-                  <p className="text-md font-medium text-blue-300 mb-4">
-                    {intern.major || "นักศึกษาฝึกงาน"}
-                  </p>
+                return (
+                  <div
+                    key={intern.id}
+                    className="w-[280px] relative aspect-9/12 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl group"
+                  >
+                    <Image
+                      className="transition-transform duration-500 ease-in-out group-hover:scale-110"
+                      src={intern.avatar || "/image/default-avatar.jpg"}
+                      alt={displayName}
+                      fill
+                      style={{ objectFit: "cover" }}
+                    />
 
-                  {/* 5. 🚨 (แก้ไข) ไอคอน Social Media (เปลี่ยน onClick) */}
-                  <div className="flex justify-center gap-5 mt-4">
-                    {/* Instagram (เปิดแท็บใหม่) */}
-                    {instagramUrl && (
-                      <a
-                        href={instagramUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white/80 hover:text-white transition-all duration-300 ease-in-out hover:-translate-y-1"
-                        aria-label={`${displayName} Instagram`}
-                      >
-                        <FaInstagram size={24} />
-                      </a>
-                    )}
-                    {/* GitHub (เปิดแท็บใหม่) */}
-                    {githubUrl && (
-                      <a
-                        href={githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white/80 hover:text-white transition-all duration-300 ease-in-out hover:-translate-y-1"
-                        aria-label={`${displayName} GitHub`}
-                      >
-                        <FaGithub size={24} />
-                      </a>
-                    )}
-                    {/* Portfolio (เปิด Modal) */}
-                    {portfolioUrl && (
-                      <button
-                        onClick={() => openModal(portfolioUrl)} // ⬅️ ใช้ฟังก์ชันใหม่
-                        className="text-white/80 hover:text-white transition-all duration-300 ease-in-out hover:-translate-y-1"
-                        aria-label={`${displayName} Portfolio`}
-                      >
-                        <FolderKanban size={24} />
-                      </button>
-                    )}
+                    <div className="absolute bottom-0 left-0 right-0 p-6 bg-linear-to-t from-black/80 via-black/60 to-transparent backdrop-blur-sm text-white transition-all duration-500 ease-in-out translate-y-full group-hover:translate-y-0">
+                      <h2 className="text-2xl font-bold text-white mb-1">
+                        {displayName}
+                      </h2>
+                      <p className="text-md font-medium text-blue-300 mb-4">
+                        {intern.major || "นักศึกษาฝึกงาน"}
+                      </p>
+
+                      <div className="flex justify-center gap-5 mt-4">
+                        {instagramUrl && (
+                          <a
+                            href={instagramUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-white/80 hover:text-white transition-all duration-300 ease-in-out hover:-translate-y-1"
+                            aria-label={`${displayName} Instagram`}
+                          >
+                            <FaInstagram size={24} />
+                          </a>
+                        )}
+                        {githubUrl && (
+                          <a
+                            href={githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-white/80 hover:text-white transition-all duration-300 ease-in-out hover:-translate-y-1"
+                            aria-label={`${displayName} GitHub`}
+                          >
+                            <FaGithub size={24} />
+                          </a>
+                        )}
+                        {portfolioUrl && (
+                          <button
+                            onClick={() => openModal(portfolioUrl)}
+                            className="text-white/80 hover:text-white transition-all duration-300 ease-in-out hover:-translate-y-1"
+                            aria-label={`${displayName} Portfolio`}
+                          >
+                            <FolderKanban size={24} />
+                          </button>
+                        )}
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+
+        {visibleGenCount < genKeys.length && (
+          <div className="flex justify-center mt-8">
+            <button
+              onClick={() => setVisibleGenCount((prev) => prev + 1)}
+              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+            >
+              Show More
+            </button>
+          </div>
+        )}
       </div>
 
-      {/* 6. 🚨 (แก้ไข) โค้ด Modal ทั้งหมด */}
+      {/* Modal */}
       {modalUrl && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          {/* Backdrop (คลิกเพื่อปิด) */}
           <div
             className="absolute inset-0 bg-black/70 backdrop-blur-sm"
             onClick={closeModal}
           />
-
-          {/* Modal Content */}
           <div className="relative z-10 w-full max-w-6xl h-[90vh] bg-white rounded-lg shadow-xl flex flex-col">
-            {/* Modal Header (เพิ่มปุ่มสลับจอ) */}
             <div className="flex justify-between items-center p-3 border-b bg-gray-50 rounded-t-lg">
-              {/* (ซ้าย) URL */}
               <span className="text-gray-600 text-sm truncate hidden md:block">
                 {modalUrl}
               </span>
-
-              {/* (ขวา) ปุ่มสลับ PC / Mobile และ ปุ่มปิด */}
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setViewMode("desktop")}
@@ -235,26 +244,20 @@ export default function ProfileSection() {
                 >
                   <Smartphone size={18} />
                 </button>
-
-                {/* (ปุ่มปิด "กากบาท") */}
                 <button
                   onClick={closeModal}
-                  className="text-gray-500 hover:text-gray-900 transition-colors ml-2" // ⬅️ เพิ่ม ml-2
+                  className="text-gray-500 hover:text-gray-900 transition-colors ml-2"
                 >
                   <X size={24} />
                 </button>
               </div>
             </div>
-
-            {/* 7. 🚨 (แก้ไข) Iframe Container */}
             <div className="w-full h-full p-4 bg-gray-300 rounded-b-lg overflow-auto flex justify-center">
               <iframe
                 src={modalUrl}
-                // (กำหนดขนาด iframe ตาม viewMode)
-                className={`
-                  h-full rounded-lg shadow-xl transition-all duration-300 ease-in-out
-                  ${viewMode === "desktop" ? "w-full" : "w-[375px] max-w-full"} 
-                `} // ⬅️ w-[375px] คือขนาดมือถือมาตรฐาน
+                className={`h-full rounded-lg shadow-xl transition-all duration-300 ease-in-out ${
+                  viewMode === "desktop" ? "w-full" : "w-[375px] max-w-full"
+                }`}
                 title="Portfolio Preview"
                 frameBorder="0"
               />

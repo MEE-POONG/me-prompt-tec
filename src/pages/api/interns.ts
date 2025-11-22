@@ -4,27 +4,22 @@
  * ME PROMPT TECHNOLOGY
  */
 
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { prisma } from '@/lib/prisma'; 
+import type { NextApiRequest, NextApiResponse } from "next";
+import { prisma } from "@/lib/prisma";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method !== 'GET') {
+  if (req.method !== "GET") {
     return res.status(405).json({
       success: false,
-      error: 'Method not allowed',
+      error: "Method not allowed",
     });
   }
 
   try {
-    const {
-      status,
-      coopType,
-      page = '1',
-      limit = '100',
-    } = req.query;
+    const { status, coopType, page = "1", limit = "100" } = req.query;
 
     const pageNum = parseInt(page as string, 10);
     const limitNum = parseInt(limit as string, 10);
@@ -37,7 +32,7 @@ export default async function handler(
     if (status) {
       where.status = status;
     } else {
-      where.status = 'published'; // แสดงเฉพาะที่ published
+      where.status = "published"; // แสดงเฉพาะที่ published
     }
 
     // Filter by coop type
@@ -51,7 +46,10 @@ export default async function handler(
         where,
         skip,
         take: limitNum,
-        orderBy: { createdAt: 'desc' },
+        orderBy: [
+          { gen: "desc" }, // ← ให้ gen มากที่สุดมาก่อน
+          { createdAt: "desc" }, // ← ถ้า gen เท่ากัน ให้เรียงตามวันที่ล่าสุด
+        ],
         select: {
           id: true,
           name: true,
@@ -86,10 +84,10 @@ export default async function handler(
       },
     });
   } catch (error) {
-    console.error('Get interns error:', error);
+    console.error("Get interns error:", error);
     return res.status(500).json({
       success: false,
-      error: 'Internal server error',
+      error: "Internal server error",
     });
   }
 }
