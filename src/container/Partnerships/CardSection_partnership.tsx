@@ -1,10 +1,7 @@
 // src/container/Partnerships/CardSection_partnership.tsx
-
-import Link from "next/link";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import Image from "next/image";
 import { FaFacebook } from "react-icons/fa";
-
 import { getPartners, Partner } from "@/lib/partners-api";
 
 const CardSection_partnership = () => {
@@ -30,8 +27,8 @@ const CardSection_partnership = () => {
 
   if (loading) {
     return (
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 max-w-6xl text-center">
+      <section className="bg-white py-24">
+        <div className="max-w-6xl mx-auto px-4 text-center text-slate-500">
           กำลังโหลดข้อมูลพันธมิตร...
         </div>
       </section>
@@ -40,8 +37,8 @@ const CardSection_partnership = () => {
 
   if (error) {
     return (
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 max-w-6xl text-center text-red-500">
+      <section className="bg-white py-24">
+        <div className="max-w-6xl mx-auto px-4 text-center text-red-500">
           {error}
         </div>
       </section>
@@ -49,45 +46,76 @@ const CardSection_partnership = () => {
   }
 
   return (
-    <section className="py-20 bg-white">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {partners.map((partner) => (
-            <div
-              key={partner.id}
-              className="bg-white rounded-xl shadow-lg border border-gray-100 transition-all duration-300 group overflow-hidden hover:scale-105 hover:shadow-2xl"
-            >
-              <div className="relative w-full h-56 flex items-center justify-center">
-                <Image
-                  src={partner.logo || "/img/logo_cs.jpg"}
-                  alt={partner.name}
-                  width={200}
-                  height={200}
-                  className="max-w-full max-h-full"
-                  style={{ objectFit: "contain" }}
-                />
-                <div className="absolute inset-x-0 bottom-0  h-1/3  flex flex-col items-center justify-center p-4  text-center  bg-linear-to-t from-black/20 via-black/40 to-transparent  backdrop-blur-[2px] translate-y-full group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out">
-                  <p className="font-bold text-lg text-white mb-2">
+    <section className="bg-white">
+      {/* ส่วนหัวข้อด้านบน (พื้นหลังขาว) */}
+      <div className="max-w-6xl mx-auto px-4 pt-20 pb-10 text-center">
+        <h2 className="text-3xl md:text-4xl font-extrabold text-[#5a32d1]">
+          ความร่วมมือกับสถาบันการศึกษา
+        </h2>
+        <p className="mt-3 text-sm md:text-base text-slate-600 max-w-2xl mx-auto">
+          เรามุ่งมั่นในการเสริมสร้างศักยภาพคนรุ่นใหม่ ผ่านเครือข่ายพันธมิตรด้านการศึกษาและเทคโนโลยี
+        </p>
+      </div>
+
+      {/* ส่วนการ์ด + พื้นหลังกราเดียนต์น้ำเงิน */}
+      <div className="bg-linear-to-b from-[#0b6bff] via-[#008cff] to-[#00a8ff] py-16">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {partners.map((partner) => (
+              <div
+                key={partner.id}
+                className="bg-white rounded-3xl shadow-lg shadow-slate-300/40 overflow-hidden flex flex-col"
+              >
+                {/* รูปโลโก้ เต็มกรอบแต่ยังโค้งมุม */}
+                <div className="w-full h-56 bg-slate-100 overflow-hidden">
+                  {partner.logo ? (
+                    <Image
+                      src={partner.logo}
+                      alt={partner.name}
+                      width={600}
+                      height={400}
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-slate-400 text-sm">
+                      ไม่มีรูปโลโก้
+                    </div>
+                  )}
+                </div>
+
+                {/* เนื้อหาในการ์ด */}
+                <div className="flex-1 px-6 pt-6 pb-5 flex flex-col text-center">
+                  <h3 className="text-lg font-bold text-slate-900">
                     {partner.name}
+                  </h3>
+                  <p className="mt-1 text-xs font-medium text-[#0b6bff]">
+                    {partner.type || "สถาบันการศึกษา"}
                   </p>
 
-                  {partner.facebookUrl && (
-                    <Link
-                      href={partner.facebookUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white hover:text-blue-500 transition-colors duration-200"
-                    >
-                      <FaFacebook className="text-3xl" />
-                    </Link>
+                  {partner.description && (
+                    <p className="mt-3 text-sm text-slate-600">
+                      {partner.description}
+                    </p>
+                  )}
+
+                  {(partner.facebookUrl || partner.website) && (
+                    <div className="mt-5">
+                      <a
+                        href={partner.facebookUrl || partner.website || "#"}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-full border border-[#0b6bff] px-4 py-2 text-xs font-semibold text-[#0b6bff] hover:bg-[#0b6bff] hover:text-white transition-colors"
+                      >
+                        <FaFacebook className="w-4 h-4" />
+                        <span>เยี่ยมชมเว็บไซต์</span>
+                      </a>
+                    </div>
                   )}
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-
-        {/* CTA ด้านล่างเดิม ถ้าอยากให้ยังอยู่ก็ใส่เพิ่มตรงนี้ได้ */}
       </div>
     </section>
   );
