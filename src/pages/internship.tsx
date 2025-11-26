@@ -25,7 +25,7 @@ export default function Internship() {
         viewport={{ once: true, amount: 0.2 }}
         variants={sectionVariants}
       >
-        <Allprofiles />
+        <Allprofiles interns={[]} />
       </motion.div>
       <motion.div
         initial="hidden"
