@@ -1,11 +1,10 @@
-// src/container/Home/PartnersSection.tsx
-
 import Link from "next/link";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 // ✅ เพิ่ม FaGlobe เข้ามาด้วย
 import { FaFacebook, FaGlobe } from "react-icons/fa"; 
 
+// เรียกใช้ API ที่เราเตรียมไว้ (ต้องเปิดหลังบ้าน Port 3000 ไว้ด้วยนะ)
 import { getPartners, Partner } from "@/lib/partners-api";
 
 export default function PartnersSection() {
@@ -16,11 +15,13 @@ export default function PartnersSection() {
   useEffect(() => {
     async function load() {
       try {
+        // ดึงข้อมูลจาก API หลังบ้าน
         const data = await getPartners();
+        // ตัดมาแสดงแค่ 3 อันแรก
         setPartners(data.slice(0, 3));
       } catch (err) {
         console.error(err);
-        setError("โหลดข้อมูลพันธมิตรไม่สำเร็จ");
+        setError("ไม่สามารถเชื่อมต่อกับระบบหลังบ้านได้ (กรุณาเปิด Server Port 3000)");
       } finally {
         setLoading(false);
       }
@@ -36,21 +37,23 @@ export default function PartnersSection() {
       ? "grid-cols-1 sm:grid-cols-2 max-w-3xl mx-auto"
       : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto";
 
+  // ถ้ากำลังโหลด
   if (loading) {
     return (
       <section className="bg-white py-16 md:py-24">
-        <div className="max-w-6xl mx-auto px-4 text-center text-gray-500">
+        <div className="max-w-6xl mx-auto px-4 text-center text-gray-400 animate-pulse">
           กำลังโหลดข้อมูลพันธมิตร...
         </div>
       </section>
     );
   }
 
+  // ถ้า Error (เช่น ลืมเปิดหลังบ้าน)
   if (error) {
     return (
       <section className="bg-white py-16 md:py-24">
-        <div className="max-w-6xl mx-auto px-4 text-center text-red-500">
-          {error}
+        <div className="max-w-6xl mx-auto px-4 text-center text-red-400 text-sm">
+          ⚠️ {error}
         </div>
       </section>
     );
@@ -69,12 +72,12 @@ export default function PartnersSection() {
           </p>
         </div>
 
-        {/* การ์ดโลโก้ */}
+        {/* การ์ดโลโก้ (แสดงจาก Database จริง) */}
         <div className={`grid gap-8 ${gridClass} justify-items-center`}>
           {partners.map((partner) => (
             <div
               key={partner.id}
-              className="w-full max-w-sm bg-white rounded-xl shadow-lg border border-gray-100 transition-all duration-300 group overflow-hidden hover:scale-105 hover:shadow-2xl"
+              className="w-full max-w-sm bg-white rounded-xl shadow-lg border border-gray-100 transition-all duration-300 group overflow-hidden hover:scale-105 hover:shadow-2xl relative"
             >
               <div className="relative w-full h-56 flex items-center justify-center">
                 <Image
@@ -82,16 +85,15 @@ export default function PartnersSection() {
                   alt={partner.name}
                   width={220}
                   height={220}
-                  className="max-w-full max-h-full object-contain p-4"
+                  className="max-w-full max-h-full object-contain p-6"
                 />
 
-                {/* overlay ด้านล่าง ตอน hover */}
-                <div className="absolute inset-x-0 bottom-0 h-1/3 flex flex-col items-center justify-center p-4 text-center bg-linear-to-t from-black/60 via-black/40 to-transparent backdrop-blur-[2px] translate-y-full group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out">
-                  <p className="font-bold text-lg text-white mb-2 truncate w-full px-2">
+                {/* Overlay ด้านล่าง */}
+                <div className="absolute inset-x-0 bottom-0 h-1/2 flex flex-col justify-end pb-6 items-center text-center bg-linear-to-t from-black/90 via-black/60 to-transparent backdrop-blur-[1px] translate-y-full group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-out">
+                  <p className="font-bold text-lg text-white mb-3 px-4 leading-tight drop-shadow-md">
                     {partner.name}
                   </p>
 
-                  {/* ✅ แก้ไขจุดนี้: ใช้ partner.website แทน facebookUrl */}
                   {partner.website && (
                     <Link
                       href={partner.website}
@@ -99,7 +101,6 @@ export default function PartnersSection() {
                       rel="noopener noreferrer"
                       className="text-white hover:text-blue-400 transition-colors duration-200"
                     >
-                      {/* เช็คว่าใช่ Facebook ไหม ถ้าใช่โชว์ F ถ้าไม่ใช่โชว์โลก */}
                       {partner.website.toLowerCase().includes('facebook') ? (
                         <FaFacebook className="text-3xl" />
                       ) : (
