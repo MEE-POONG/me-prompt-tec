@@ -33,6 +33,7 @@ function ApplyFormContent() {
     gpa: "",
     position: "",
     portfolioUrl: "",
+    resumeUrl: "",
     message: "",
   });
 
@@ -76,17 +77,75 @@ function ApplyFormContent() {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
-      setResumeFile(e.target.files[0]);
+      const file = e.target.files[0];
+      setResumeFile(file);
+
+      // สร้าง URL ชั่วคราวสำหรับให้ดาวน์โหลด
+      const fileUrl = URL.createObjectURL(file);
+      setFormData((prev) => ({ ...prev, resumeUrl: fileUrl }));
     }
   };
 
-  // --- ส่วนที่แก้ไข: เชื่อมต่อกับระบบ Inbox ---
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      // 1. จัดเตรียมข้อความรายละเอียด (รวมข้อมูลสมัครงานเป็นก้อนเดียว)
+      // ตรวจสอบข้อมูลที่จำเป็น
+      if (!formData.firstName || !formData.lastName) {
+        alert("กรุณากรอกชื่อและนามสกุล");
+        setIsSubmitting(false);
+        return;
+      }
+
+      if (!formData.email) {
+        alert("กรุณากรอกอีเมล");
+        setIsSubmitting(false);
+        return;
+      }
+
+      if (!formData.phone) {
+        alert("กรุณากรอกเบอร์โทร");
+        setIsSubmitting(false);
+        return;
+      }
+
+      if (!formData.position) {
+        alert("กรุณาเลือกตำแหน่ง");
+        setIsSubmitting(false);
+        return;
+      }
+
+      if (!resumeFile) {
+        alert("กรุณาอัพโหลดไฟล์ Resume/CV");
+        setIsSubmitting(false);
+        return;
+      }
+
+      // 1. อัพโหลดไฟล์ Resume
+      let uploadedResumeUrl = "";
+
+      const formDataFile = new FormData();
+      formDataFile.append("file", resumeFile);
+
+      const uploadRes = await fetch("/api/upload", {
+        method: "POST",
+        body: formDataFile,
+      });
+
+      if (!uploadRes.ok) {
+        const errorData = await uploadRes.json();
+        alert(
+          "อัปโหลดไฟล์ล้มเหลว: " + (errorData.error || "กรุณาลองใหม่อีกครั้ง")
+        );
+        setIsSubmitting(false);
+        return;
+      }
+
+      const uploadData = await uploadRes.json();
+      uploadedResumeUrl = uploadData.url;
+
+      // 2. จัดเตรียมข้อความรายละเอียด
       const detailMessage = `
 **ข้อมูลการสมัครงาน**
 ตำแหน่ง: ${formData.position}
@@ -95,30 +154,23 @@ function ApplyFormContent() {
 คณะ/สาขา: ${formData.faculty}
 GPA: ${formData.gpa}
 
-**ช่องทางผลงาน**
-Portfolio: ${formData.portfolioUrl || "-"}
+${formData.message ? formData.message : "- ไม่มีข้อความเพิ่มเติม -"}
+`.trim();
 
-**ข้อความแนะนำตัว (Cover Letter)**
-${formData.message}
-
-----------------
-ชื่อไฟล์ Resume: ${resumeFile ? resumeFile.name : "ไม่ได้แนบไฟล์"}
-*(หมายเหตุ: ระบบ Inbox ปัจจุบันรองรับการแจ้งชื่อไฟล์ หากต้องการดูไฟล์จริงต้องพัฒนาระบบ Upload เพิ่มเติม)*
-      `.trim();
-
-      // 2. เตรียม Payload ส่งให้ API Inbox (JSON)
+      // 3. ส่งข้อมูลไปยัง API
       const payload = {
         name: `${formData.firstName} ${formData.lastName}`,
         email: formData.email,
-        phone: formData.phone, // (ถ้า Database รองรับ field phone)
+        phone: formData.phone,
         subject: `[ใบสมัคร] ${formData.position} - ${formData.firstName}`,
         message: detailMessage,
         source: "application-form",
         status: "new",
+        resumeUrl: uploadedResumeUrl,
+        portfolioUrl: formData.portfolioUrl || null,
       };
 
-      // 3. ยิงไปที่ API /api/contact/create (API ของ Inbox)
-      const res = await fetch("/api/contact/create", {
+      const res = await fetch("/api/Contact/contactmessage", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -141,7 +193,6 @@ ${formData.message}
       setIsSubmitting(false);
     }
   };
-  // ---------------------------------------------
 
   const getLabels = () => {
     switch (formData.educationLevel) {
@@ -510,7 +561,7 @@ ${formData.message}
                 className={`w-full cursor-pointer flex items-center justify-center py-3.5 px-6 rounded-xl text-white font-bold text-lg shadow-lg transition-all duration-300 transform ${
                   isSubmitting
                     ? "bg-gray-400 cursor-not-allowed scale-95"
-                    : "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 hover:shadow-xl hover:-translate-y-1 active:scale-95"
+                    : "bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 hover:shadow-xl hover:-translate-y-1 active:scale-95"
                 }`}
               >
                 {isSubmitting ? (

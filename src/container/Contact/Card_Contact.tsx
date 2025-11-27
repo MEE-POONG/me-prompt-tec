@@ -12,7 +12,6 @@ import * as React from "react";
 
 import {
   AlertDialog,
-  AlertDialogTrigger,
   AlertDialogPopup,
   AlertDialogHeader,
   AlertDialogTitle,

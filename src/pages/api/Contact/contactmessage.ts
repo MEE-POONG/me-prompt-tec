@@ -9,12 +9,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const {
       name,
-      date,
       email,
       phone,
       subject,
       message,
       source,
+      resumeUrl,
+      portfolioUrl,
       handledById,
       status,
     } = req.body;
@@ -26,12 +27,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const newMessage = await prisma.contactMessage.create({
       data: {
         name: name ?? null,
-        date: new Date(),   
+        date: new Date(),
         email: email ?? null,
         phone: phone ?? null,
         subject: subject ?? null,
         message,
-        source: source ?? 'website',
+        source: source ?? 'intern-page',
+        resumeUrl: resumeUrl ?? null,
+        portfolioUrl: portfolioUrl ?? null,
         handledById: handledById ?? null,
         status: status ?? 'new',
       },
