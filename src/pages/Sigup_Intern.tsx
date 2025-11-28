@@ -15,6 +15,13 @@ import {
 } from "lucide-react";
 import Layout from "@/components/Layout";
 
+// Interface สำหรับข้อมูลตำแหน่งงานจาก Database
+interface Position {
+  id: string;
+  title: string;
+  isOpen: boolean;
+}
+
 // แยก Component หลักออกมาเพื่อให้รองรับ Suspense
 function ApplyFormContent() {
   const router = useRouter();
@@ -41,21 +48,42 @@ function ApplyFormContent() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const positions = [
-    { id: "1", name: "Frontend Developer (Intern)" },
-    { id: "2", name: "Backend Developer (Intern)" },
-    { id: "3", name: "UI/UX Designer (Intern)" },
-  ];
+  // --- แก้ไขจุดที่ 1: เปลี่ยนจาก Hardcode เป็น State ---
+  const [positions, setPositions] = useState<Position[]>([]);
 
-  // Auto-select position
+  // --- แก้ไขจุดที่ 2: เพิ่ม useEffect ดึงข้อมูลจาก API ---
   useEffect(() => {
-    if (position_id) {
+    const fetchPositions = async () => {
+      try {
+        const res = await fetch("/api/positions"); // ยิงไปที่ positions/index.ts
+        if (res.ok) {
+          const data = await res.json();
+          // กรองเอาเฉพาะตำแหน่งที่เปิดรับ (isOpen = true)
+          const activePositions = Array.isArray(data) 
+            ? data.filter((p: Position) => p.isOpen) 
+            : [];
+          setPositions(activePositions);
+        } else {
+          console.error("Failed to fetch positions");
+        }
+      } catch (error) {
+        console.error("Error fetching positions:", error);
+      }
+    };
+
+    fetchPositions();
+  }, []);
+
+  // --- แก้ไขจุดที่ 3: ปรับ Auto-select ให้รองรับข้อมูลที่โหลดมา ---
+  useEffect(() => {
+    if (position_id && positions.length > 0) {
       const target = positions.find((p) => p.id === position_id);
       if (target) {
-        setFormData((prev) => ({ ...prev, position: target.name }));
+        // เปลี่ยนจาก target.name เป็น target.title ตาม Database Schema
+        setFormData((prev) => ({ ...prev, position: target.title }));
       }
     }
-  }, [position_id]);
+  }, [position_id, positions]);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -447,6 +475,7 @@ ${formData.message ? formData.message : "- ไม่มีข้อความ�
                     <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
+                    {/* --- แก้ไขจุดที่ 4: Loop แสดงผลข้อมูลจาก State positions --- */}
                     <select
                       required
                       name="position"
@@ -455,11 +484,16 @@ ${formData.message ? formData.message : "- ไม่มีข้อความ�
                       className="w-full px-4 py-2.5 border border-gray-200 rounded-lg focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition-all text-black bg-white cursor-pointer hover:bg-gray-50"
                     >
                       <option value="">-- กรุณาเลือกตำแหน่ง --</option>
-                      {positions.map((p) => (
-                        <option key={p.id} value={p.name}>
-                          {p.name}
-                        </option>
-                      ))}
+                      {positions.length === 0 ? (
+                        <option value="" disabled>กำลังโหลดข้อมูล...</option>
+                      ) : (
+                        positions.map((p) => (
+                          // ใช้ p.title ตาม database schema
+                          <option key={p.id} value={p.title}>
+                            {p.title}
+                          </option>
+                        ))
+                      )}
                     </select>
                   </div>
                 </div>

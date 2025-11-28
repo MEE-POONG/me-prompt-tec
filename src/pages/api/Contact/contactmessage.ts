@@ -48,4 +48,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     console.error('Error creating contact message:', err);
     return res.status(500).json({ error: 'Internal Server Error' });
   }
+  
 }
