@@ -1,136 +1,107 @@
 import Link from "next/link";
 import React, { useState } from "react";
+import { Menu, X, ArrowRight } from "lucide-react";
+import { useRouter } from "next/router";
+import Image from "next/image";
 
-export default function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+export default function FrontendNavbar() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const router = useRouter();
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  // เมนูลิงก์ต่างๆ
+  const navLinks = [
+    { label: "หน้าแรก", href: "/" },
+    { label: "ผลงาน", href: "/portfolio" },
+    { label: "ฝึกงาน", href: "/internship" },
+    { label: "พันธมิตร", href: "/partnerships" },
+  ];
+
+  const isActive = (path: string) => router.pathname === path;
+
   return (
-    <nav className="bg-white shadow-lg border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-30">
-        <div className="flex justify-between items-center h-16">
-          {/* logo */}
-          <div className="shrink-0">
-            <Link href="/" className="flex items-center space-x-2">
-              <img src="/image/logo.png" alt="logo" className=" transition-all duration-300 hover:scale-110" height={70} width={70}/>
-              <span className="text-xl font-bold text-blue-600 transition-all duration-300 hover:scale-110">
-                ME PROMPT <span className="text-orange-400">TEC</span>
-              </span>
+    <>
+      <nav
+        // ✅ แก้ไขตรงนี้: ให้มีพื้นหลังและเงาตลอดเวลา ไม่ต้องรอ Scroll
+        className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl shadow-sm border-b border-white/40 py-3 transition-all duration-300"
+      >
+        <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
+          
+          {/* ✅ โลโก้รูปภาพแบบเดิม (ที่คุณชอบ) */}
+          <Link href="/" className="flex items-center gap-3 group cursor-pointer">
+             <div className="relative w-12 h-12 md:w-14 md:h-14 transition-transform group-hover:scale-105 duration-300">
+                <Image 
+                    src="/image/logo.png" 
+                    alt="ME PROMPT TEC Logo" 
+                    fill
+                    className="object-contain"
+                    priority
+                />
+             </div>
+             
+             <div className="flex flex-col justify-center">
+                 <span className="text-xl md:text-2xl font-extrabold tracking-tight leading-none text-blue-600">
+                    ME PROMPT <span className="text-orange-500">TEC</span>
+                 </span>
+             </div>
+          </Link>
+
+          {/* Desktop Menu */}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`text-sm font-bold transition-colors relative group ${
+                  isActive(link.href) ? "text-blue-600" : "text-slate-600 hover:text-blue-600"
+                }`}
+              >
+                {link.label}
+                <span className={`absolute -bottom-1 left-0 h-0.5 bg-blue-600 transition-all duration-300 ${isActive(link.href) ? "w-full" : "w-0 group-hover:w-full"}`}></span>
+              </Link>
+            ))}
+            
+            <Link href="/contact">
+                <button className="px-6 py-2.5 rounded-full bg-slate-900 text-white text-sm font-bold hover:bg-blue-600 transition-all shadow-lg hover:shadow-blue-500/30 flex items-center gap-2 group hover:-translate-y-0.5">
+                    ติดต่อเรา
+                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform"/>
+                </button>
             </Link>
           </div>
 
-          {/* desktop responsive */}
-          <div className="hidden md:block justify-item-center space-x-10">
-            <div className="ml-10 flex items-baseline space-x-4">
-              <Link
-                href="/"
-                className="text-gray-700 hover:text-fuchsia-700 transition-all duration-300 hover:scale-110 font-bold"
-              >
-                เกี่ยวกับเรา
-              </Link>
-              <Link
-                href="/portfolio"
-                className="text-gray-700 hover:text-fuchsia-700 transition-all duration-300 hover:scale-110 font-bold"
-              >
-                ผลงาน
-              </Link>
-              <Link
-                href="/internship"
-                className="text-gray-700 hover:text-fuchsia-700 transition-all duration-300 hover:scale-110 font-bold"
-              >
-                ฝึกงาน
-              </Link>
-              <Link
-                href="/partnerships"
-                className="text-gray-700 hover:text-fuchsia-700 transition-all duration-300 hover:scale-110 font-bold"
-              >
-                พันธมิตร
-              </Link>
-              <Link
-                href="/contact"
-                className="text-gray-700 hover:text-fuchsia-700 transition-all duration-300 hover:scale-110 font-bold"
-              >
-                ติดต่อเรา
-              </Link>
-            </div>
-          </div>
-
-          {/* hamberger dropdown */}
-          <div className="md:hidden">
-            <button
-              onClick={toggleMenu}
-              className="text-gray-700 hover:text-blue-600 p-2 rounded-md transition-colors duration-200"
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                {isMenuOpen ? (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M6 18L18 6M6 6l12 12"
-                  />
-                ) : (
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 6h16M4 12h16M4 18h16"
-                  />
-                )}
-              </svg>
-            </button>
-          </div>
+          {/* Mobile Toggle */}
+          <button
+            className="md:hidden p-2 text-slate-600 hover:text-blue-600 transition-colors"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
         </div>
-        {/* mobile responsive */}
-        {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t border-gray-200 bg-white">
-              <Link
-                href="/about"
-                className="text-gray-700 hover:text-blue-600 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
-                onClick={toggleMenu}
-              >
-                เกี่ยวกับเรา
+      </nav>
+
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl pt-24 px-6 md:hidden animate-in slide-in-from-top-5">
+           <div className="flex flex-col gap-4">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`text-lg font-bold py-3 border-b border-slate-100 ${
+                    isActive(link.href) ? "text-blue-600" : "text-slate-800"
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+               <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+                <button className="w-full mt-4 px-5 py-3 rounded-xl bg-blue-600 text-white font-bold shadow-lg">
+                    ติดต่อเรา
+                </button>
               </Link>
-              <Link
-                href="/portfolio"
-                className="text-gray-700 block px-3 py-2 rounded-md text-base font-medium transition-all duration-200"
-                onClick={toggleMenu}
-              >
-                ผลงาน
-              </Link>
-              <Link
-                href="/internship"
-                className="text-gray-700 block px-3 py-2 rounded-md text-base font-medium transition-all duration-200"
-                onClick={toggleMenu}
-              >
-                ฝึกงาน
-              </Link>
-              <Link
-                href="/partnerships"
-                className="text-gray-700 block px-3 py-2 rounded-md text-base font-medium transition-all duration-200"
-                onClick={toggleMenu}
-              >
-                พันธมิตร
-              </Link>
-              <Link
-                href="/contact"
-                className="text-gray-700 block px-3 py-2 rounded-md text-base font-medium transition-all duration-200"
-                onClick={toggleMenu}
-              >
-                ติดต่อเรา
-              </Link>
-            </div>
-          </div>
-        )}
-      </div>
-    </nav>
+           </div>
+        </div>
+      )}
+    </>
   );
 }

@@ -40,7 +40,7 @@ export default function OpenPositions_Internship() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Section */}
         <div className="text-center mb-10">
-          <h2 className="text-6xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-violet-700 to-red-400 bg-clip-text text-transparent">
+          <h2 className="text-6xl md:text-4xl font-bold mb-4 bg-linear-to-r from-blue-600 via-violet-700 to-red-400 bg-clip-text text-transparent">
             โปรแกรมฝึกงาน (Internship)
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto px-4">
