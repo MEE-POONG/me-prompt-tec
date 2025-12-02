@@ -156,7 +156,7 @@ function ApplyFormContent() {
       const formDataFile = new FormData();
       formDataFile.append("file", resumeFile);
 
-      const uploadRes = await fetch("/api/upload", {
+      const uploadRes = await fetch("/pages/api/upload.ts", {
         method: "POST",
         body: formDataFile,
       });
@@ -198,7 +198,7 @@ ${formData.message ? formData.message : "- ไม่มีข้อความ�
         portfolioUrl: formData.portfolioUrl || null,
       };
 
-      const res = await fetch("/api/Contact/contactmessage", {
+      const res = await fetch("/pages/api/Contact/contactmessage.ts", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
