@@ -8,7 +8,6 @@ export default function FrontendNavbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const router = useRouter();
 
-  // เมนูลิงก์ต่างๆ
   const navLinks = [
     { label: "หน้าแรก", href: "/" },
     { label: "ผลงาน", href: "/portfolio" },
@@ -20,29 +19,27 @@ export default function FrontendNavbar() {
 
   return (
     <>
-      <nav
-        // ✅ แก้ไขตรงนี้: ให้มีพื้นหลังและเงาตลอดเวลา ไม่ต้องรอ Scroll
-        className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl shadow-sm border-b border-white/40 py-3 transition-all duration-300"
-      >
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl shadow-sm border-b border-white/40 py-3 transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
-          
-          {/* ✅ โลโก้รูปภาพแบบเดิม (ที่คุณชอบ) */}
+          {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group cursor-pointer">
-             <div className="relative w-12 h-12 md:w-14 md:h-14 transition-transform group-hover:scale-105 duration-300">
-                <Image 
-                    src="/image/logo.png" 
-                    alt="ME PROMPT TEC Logo" 
-                    fill
-                    className="object-contain"
-                    priority
-                />
-             </div>
-             
-             <div className="flex flex-col justify-center">
-                 <span className="text-xl md:text-2xl font-extrabold tracking-tight leading-none text-blue-600">
-                    ME PROMPT <span className="text-orange-500">TEC</span>
-                 </span>
-             </div>
+            <div className="relative w-12 h-12 md:w-14 md:h-14 transition-transform group-hover:scale-105 duration-300">
+              <Image
+                src="/image/logo.png"
+                alt="ME PROMPT TEC Logo"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+
+            {/* เก็บสีตัวหนังสือตามโลโก้เพื่อรักษา identity */}
+            <div className="flex flex-col justify-center">
+              <span className="text-xl md:text-2xl font-extrabold tracking-tight leading-none">
+                <span className="text-[#2563EB]">ME PROMPT</span>{" "}
+                <span className="text-[#F97316]">TEC</span>
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Menu */}
@@ -52,25 +49,34 @@ export default function FrontendNavbar() {
                 key={link.href}
                 href={link.href}
                 className={`text-sm font-bold transition-colors relative group ${
-                  isActive(link.href) ? "text-blue-600" : "text-slate-600 hover:text-blue-600"
+                  isActive(link.href)
+                    ? "text-purple-600"
+                    : "text-slate-600 hover:text-purple-600"
                 }`}
               >
                 {link.label}
-                <span className={`absolute -bottom-1 left-0 h-0.5 bg-blue-600 transition-all duration-300 ${isActive(link.href) ? "w-full" : "w-0 group-hover:w-full"}`}></span>
+                <span
+                  className={`absolute -bottom-1 left-0 h-0.5 bg-purple-500 transition-all duration-300 ${
+                    isActive(link.href) ? "w-full" : "w-0 group-hover:w-full"
+                  }`}
+                ></span>
               </Link>
             ))}
-            
+
             <Link href="/contact">
-                <button className="px-6 py-2.5 rounded-full bg-slate-900 text-white text-sm font-bold hover:bg-blue-600 transition-all shadow-lg hover:shadow-blue-500/30 flex items-center gap-2 group hover:-translate-y-0.5">
-                    ติดต่อเรา
-                    <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform"/>
-                </button>
+              <button className="px-6 py-2.5 rounded-full bg-linear-to-r from-purple-600 via-fuchsia-500 to-pink-500 text-white text-sm font-bold transition-all shadow-lg shadow-fuchsia-400/40 flex items-center gap-2 group hover:-translate-y-0.5 hover:brightness-110">
+                ติดต่อเรา
+                <ArrowRight
+                  size={16}
+                  className="group-hover:translate-x-1 transition-transform"
+                />
+              </button>
             </Link>
           </div>
 
           {/* Mobile Toggle */}
           <button
-            className="md:hidden p-2 text-slate-600 hover:text-blue-600 transition-colors"
+            className="md:hidden p-2 text-slate-600 hover:text-purple-600 transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
@@ -81,25 +87,25 @@ export default function FrontendNavbar() {
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-40 bg-white/95 backdrop-blur-xl pt-24 px-6 md:hidden animate-in slide-in-from-top-5">
-           <div className="flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`text-lg font-bold py-3 border-b border-slate-100 ${
-                    isActive(link.href) ? "text-blue-600" : "text-slate-800"
-                  }`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.label}
-                </Link>
-              ))}
-               <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-                <button className="w-full mt-4 px-5 py-3 rounded-xl bg-blue-600 text-white font-bold shadow-lg">
-                    ติดต่อเรา
-                </button>
+          <div className="flex flex-col gap-4">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`text-lg font-bold py-3 border-b border-slate-100 ${
+                  isActive(link.href) ? "text-purple-600" : "text-slate-800"
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {link.label}
               </Link>
-           </div>
+            ))}
+            <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+              <button className="w-full mt-4 px-5 py-3 rounded-xl bg-linear-to-r from-purple-600 via-fuchsia-500 to-pink-500 text-white font-bold shadow-lg shadow-fuchsia-400/40">
+                ติดต่อเรา
+              </button>
+            </Link>
+          </div>
         </div>
       )}
     </>

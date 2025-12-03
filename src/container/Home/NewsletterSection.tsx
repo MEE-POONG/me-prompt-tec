@@ -1,34 +1,36 @@
-import { GravityStarsBackground } from "@/components/animate-ui/components/backgrounds/gravity-stars";
-import { StarsBackground } from "@/components/animate-ui/components/backgrounds/stars";
 import React from "react";
 
 export default function NewsletterSection() {
   return (
-    <section className="relative bg-linear-to-bl from-green-400 via-blue-600 to-purple-800 py-20 px-4 sm:px-6 lg:px-8">
-      
-      <div className="max-w-3xl mx-auto text-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+    <section className="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      {/* BG ไล่สีโทนอ่อนแบบ Hero */}
+      <div className="absolute inset-0 -z-20 bg-linear-to-br from-[#f5f3ff] via-[#fdf2ff] to-[#eff6ff]" />
+      <div className="absolute inset-0 -z-10 opacity-70 bg-[radial-gradient(circle_at_top_left,rgba(129,140,248,0.35),transparent_60%),radial-gradient(circle_at_bottom_right,rgba(244,114,182,0.35),transparent_55%)]" />
+
+      <div className="relative max-w-3xl mx-auto text-center">
+        <h2 className="text-3xl md:text-4xl font-extrabold mb-4 bg-clip-text text-transparent bg-linear-to-r from-blue-600 via-violet-700 to-pink-500">
           รับข่าวสารล่าสุดจากเรา
         </h2>
-        <p className="text-lg text-white mb-8">
+
+        <p className="text-base md:text-lg text-slate-700 mb-8">
           สมัครรับจดหมายข่าวเพื่อไม่พลาดข้อมูลอัปเดตเกี่ยวกับเทคโนโลยีและบริการใหม่ ๆ จาก Me Prompt
         </p>
 
-        <form className="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <form className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-3xl mx-auto">
           <input
             type="email"
             placeholder="กรอกอีเมลของคุณ"
-            className="w-full text-white sm:w-auto flex-1 px-4 py-3 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400"
+            className="w-full sm:flex-1 rounded-full border border-sky-200 bg-white/80 px-5 py-3 text-sm md:text-base text-slate-800 shadow-md shadow-sky-100/70 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent"
           />
           <button
             type="submit"
-            className="px-6 py-3 bg-yellow-500 text-white font-semibold rounded-xl hover:bg-blue-700 transition duration-300 w-full sm:w-auto"
+            className="w-full sm:w-auto rounded-full px-8 py-3 text-sm md:text-base font-semibold text-white bg-linear-to-r from-purple-600 via-fuchsia-500 to-pink-500 shadow-lg shadow-fuchsia-300/70 transition-transform duration-200 hover:-translate-y-0.5 hover:brightness-110"
           >
             สมัคร
           </button>
         </form>
 
-        <p className="text-sm text-white mt-4">
+        <p className="mt-4 text-xs md:text-sm text-slate-500">
           เราจะไม่ส่งสแปมและเคารพความเป็นส่วนตัวของคุณ
         </p>
       </div>

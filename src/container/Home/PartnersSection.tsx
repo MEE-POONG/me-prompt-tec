@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { FaFacebook, FaGlobe, FaExternalLinkAlt } from "react-icons/fa";
+import { FaFacebook, FaExternalLinkAlt } from "react-icons/fa";
 import { motion, Variants } from "framer-motion";
 
 import { getPartners, Partner } from "@/lib/partners-api";
@@ -11,6 +11,7 @@ export default function PartnersSection() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // ----------------- ดึงข้อมูลจากหลังบ้าน (เหมือนเดิม) -----------------
   useEffect(() => {
     async function load() {
       try {
@@ -18,7 +19,9 @@ export default function PartnersSection() {
         setPartners(data.slice(0, 3));
       } catch (err) {
         console.error(err);
-        setError("ไม่สามารถเชื่อมต่อกับระบบหลังบ้านได้ (กรุณาเปิด Server Port 3000)");
+        setError(
+          "ไม่สามารถเชื่อมต่อกับระบบหลังบ้านได้ (กรุณาเปิด Server Port 3000)"
+        );
       } finally {
         setLoading(false);
       }
@@ -38,17 +41,17 @@ export default function PartnersSection() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.2 }
-    }
+      transition: { staggerChildren: 0.2 },
+    },
   };
 
   const cardVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { duration: 0.5, ease: "easeOut" }
-    }
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeOut" },
+    },
   };
 
   if (loading) {
@@ -74,26 +77,25 @@ export default function PartnersSection() {
   return (
     <section className="bg-white relative z-10 py-16 md:py-24 overflow-hidden">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* ส่วนหัวข้อ */}
-        <motion.div 
+        {/* ----------------- หัวข้อ (ไม่มีเส้นใต้แล้ว) ----------------- */}
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          {/* ✅ แก้ไข: คืนค่า Gradient ไล่สีแบบต้นฉบับ */}
           <h2 className="text-3xl md:text-4xl font-bold bg-linear-to-r from-blue-600 via-violet-700 to-red-400 bg-clip-text text-transparent">
             ความร่วมมือกับสถาบันการศึกษา
           </h2>
           <p className="mt-4 text-slate-500 max-w-2xl mx-auto">
-            เรามุ่งมั่นในการเสริมสร้างศักยภาพคนรุ่นใหม่ ให้พร้อมสำหรับโลกเทคโนโลยี ผ่านเครือข่ายพันธมิตรที่แข็งแกร่ง
+            เรามุ่งมั่นในการเสริมสร้างศักยภาพคนรุ่นใหม่ ให้พร้อมสำหรับโลกเทคโนโลยี
+            ผ่านเครือข่ายพันธมิตรที่แข็งแกร่ง
           </p>
         </motion.div>
 
-        {/* Grid แสดงโลโก้ */}
-        <motion.div 
+        {/* ----------------- Grid แสดงโลโก้ ----------------- */}
+        <motion.div
           className={`grid gap-8 ${gridClass} justify-items-center`}
           variants={containerVariants}
           initial="hidden"
@@ -104,50 +106,54 @@ export default function PartnersSection() {
             <motion.div
               key={partner.id}
               variants={cardVariants}
-              whileHover={{ y: -8 }} 
-              className="w-full h-full bg-white rounded-2xl shadow-md hover:shadow-xl border border-slate-100 group overflow-hidden relative cursor-pointer transition-all duration-300 flex flex-col"
+              whileHover={{ y: -8 }}
+              className="w-full h-full bg-white rounded-2xl shadow-md hover:shadow-2xl border border-slate-100/80 group overflow-hidden relative cursor-pointer transition-all duration-300 flex flex-col"
             >
-              <div className="relative w-full h-64 p-10 flex items-center justify-center bg-white group-hover:bg-slate-50/50 transition-colors duration-300">
-                
+              {/* ---------- โซนรูปโลโก้ (ขยายให้เต็มกรอบมากขึ้น) ---------- */}
+              <div className="relative w-full h-52 sm:h-60 md:h-64 px-4 sm:px-6 py-6 flex items-center justify-center bg-slate-50 group-hover:bg-slate-100/70 transition-colors duration-300">
                 <Image
                   src={partner.logo || "/img/logo-placeholder.png"}
                   alt={partner.name}
-                  width={300}
-                  height={300}
-                  className="w-full h-full object-contain opacity-90 transition-all duration-500 group-hover:opacity-100 group-hover:scale-110"
+                  width={400}
+                  height={400}
+                  className="w-full h-full max-w-full max-h-full object-contain drop-shadow-md transition-all duration-500 group-hover:scale-[1.06] group-hover:drop-shadow-xl"
                 />
 
-                {/* Overlay เมื่อ Hover */}
-                <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-6 text-center">
-                   <p className="text-white font-bold text-lg mb-1 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
-                     {partner.name}
-                   </p>
-                   <p className="text-slate-300 text-xs mb-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">
-                     {partner.type || "สถาบันการศึกษา"}
-                   </p>
-                   
-                   {partner.website && (
-                      <Link 
-                        href={partner.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 bg-white text-slate-900 px-5 py-2 rounded-full text-sm font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300 scale-90 group-hover:scale-100"
-                      >
-                        <span>เยี่ยมชม</span>
-                        {partner.website.toLowerCase().includes('facebook') ? <FaFacebook /> : <FaExternalLinkAlt className="text-xs"/>}
-                      </Link>
-                   )}
+                {/* Overlay ตอน Hover */}
+                <div className="absolute inset-0 bg-slate-900/80 backdrop-blur-[3px] opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-center items-center p-6 text-center">
+                  <p className="text-white font-bold text-lg mb-1 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
+                    {partner.name}
+                  </p>
+                  <p className="text-slate-300 text-xs mb-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">
+                    {partner.type || "สถาบันการศึกษา"}
+                  </p>
+
+                  {partner.website && (
+                    <Link
+                      href={partner.website}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 bg-white text-slate-900 px-5 py-2 rounded-full text-sm font-semibold hover:bg-blue-500 hover:text-white transition-all duration-300 scale-90 group-hover:scale-100"
+                    >
+                      <span>เยี่ยมชม</span>
+                      {partner.website.toLowerCase().includes("facebook") ? (
+                        <FaFacebook />
+                      ) : (
+                        <FaExternalLinkAlt className="text-xs" />
+                      )}
+                    </Link>
+                  )}
                 </div>
               </div>
 
-              {/* แถบสีด้านล่าง */}
-              <div className="h-1.5 w-full bg-linear-to-r from-blue-500 via-violet-500 to-pink-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+              {/* แถบสีด้านล่างการ์ด */}
+              <div className="h-1.5 w-full bg-linear-to-r from-sky-500 via-violet-500 to-pink-500 scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
             </motion.div>
           ))}
         </motion.div>
 
-        {/* ปุ่มลิงก์ */}
-        <motion.div 
+        {/* ----------------- ปุ่ม “ดูความร่วมมือทั้งหมด” ----------------- */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.5 }}
@@ -156,10 +162,20 @@ export default function PartnersSection() {
         >
           <Link
             href="/partnerships"
-            className="group inline-flex items-center gap-2 font-semibold text-slate-600 hover:text-[#5a32d1] transition-colors duration-200"
+            className="
+              group inline-flex items-center gap-2
+              px-7 py-3 rounded-full
+              bg-linear-to-r from-sky-500 via-violet-500 to-pink-500
+              text-white text-sm md:text-base font-semibold
+              shadow-lg shadow-fuchsia-300/40
+              hover:shadow-xl hover:-translate-y-0.5
+              transition-all duration-300
+            "
           >
             <span>ดูความร่วมมือทั้งหมด</span>
-            <span className="transform group-hover:translate-x-1 transition-transform duration-200">→</span>
+            <span className="transform group-hover:translate-x-1 transition-transform duration-200">
+              →
+            </span>
           </Link>
         </motion.div>
       </div>
