@@ -79,9 +79,10 @@ export const Card_Contact = ({ from }: BaseAlertDialogDemoProps) => {
     }
   };
 
+  const newLocal = "container mx-auto px-4 max-w-6xl";
   return (
     <section className="pb-20 bg-linear-to-bl from-lime-400 via-blue-600 to-indigo-800">
-      <div className="container mx-auto px-4 max-w-6xl">
+      <div className={newLocal}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 bg-white p-8 md:p-12 rounded-2xl shadow-2xl">
           {/* ===== ส่วนข้อมูลติดต่อ (ซ้าย) ===== */}
           <div>
