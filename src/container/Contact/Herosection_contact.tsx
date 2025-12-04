@@ -1,18 +1,28 @@
-import { GravityStarsBackground } from "@/components/animate-ui/components/backgrounds/gravity-stars";
 import React from "react";
+import { motion } from "framer-motion";
 
 export default function Herosection_contact() {
   return (
-    <section className="py-24 md:py-32 text-white bg-linear-to-tl from-lime-400 via-blue-600 to-indigo-800">
-      <div className="container mx-auto px-4 max-w-6xl text-center">
-        <h1 className="text-4xl md:text-6xl font-extrabold text-white">
-          ติดต่อเรา
+    <section className="relative pt-32 pb-12 text-center px-4">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="max-w-4xl mx-auto"
+      >
+        {/* ลบ Get in touch ออกแล้วครับ */}
+
+        <h1 className="text-xl md:text-5xl font-black mb-6 tracking-tight drop-shadow-sm">
+          <span className="bg-clip-text text-transparent bg-linear-to-r from-blue-600 via-violet-600 to-pink-500">
+            ติดต่อเรา
+          </span>
         </h1>
-        <p className="mt-4 text-xl text-gray-200 max-w-1xl mx-auto">
-          พบปัญหาหรือมีข้อสงสัย กรอกแบบฟอร์มด้านล่าง
-          หรือติดต่อเราผ่านช่องทางอื่นได้เลย
+
+        <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto font-light leading-relaxed">
+          เราพร้อมเปลี่ยนไอเดียของคุณให้เป็นจริง <br className="hidden md:block" />
+          ปรึกษาเรื่องโปรเจกต์ สอบถามข้อมูล หรือแค่อยากทักทาย ทีมงาน Me Prompt ยินดีต้อนรับครับ
         </p>
-      </div>
+      </motion.div>
     </section>
   );
 }
