@@ -59,8 +59,8 @@ function ApplyFormContent() {
         if (res.ok) {
           const data = await res.json();
           // กรองเอาเฉพาะตำแหน่งที่เปิดรับ (isOpen = true)
-          const activePositions = Array.isArray(data) 
-            ? data.filter((p: Position) => p.isOpen) 
+          const activePositions = Array.isArray(data)
+            ? data.filter((p: Position) => p.isOpen)
             : [];
           setPositions(activePositions);
         } else {
@@ -156,7 +156,7 @@ function ApplyFormContent() {
       const formDataFile = new FormData();
       formDataFile.append("file", resumeFile);
 
-      const uploadRes = await fetch("/pages/api/upload.ts", {
+      const uploadRes = await fetch("/api/upload", {
         method: "POST",
         body: formDataFile,
       });
@@ -198,7 +198,7 @@ ${formData.message ? formData.message : "- ไม่มีข้อความ�
         portfolioUrl: formData.portfolioUrl || null,
       };
 
-      const res = await fetch("/pages/api/Contact/contactmessage.ts", {
+      const res = await fetch("/api/Contact/contactmessage", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -297,7 +297,7 @@ ${formData.message ? formData.message : "- ไม่มีข้อความ�
                 แบบฟอร์มสมัครฝึกงาน
               </h1>
               <p className="text-blue-100 text-sm mt-1 font-light opacity-90">
-                กรอกข้อมูลให้ครบถ้วนเพื่อประกอบการพิจารณาคัดเลือก
+                กรุณากรอกข้อมูลให้ครบถ้วนเพื่อประกอบการพิจารณาคัดเลือก
               </p>
             </div>
           </div>
@@ -379,44 +379,40 @@ ${formData.message ? formData.message : "- ไม่มีข้อความ�
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
                 <div
                   onClick={() => handleLevelChange("highschool")}
-                  className={`cursor-pointer border rounded-xl p-3 flex flex-col items-center justify-center gap-2 transition-all hover:shadow-md text-center h-24 ${
-                    formData.educationLevel === "highschool"
+                  className={`cursor-pointer border rounded-xl p-3 flex flex-col items-center justify-center gap-2 transition-all hover:shadow-md text-center h-24 ${formData.educationLevel === "highschool"
                       ? "border-blue-500 bg-blue-50 text-blue-700 ring-1 ring-blue-500"
                       : "border-gray-200 bg-white text-gray-500 hover:border-blue-300"
-                  }`}
+                    }`}
                 >
                   <School size={24} />
                   <span className="text-sm font-medium">มัธยมปลาย</span>
                 </div>
                 <div
                   onClick={() => handleLevelChange("vocational")}
-                  className={`cursor-pointer border rounded-xl p-3 flex flex-col items-center justify-center gap-2 transition-all hover:shadow-md text-center h-24 ${
-                    formData.educationLevel === "vocational"
+                  className={`cursor-pointer border rounded-xl p-3 flex flex-col items-center justify-center gap-2 transition-all hover:shadow-md text-center h-24 ${formData.educationLevel === "vocational"
                       ? "border-blue-500 bg-blue-50 text-blue-700 ring-1 ring-blue-500"
                       : "border-gray-200 bg-white text-gray-500 hover:border-blue-300"
-                  }`}
+                    }`}
                 >
                   <Building2 size={24} />
                   <span className="text-sm font-medium">ปวช. / ปวส.</span>
                 </div>
                 <div
                   onClick={() => handleLevelChange("university")}
-                  className={`cursor-pointer border rounded-xl p-3 flex flex-col items-center justify-center gap-2 transition-all hover:shadow-md text-center h-24 ${
-                    formData.educationLevel === "university"
+                  className={`cursor-pointer border rounded-xl p-3 flex flex-col items-center justify-center gap-2 transition-all hover:shadow-md text-center h-24 ${formData.educationLevel === "university"
                       ? "border-blue-500 bg-blue-50 text-blue-700 ring-1 ring-blue-500"
                       : "border-gray-200 bg-white text-gray-500 hover:border-blue-300"
-                  }`}
+                    }`}
                 >
                   <GraduationCap size={24} />
                   <span className="text-sm font-medium">มหาวิทยาลัย</span>
                 </div>
                 <div
                   onClick={() => handleLevelChange("graduated")}
-                  className={`cursor-pointer border rounded-xl p-3 flex flex-col items-center justify-center gap-2 transition-all hover:shadow-md text-center h-24 ${
-                    formData.educationLevel === "graduated"
+                  className={`cursor-pointer border rounded-xl p-3 flex flex-col items-center justify-center gap-2 transition-all hover:shadow-md text-center h-24 ${formData.educationLevel === "graduated"
                       ? "border-blue-500 bg-blue-50 text-blue-700 ring-1 ring-blue-500"
                       : "border-gray-200 bg-white text-gray-500 hover:border-blue-300"
-                  }`}
+                    }`}
                 >
                   <Briefcase size={24} />
                   <span className="text-sm font-medium">จบการศึกษาแล้ว</span>
@@ -513,11 +509,10 @@ ${formData.message ? formData.message : "- ไม่มีข้อความ�
                 </label>
                 <div className="flex items-center justify-center w-full group">
                   <label
-                    className={`flex flex-col items-center justify-center w-full h-36 border-2 border-dashed rounded-xl cursor-pointer transition-all duration-300 ${
-                      resumeFile
+                    className={`flex flex-col items-center justify-center w-full h-36 border-2 border-dashed rounded-xl cursor-pointer transition-all duration-300 ${resumeFile
                         ? "border-green-400 bg-green-50/50"
                         : "border-gray-300 bg-gray-50/50 hover:bg-blue-50/50 hover:border-blue-300"
-                    }`}
+                      }`}
                   >
                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
                       {resumeFile ? (
@@ -592,11 +587,10 @@ ${formData.message ? formData.message : "- ไม่มีข้อความ�
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`w-full cursor-pointer flex items-center justify-center py-3.5 px-6 rounded-xl text-white font-bold text-lg shadow-lg transition-all duration-300 transform ${
-                  isSubmitting
+                className={`w-full cursor-pointer flex items-center justify-center py-3.5 px-6 rounded-xl text-white font-bold text-lg shadow-lg transition-all duration-300 transform ${isSubmitting
                     ? "bg-gray-400 cursor-not-allowed scale-95"
                     : "bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 hover:shadow-xl hover:-translate-y-1 active:scale-95"
-                }`}
+                  }`}
               >
                 {isSubmitting ? (
                   <div className="flex items-center gap-2">
@@ -638,7 +632,7 @@ ${formData.message ? formData.message : "- ไม่มีข้อความ�
 }
 
 // Default Export: Wrap ด้วย Layout และ Suspense ตรงนี้
-export default function ApplyPage() {
+export default function ApplyPage(props) {
   return (
     <Layout>
       <Suspense

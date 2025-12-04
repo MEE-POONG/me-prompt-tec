@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
@@ -136,12 +130,12 @@ type ContactInfo {
 }
 
 type Resume {
-  summary      String?
-  skills       Skill[]
-  educations   Education[]
-  experiences  Experience[]
-  projects     ResumeProject[]
-  links        Link[]
+  summary     String?
+  skills      Skill[]
+  educations  Education[]
+  experiences Experience[]
+  projects    ResumeProject[]
+  links       Link[]
 }
 
 type ResumeProject {
@@ -155,15 +149,15 @@ type ResumeProject {
 
 // ผู้ใช้งานหลังบ้าน
 model User {
-  id             String  @id @default(auto()) @map("_id") @db.ObjectId
-  email          String  @unique
-  passwordHash   String
-  role           Role    @default(viewer)
-  isActive       Boolean @default(true)
-  
-  name           String?  // ชื่อ-นามสกุล (ใช้แทน fullName)
-  phone          String?  // เบอร์โทร
-  position       String?  // ตำแหน่ง
+  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  email        String  @unique
+  passwordHash String
+  role         Role    @default(viewer)
+  isActive     Boolean @default(true)
+
+  name     String? // ชื่อ-นามสกุล (ใช้แทน fullName)
+  phone    String? // เบอร์โทร
+  position String? // ตำแหน่ง
   // ------------------------
   // โปรไฟล์ที่เชื่อม (อย่างใดอย่างหนึ่งหรือว่างได้)
   memberId String? @db.ObjectId
@@ -227,15 +221,15 @@ model Member {
 
 // นักศึกษา Coop/ฝึกงาน (มีหน้า portfolio ของตัวเอง)
 model Intern {
-  id            String       @id @default(auto()) @map("_id") @db.ObjectId
-  name          Name
-  university    String       @default("มหาวิทยาลัยเทคโนโลยีราชมงคลอีสาน")
-  faculty       String?      @default("คณะบริหารธุรกิจ")
-  major         String?      @default("สารสนเทศทางคอมพิวเตอร์")
-  studentId     String?
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  name       Name
+  university String  @default("มหาวิทยาลัยเทคโนโลยีราชมงคลอีสาน")
+  faculty    String? @default("คณะบริหารธุรกิจ")
+  major      String? @default("สารสนเทศทางคอมพิวเตอร์")
+  studentId  String?
 
   // ✅ เพิ่มฟิลด์รุ่น (Generation) ตรงนี้ครับ
-  gen           String       @default("6") 
+  gen String @default("6")
 
   coopType      CoopType     @default(coop)
   contact       ContactInfo?
@@ -313,21 +307,25 @@ model MOU {
 
 // ข้อความติดต่อจากหน้าเว็บ
 model ContactMessage {
-  id        String  @id @default(auto()) @map("_id") @db.ObjectId
-  name      String?
-  date      DateTime?
-  email     String?
-  phone     String?
-  subject   String?
-  message   String
-  source    String  @default("website") // website|portfolio|intern-page|other
-  resumeUrl      String?
-  portfolioUrl   String?
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  name         String?
+  date         DateTime?
+  email        String?
+  phone        String?
+  subject      String?
+  message      String
+  source       String    @default("website") // website|portfolio|intern-page|other
+  resumeUrl    String?
+  portfolioUrl String?
 
   handledById String? @db.ObjectId
   handledBy   User?   @relation(fields: [handledById], references: [id])
 
-  status    String   @default("new") // new|in-progress|done
+  status String @default("new") // new|in-progress|done
+
+  // ✅ เพิ่ม isStarred ตรงนี้
+  isStarred Boolean @default(false)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -381,28 +379,59 @@ model ProjectIntern {
 
   @@unique([projectId, internId])
 }
-// ... (ต่อจากบรรทัดสุดท้ายของไฟล์เดิม)
 
 // ตารางเก็บตำแหน่งงานที่เปิดรับ (Internship Positions)
 model InternshipPosition {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  title       String   // ชื่อตำแหน่ง เช่น Frontend Developer
-  description String   // รายละเอียด
-  isOpen      Boolean  @default(true) // เปิดรับอยู่หรือไม่
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  title       String // ชื่อตำแหน่ง เช่น Frontend Developer
+  description String // รายละเอียด
+  isOpen      Boolean @default(true) // เปิดรับอยู่หรือไม่
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
+
 model Partner {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   type        String
-  logo        String?      // path รูป / URL logo
+  logo        String? // path รูป / URL logo
   website     String?
   facebookUrl String?
   description String?
-  status      String   @default("active")
+  status      String  @default("active")
 
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Model สำหรับเก็บข้อมูลรูปภาพที่อัพโหลดไปยัง Cloudflare Images
+model CloudflareImage {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  cloudflareId     String   @unique // ID ที่ Cloudflare ส่งกลับมา
+  filename         String // ชื่อไฟล์ต้นฉบับ
+  uploadedBy       String? // อาจเชื่อมกับ User ID ถ้าต้องการ
+  publicUrl        String // URL สำหรับเข้าถึงรูปภาพ
+  variants         String[] // URL ของ variants ต่างๆ (thumbnail, medium, large)
+
+  // Metadata
+  width            Int?
+  height           Int?
+  format           String? // jpg, png, webp, etc.
+  size             Int? // ขนาดไฟล์ (bytes)
+
+  // Reference ไปยัง entity ที่ใช้รูปนี้
+  relatedType      String? // "project" | "member" | "intern" | "partner" | etc.
+  relatedId        String? @db.ObjectId
+  fieldName        String? // "cover" | "avatar" | "logo" | "gallery" etc.
+
+  // จัดการ
+  isActive         Boolean  @default(true)
+  tags             String[] // tags สำหรับจัดการรูป
+
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([relatedType, relatedId])
+  @@index([uploadedBy])
 }

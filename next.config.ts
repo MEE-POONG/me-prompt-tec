@@ -6,14 +6,14 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https' as const, // ✅ แก้ตรงนี้: เติม as const ให้หายแดง
+        protocol: 'https' as const, // ✅
         hostname: 'imagedelivery.net',
         port: '',
         pathname: '/**',
       },
     ],
   },
-  
+
   experimental: {
     reactCompiler: true,
   },
