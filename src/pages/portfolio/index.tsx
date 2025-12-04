@@ -72,7 +72,7 @@ export default function Portfolio() {
             >
               {/* ลบส่วน Badge "Our Masterpieces" ออกแล้วตามที่ขอครับ */}
               
-              <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tight">
+              <h1 className="text-5xl md:text-5xl font-black mb-6 tracking-tight">
                 <span className="bg-clip-text text-transparent bg-linear-to-r from-blue-600 via-purple-600 to-pink-500 drop-shadow-sm">
                   ผลงานทั้งหมด
                 </span>
