@@ -3,20 +3,20 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
 
-//   images: {
-//     remotePatterns: [
-//       {
-//         protocol: 'https' as const, // ✅
-//         hostname: 'imagedelivery.net',
-//         port: '',
-//         pathname: '/**',
-//       },
-//     ],
-//   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https' as const, // ✅
+        hostname: 'imagedelivery.net',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
 
-//   experimental: {
-//     reactCompiler: true,
-//   },
-// };
+  experimental: {
+    reactCompiler: true,
+  },
+};
 
-// export default nextConfig;
+export default nextConfig;
