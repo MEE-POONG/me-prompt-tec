@@ -8,26 +8,27 @@ export default function Footer() {
     <footer className="relative z-10 mt-auto border-t border-purple-100 bg-white/80 backdrop-blur-xl pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+          
           {/* 1. Brand Info */}
           <div className="col-span-1 space-y-4">
             <Link href="/" className="flex items-center gap-3 group cursor-pointer">
               <div className="relative w-12 h-12 transition-transform group-hover:scale-105 duration-300">
                 <Image
                   src="/image/logo.png"
-                  alt="ME PROMPT TEC Logo"
+                  alt="ME PROMPT TECHNOLOGY Logo"
                   fill
                   className="object-contain"
                 />
               </div>
               <div className="flex flex-col justify-center">
-                <span className="text-xl font-extrabold tracking-tight leading-none">
-                  <span className="text-[#2563EB]">ME PROMPT</span>{" "}
-                  <span className="text-[#F97316]">TEC</span>
+                {/* ✅ เปลี่ยนชื่อและใส่ Gradient เหมือน Navbar */}
+                <span className="text-lg font-black tracking-tight leading-none bg-clip-text text-transparent bg-linear-to-r from-blue-600 via-violet-600 to-pink-500">
+                  ME PROMPT TEC
                 </span>
               </div>
             </Link>
 
-            <p className="text-slate-500 text-sm leading-relaxed mt-2">
+            <p className="text-slate-500 text-sm leading-relaxed mt-2 font-light">
               "มีพร้อมเทคโนโลยี" <br />
               พันธมิตรดิจิทัลที่จะช่วยขับเคลื่อนธุรกิจของคุณด้วยนวัตกรรมที่ทันสมัย
             </p>
