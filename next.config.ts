@@ -4,7 +4,14 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
 
   // Enable standalone output for Docker deployment
-  output: 'standalone',
+  // Temporarily disabled to test build
+  // output: 'standalone',
+
+  // Limit file tracing to project directory only (fixes EPERM errors)
+  // outputFileTracingRoot: __dirname,
+
+  // React Compiler (moved from experimental in Next.js 16)
+  reactCompiler: true,
 
   images: {
     remotePatterns: [
@@ -17,8 +24,29 @@ const nextConfig: NextConfig = {
     ],
   },
 
-  experimental: {
-    reactCompiler: true,
+  // Fix EPERM errors by excluding system folders
+  webpack: (config, { isServer }) => {
+    // Ignore system folders and symlinks
+    config.watchOptions = {
+      ...config.watchOptions,
+      ignored: [
+        '**/node_modules/**',
+        '**/.git/**',
+        '**/.next/**',
+        '**/Application Data/**',
+        '**/AppData/**',
+        'C:/Users/**/Application Data/**',
+        'C:/Users/**/AppData/**',
+      ],
+    };
+
+    // Disable symlinks resolution
+    config.resolve = {
+      ...config.resolve,
+      symlinks: false,
+    };
+
+    return config;
   },
 };
 

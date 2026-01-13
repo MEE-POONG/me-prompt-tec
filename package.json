@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --webpack",
     "build": "next build --webpack",
+    "build:test": "cross-env NEXT_PRIVATE_STANDALONE=false next build --webpack",
     "start": "next start"
   },
   "dependencies": {
