@@ -4,11 +4,10 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
 
   // Enable standalone output for Docker deployment
-  // Temporarily disabled to test build
-  // output: 'standalone',
+  output: 'standalone',
 
-  // Limit file tracing to project directory only (fixes EPERM errors)
-  // outputFileTracingRoot: __dirname,
+  // Limit file tracing to project directory only
+  outputFileTracingRoot: __dirname,
 
   // React Compiler (moved from experimental in Next.js 16)
   reactCompiler: true,
