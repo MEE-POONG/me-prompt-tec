@@ -10,30 +10,30 @@ interface HeroSectionProps {
 export default function HeroSection({ onScrollToNextSection }: HeroSectionProps) {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white text-slate-900 pt-32 md:pt-20">
-      
+
       {/* =========================================
           1. BACKGROUND: Clean & Bright
          ========================================= */}
-      
+
       {/* พื้นหลังขาวสะอาด */}
       <div className="absolute inset-0 -z-50 bg-white" />
 
       {/* Aurora Blobs */}
       <div className="absolute inset-0 -z-40 overflow-hidden opacity-60">
-        <motion.div 
+        <motion.div
           animate={{ x: [-20, 20, -20], y: [0, -20, 0], scale: [1, 1.1, 1] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -top-[10%] -left-[10%] w-[600px] h-[600px] bg-blue-200/40 rounded-full blur-[100px] mix-blend-multiply" 
+          className="absolute -top-[10%] -left-[10%] w-[600px] h-[600px] bg-blue-200/40 rounded-full blur-[100px] mix-blend-multiply"
         />
-        <motion.div 
+        <motion.div
           animate={{ x: [20, -20, 20], y: [0, 30, 0], scale: [1.1, 1, 1.1] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[10%] -right-[10%] w-[500px] h-[500px] bg-purple-200/40 rounded-full blur-[100px] mix-blend-multiply" 
+          className="absolute top-[10%] -right-[10%] w-[500px] h-[500px] bg-purple-200/40 rounded-full blur-[100px] mix-blend-multiply"
         />
-        <motion.div 
+        <motion.div
           animate={{ y: [0, -40, 0], scale: [1, 1.2, 1] }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -bottom-[20%] left-[20%] w-[700px] h-[700px] bg-pink-200/40 rounded-full blur-[120px] mix-blend-multiply" 
+          className="absolute -bottom-[20%] left-[20%] w-[700px] h-[700px] bg-pink-200/40 rounded-full blur-[120px] mix-blend-multiply"
         />
       </div>
 
@@ -46,7 +46,7 @@ export default function HeroSection({ onScrollToNextSection }: HeroSectionProps)
          ========================================= */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-16">
-          
+
           {/* ----- ฝั่งซ้าย: Text Content ----- */}
           <div className="flex-1 text-center lg:text-left z-20">
             <motion.div
@@ -58,7 +58,7 @@ export default function HeroSection({ onScrollToNextSection }: HeroSectionProps)
                 <span className="block text-slate-800 mb-2">
                   มีพร้อมเทคโนโลยี
                 </span>
-                
+
                 {/* Gradient Text */}
                 <span className="block bg-clip-text text-transparent bg-linear-to-r from-blue-600 via-violet-700 to-pink-500 drop-shadow-sm pb-1">
                   ME PROMPT TECHNOLOGY
@@ -66,7 +66,7 @@ export default function HeroSection({ onScrollToNextSection }: HeroSectionProps)
               </h1>
 
               <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto lg:mx-0 mb-10 leading-relaxed font-light">
-                เราออกแบบโซลูชันดิจิทัลแบบครบวงจร ตั้งแต่ระบบหลังบ้านจนถึงประสบการณ์ของผู้ใช้ 
+                เราออกแบบโซลูชันดิจิทัลแบบครบวงจร ตั้งแต่ระบบหลังบ้านจนถึงประสบการณ์ของผู้ใช้
                 เพื่อช่วยให้แบรนด์ของคุณ <strong className="text-slate-800 font-semibold">ก้าวทันโลกเทคโนโลยี</strong>
               </p>
 
@@ -95,9 +95,9 @@ export default function HeroSection({ onScrollToNextSection }: HeroSectionProps)
           {/* ----- ฝั่งขวา: Image ----- */}
           <div className="flex-1 flex justify-center lg:justify-end relative">
             <motion.div
-              animate={{ 
-                y: [-15, 15, -15], 
-              }} 
+              animate={{
+                y: [-15, 15, -15],
+              }}
               transition={{
                 repeat: Infinity,
                 duration: 5,
@@ -106,7 +106,7 @@ export default function HeroSection({ onScrollToNextSection }: HeroSectionProps)
               className="relative z-10 w-full max-w-[500px] lg:max-w-[750px]"
             >
               <Image
-                src="/image/Me.png"
+                src="/image/AceMe.png"
                 alt="ME Prompt Technology Illustration"
                 width={1400}
                 height={900}
@@ -120,7 +120,7 @@ export default function HeroSection({ onScrollToNextSection }: HeroSectionProps)
 
         </div>
       </div>
-      
+
     </section>
   );
 }

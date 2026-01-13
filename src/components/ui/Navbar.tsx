@@ -21,12 +21,12 @@ export default function FrontendNavbar() {
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl shadow-sm border-b border-white/40 py-3 transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
-          
+
           {/* Logo & Brand Name */}
           <Link href="/" className="flex items-center gap-3 group cursor-pointer">
             <div className="relative w-10 h-10 md:w-12 md:h-12 transition-transform group-hover:scale-105 duration-300">
               <Image
-                src="/image/logo.png"
+                src="/image/logo_new.png"
                 alt="ME PROMPT TECHNOLOGY Logo"
                 fill
                 className="object-contain"
@@ -48,17 +48,15 @@ export default function FrontendNavbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-bold transition-colors relative group ${
-                  isActive(link.href)
+                className={`text-sm font-bold transition-colors relative group ${isActive(link.href)
                     ? "text-purple-600"
                     : "text-slate-600 hover:text-purple-600"
-                }`}
+                  }`}
               >
                 {link.label}
                 <span
-                  className={`absolute -bottom-1 left-0 h-0.5 bg-purple-500 transition-all duration-300 ${
-                    isActive(link.href) ? "w-full" : "w-0 group-hover:w-full"
-                  }`}
+                  className={`absolute -bottom-1 left-0 h-0.5 bg-purple-500 transition-all duration-300 ${isActive(link.href) ? "w-full" : "w-0 group-hover:w-full"
+                    }`}
                 ></span>
               </Link>
             ))}
@@ -92,9 +90,8 @@ export default function FrontendNavbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-lg font-bold py-3 border-b border-slate-100 ${
-                  isActive(link.href) ? "text-purple-600" : "text-slate-800"
-                }`}
+                className={`text-lg font-bold py-3 border-b border-slate-100 ${isActive(link.href) ? "text-purple-600" : "text-slate-800"
+                  }`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.label}

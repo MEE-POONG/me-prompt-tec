@@ -8,13 +8,13 @@ export default function Footer() {
     <footer className="relative z-10 mt-auto border-t border-purple-100 bg-white/80 backdrop-blur-xl pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-          
+
           {/* 1. Brand Info */}
           <div className="col-span-1 space-y-4">
             <Link href="/" className="flex items-center gap-3 group cursor-pointer">
               <div className="relative w-12 h-12 transition-transform group-hover:scale-105 duration-300">
                 <Image
-                  src="/image/logo.png"
+                  src="/image/logo_new.png"
                   alt="ME PROMPT TECHNOLOGY Logo"
                   fill
                   className="object-contain"

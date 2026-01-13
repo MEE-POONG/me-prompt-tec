@@ -59,7 +59,7 @@ const PermissionSection = forwardRef(function PermissionSection(
           {/* ตัดพื้นหลังฟุ้ง ๆ ออก ให้โลโก้ลอยบนสีขาว */}
           <div className="flex flex-col items-center -space-y-1 sm:-space-y-2 w-fit">
             <Image
-              src="/image/logo.png"
+              src="/image/logo_new.png"
               alt="ME PROMPT TEC Logo"
               width={520}
               height={360}
