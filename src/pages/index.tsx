@@ -9,6 +9,7 @@ import PartnersSection from "@/container/Home/PartnersSection";
 import NewsletterSection from "@/container/Home/NewsletterSection";
 import PermissionSection from "@/container/Home/PermissionSection";
 import TeamSection from "@/container/Home/TeamSection";
+import InternSectionHome from "@/container/Home/InternSectionHome";
 import SectionWrapper from "@/components/SectionWrapper";
 
 export default function Home() {
@@ -30,6 +31,10 @@ export default function Home() {
 
       <SectionWrapper>
         <TeamSection />
+      </SectionWrapper>
+
+      <SectionWrapper>
+        <InternSectionHome />
       </SectionWrapper>
 
       <SectionWrapper>
