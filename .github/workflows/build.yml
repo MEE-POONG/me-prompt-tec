@@ -1,4 +1,4 @@
-name: Build Next.js Application
+name: Build and Deploy Next.js Docker
 
 on:
   push:
@@ -8,104 +8,88 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build-and-push:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      # ดึงชื่อ Repo มาทำเป็นตัวเล็ก (Lowercase) เพื่อใช้เป็นชื่อ Image
+      - id: string
+        uses: ASzc/change-string-case-action@v1
         with:
-          node-version: '20'
-          cache: 'npm'
+          string: ${{ github.event.repository.name }}
 
-      - name: Install dependencies
-        run: npm ci
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
 
-      - name: Generate Prisma Client
-        run: npx prisma generate
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-      - name: Build application
-        run: npm run build
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          JWT_SECRET: ${{ secrets.JWT_SECRET }}
-          JWT_REFRESH_SECRET: ${{ secrets.JWT_REFRESH_SECRET }}
-          NEXT_PUBLIC_APP_URL: ${{ secrets.NEXT_PUBLIC_APP_URL }}
-
-      - name: Upload build artifacts
-        uses: actions/upload-artifact@v4
+      # ล็อกอินเข้า Docker Hub เพื่อเตรียม Push Image
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
         with:
-          name: nextjs-build
-          path: |
-            .next/
-            public/
-          retention-days: 7
+          username: ${{ secrets.DOCKER_USERNAME }} # ใส่ Secret เพิ่ม
+          password: ${{ secrets.DOCKER_PASSWORD }} # ใส่ Secret เพิ่ม
 
-      - name: Build summary
-        run: |
-          echo "✅ Build completed successfully!"
-          echo "📦 Build size:"
-          du -sh .next
+      # สร้าง Docker Image และ Push ขึ้นไป
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: chunwarayut/${{ steps.string.outputs.lowercase }}:latest
+          # ส่ง Build Args หรือ Secrets เข้าไปใน Dockerfile (ถ้าจำเป็น)
+          build-args: |
+             NEXT_PUBLIC_APP_URL=${{ secrets.NEXT_PUBLIC_APP_URL }}
 
-deploy:
-    needs: build
+  deploy:
+    needs: build-and-push
     runs-on: ubuntu-latest
-
     steps:
       - id: string
         uses: ASzc/change-string-case-action@v1
         with:
           string: ${{ github.event.repository.name }}
 
-      - name: SSH Command docker pull
-        uses: D3rHase/ssh-command-action@v0.2.2
+      - name: Deploy to Server via SSH
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SERVER_HOST }}
-          user: ${{ secrets.SERVER_USER }}
-          private_key: ${{ secrets.SSH_KEY }}
-          command: docker pull chunwarayut/${{ steps.string.outputs.lowercase }}:latest
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          # รวมคำสั่งทั้งหมดเป็น Script เดียว เพื่อลดการ Connect หลายรอบ
+          script: |
+            echo "Login into Docker Registry (Optional if public)..."
+            # docker login ... (ถ้า Image เป็น Private)
 
-      - name: SSH Command docker stop
-        uses: D3rHase/ssh-command-action@v0.2.2
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          user: ${{ secrets.SERVER_USER }}
-          private_key: ${{ secrets.SSH_KEY }}
-          command: docker stop ${{ steps.string.outputs.lowercase }} || true
+            echo "Pulling new image..."
+            docker pull chunwarayut/${{ steps.string.outputs.lowercase }}:latest
 
-      - name: SSH Command docker rm
-        uses: D3rHase/ssh-command-action@v0.2.2
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          user: ${{ secrets.SERVER_USER }}
-          private_key: ${{ secrets.SSH_KEY }}
-          command: docker rm ${{ steps.string.outputs.lowercase }} || true
+            echo "Stopping old container..."
+            docker stop ${{ steps.string.outputs.lowercase }} || true
+            docker rm ${{ steps.string.outputs.lowercase }} || true
 
-      - name: SSH Command docker run
-        uses: D3rHase/ssh-command-action@v0.2.2
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          user: ${{ secrets.SERVER_USER }}
-          private_key: ${{ secrets.SSH_KEY }}
-          command: docker run --name ${{ steps.string.outputs.lowercase }} --label io.portainer.accesscontrol.teams=discord --restart=always -d -p 7075:3000 -e DATABASE_URL="${{ secrets.DATABASE_URL }}" -e JWT_SECRET="${{ secrets.JWT_SECRET }}" -e EXT_PUBLIC_SOCKET_URL="${{ secrets.EXT_PUBLIC_SOCKET_URL }}" -e REDIS_URL="${{ secrets.REDIS_URL }}" -e NODE_ENV="${{ secrets.NODE_ENV }}" --memory=512m --memory-swap=512m --cpus=1.5 --log-opt max-size=10m --log-opt max-file=3 chunwarayut/${{ steps.string.outputs.lowercase }}:latest
+            echo "Starting new container..."
+            docker run --name ${{ steps.string.outputs.lowercase }} \
+              --label io.portainer.accesscontrol.teams=discord \
+              --restart=always -d \
+              -p 7075:3000 \
+              -e DATABASE_URL="${{ secrets.DATABASE_URL }}" \
+              -e JWT_SECRET="${{ secrets.JWT_SECRET }}" \
+              -e CFIMG="${{ secrets.CFIMG }}" \
+              -e CLOUDFLARE_ACCOUNT_ID="${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" \
+              -e CLOUDFLARE_KEY="${{ secrets.CLOUDFLARE_KEY }}" \
+              -e CLOUDFLARE_API_TOKEN="${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+              -e MAIL_USER="${{ secrets.MAIL_USER }}" \
+              -e MAIL_PASS="${{ secrets.MAIL_PASS }}" \
+              -e NEXT_PUBLIC_BASE_URL="${{ secrets.NEXT_PUBLIC_BASE_URL }}" \
+              -e NODE_ENV="production" \
+              --memory=512m --memory-swap=512m --cpus=1.5 \
+              --log-opt max-size=10m --log-opt max-file=3 \
+              chunwarayut/${{ steps.string.outputs.lowercase }}:latest
 
-      - name: SSH Command docker image prune
-        uses: D3rHase/ssh-command-action@v0.2.2
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          user: ${{ secrets.SERVER_USER }}
-          private_key: ${{ secrets.SSH_KEY }}
-          command: docker image prune -a -f
-
-      - name: SSH Command docker logs
-        uses: D3rHase/ssh-command-action@v0.2.2
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          user: ${{ secrets.SERVER_USER }}
-          private_key: ${{ secrets.SSH_KEY }}
-          command: docker logs --timestamps --since=1h ${{ steps.string.outputs.lowercase }}
+            echo "Cleaning up..."
+            docker image prune -f
