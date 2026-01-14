@@ -1,10 +1,10 @@
-name: Build and Deploy Next.js Docker
+name: Build and Deploy Next.js App
 
 on:
   push:
-    branches: [ main, master, develop ]
+    branches: [ main, master ]
   pull_request:
-    branches: [ main, master, develop ]
+    branches: [ main, master ]
   workflow_dispatch:
 
 jobs:
@@ -14,82 +14,69 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # ดึงชื่อ Repo มาทำเป็นตัวเล็ก (Lowercase) เพื่อใช้เป็นชื่อ Image
-      - id: string
+      - id: repository-name
         uses: ASzc/change-string-case-action@v1
         with:
           string: ${{ github.event.repository.name }}
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      # ล็อกอินเข้า Docker Hub เพื่อเตรียม Push Image
-      - name: Login to Docker Hub
+      - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKER_USERNAME }} # ใส่ Secret เพิ่ม
-          password: ${{ secrets.DOCKER_PASSWORD }} # ใส่ Secret เพิ่ม
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
 
-      # สร้าง Docker Image และ Push ขึ้นไป
-      - name: Build and push
+      - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
-          tags: chunwarayut/${{ steps.string.outputs.lowercase }}:latest
-          # ส่ง Build Args หรือ Secrets เข้าไปใน Dockerfile (ถ้าจำเป็น)
+          tags: chunwarayut/${{ steps.repository-name.outputs.lowercase }}:latest
           build-args: |
-             NEXT_PUBLIC_APP_URL=${{ secrets.NEXT_PUBLIC_APP_URL }}
+            DATABASE_URL=${{ secrets.DATABASE_URL }}
 
   deploy:
     needs: build-and-push
+    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - id: string
+      - id: repository-name
         uses: ASzc/change-string-case-action@v1
         with:
           string: ${{ github.event.repository.name }}
 
-      - name: Deploy to Server via SSH
+      - name: Deploy via SSH
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SSH_KEY }}
-          port: 22
-          # รวมคำสั่งทั้งหมดเป็น Script เดียว เพื่อลดการ Connect หลายรอบ
           script: |
-            echo "Login into Docker Registry (Optional if public)..."
-            # docker login ... (ถ้า Image เป็น Private)
-
-            echo "Pulling new image..."
-            docker pull chunwarayut/${{ steps.string.outputs.lowercase }}:latest
-
-            echo "Stopping old container..."
-            docker stop ${{ steps.string.outputs.lowercase }} || true
-            docker rm ${{ steps.string.outputs.lowercase }} || true
-
-            echo "Starting new container..."
-            docker run --name ${{ steps.string.outputs.lowercase }} \
-              --label io.portainer.accesscontrol.teams=discord \
-              --restart=always -d \
+            # Pull new image
+            docker pull chunwarayut/${{ steps.repository-name.outputs.lowercase }}:latest
+            
+            # Stop and remove old container
+            docker stop ${{ steps.repository-name.outputs.lowercase }} || true
+            docker rm ${{ steps.repository-name.outputs.lowercase }} || true
+            
+            # Run new container
+            docker run -d \
+              --name ${{ steps.repository-name.outputs.lowercase }} \
+              --restart=always \
               -p 7075:3000 \
               -e DATABASE_URL="${{ secrets.DATABASE_URL }}" \
               -e JWT_SECRET="${{ secrets.JWT_SECRET }}" \
-              -e CFIMG="${{ secrets.CFIMG }}" \
-              -e CLOUDFLARE_ACCOUNT_ID="${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" \
-              -e CLOUDFLARE_KEY="${{ secrets.CLOUDFLARE_KEY }}" \
+              -e JWT_REFRESH_SECRET="${{ secrets.JWT_REFRESH_SECRET }}" \
+              -e NEXT_PUBLIC_APP_URL="${{ secrets.NEXT_PUBLIC_APP_URL }}" \
               -e CLOUDFLARE_API_TOKEN="${{ secrets.CLOUDFLARE_API_TOKEN }}" \
+              -e CLOUDFLARE_ACCOUNT_ID="${{ secrets.CLOUDFLARE_ACCOUNT_ID }}" \
+              -e CFIMG="${{ secrets.CFIMG }}" \
+              -e CLOUDFLARE_KEY="${{ secrets.CLOUDFLARE_KEY }}" \
               -e MAIL_USER="${{ secrets.MAIL_USER }}" \
               -e MAIL_PASS="${{ secrets.MAIL_PASS }}" \
-              -e NEXT_PUBLIC_BASE_URL="${{ secrets.NEXT_PUBLIC_BASE_URL }}" \
-              -e NODE_ENV="production" \
-              --memory=512m --memory-swap=512m --cpus=1.5 \
+              --memory=512m \
               --log-opt max-size=10m --log-opt max-file=3 \
-              chunwarayut/${{ steps.string.outputs.lowercase }}:latest
+              chunwarayut/${{ steps.repository-name.outputs.lowercase }}:latest
+            
+            # Clean up
+            docker image prune -a -f
 
-            echo "Cleaning up..."
-            docker image prune -f
