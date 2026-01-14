@@ -62,7 +62,7 @@ jobs:
             docker run -d \
               --name ${{ steps.repository-name.outputs.lowercase }} \
               --restart=always \
-              -p 7075:3000 \
+              -p 7076:3000 \
               -e DATABASE_URL="${{ secrets.DATABASE_URL }}" \
               -e JWT_SECRET="${{ secrets.JWT_SECRET }}" \
               -e JWT_REFRESH_SECRET="${{ secrets.JWT_REFRESH_SECRET }}" \
