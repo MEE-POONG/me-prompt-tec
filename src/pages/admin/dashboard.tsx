@@ -1,6 +1,5 @@
 
 import { AdminDashboard } from '@/container/Admin/AdminDashboard';
-import { useAuth } from '@/hooks/useAuth'; // We'll need to check if this hook exists or create it
 import { Loader2 } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
