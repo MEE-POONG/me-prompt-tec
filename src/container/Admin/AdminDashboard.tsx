@@ -17,6 +17,7 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
         messages: 0,
         members: 0
     });
+    const [recentApplications, setRecentApplications] = useState<any[]>([]);
 
     useEffect(() => {
         // Check if user is admin
@@ -25,15 +26,31 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
             return;
         }
 
-        // Simulate fetching stats (replace with actual API calls later)
-        setTimeout(() => {
-            setStats({
-                interns: 12, // Mock data
-                messages: 5,  // Mock data
-                members: 8    // Mock data
-            });
-            setLoading(false);
-        }, 800);
+        // Fetch real stats
+        const fetchStats = async () => {
+            try {
+                // Note: You need to include the token in the request headers if it's not handled by cookies/interceptor automatically
+                // Assuming token is in localStorage for this example, or relying on cookie-based auth if set up
+                const token = localStorage.getItem('accessToken');
+                const res = await fetch('/api/v1/admin/dashboard-stats', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                const data = await res.json();
+
+                if (data.success) {
+                    setStats(data.data.stats);
+                    setRecentApplications(data.data.recentInterns);
+                }
+            } catch (error) {
+                console.error("Failed to fetch dashboard stats", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchStats();
     }, [user, router]);
 
     if (loading) {
@@ -104,22 +121,31 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({ user }) => {
                                     </tr>
                                 </thead>
                                 <tbody className="text-slate-700">
-                                    <tr className="border-b last:border-0 hover:bg-slate-50 transition-colors">
-                                        <td className="py-4 px-2 font-medium">Somsak Jai-dee</td>
-                                        <td className="px-2">Frontend Developer</td>
-                                        <td className="px-2">RMUTI</td>
-                                        <td className="px-2 text-sm text-slate-500">Jan 16, 2026</td>
-                                        <td className="px-2"><span className="px-2 py-1 bg-yellow-100 text-yellow-700 rounded-full text-xs font-bold">New</span></td>
-                                        <td className="px-2"><Button variant="outline" size="sm">View</Button></td>
-                                    </tr>
-                                    <tr className="border-b last:border-0 hover:bg-slate-50 transition-colors">
-                                        <td className="py-4 px-2 font-medium">Malee Suay</td>
-                                        <td className="px-2">UX/UI Designer</td>
-                                        <td className="px-2">KKU</td>
-                                        <td className="px-2 text-sm text-slate-500">Jan 15, 2026</td>
-                                        <td className="px-2"><span className="px-2 py-1 bg-green-100 text-green-700 rounded-full text-xs font-bold">Reviewed</span></td>
-                                        <td className="px-2"><Button variant="outline" size="sm">View</Button></td>
-                                    </tr>
+                                    {recentApplications.map((intern) => (
+                                        <tr key={intern.id} className="border-b last:border-0 hover:bg-slate-50 transition-colors">
+                                            <td className="py-4 px-2 font-medium">
+                                                {intern.name.display || `${intern.name.first} ${intern.name.last}`}
+                                            </td>
+                                            <td className="px-2">{intern.major || '-'}</td>
+                                            <td className="px-2">{intern.university}</td>
+                                            <td className="px-2 text-sm text-slate-500">
+                                                {new Date(intern.createdAt).toLocaleDateString()}
+                                            </td>
+                                            <td className="px-2">
+                                                <span className={`px-2 py-1 rounded-full text-xs font-bold ${intern.status === 'published' ? 'bg-green-100 text-green-700' :
+                                                        intern.status === 'draft' ? 'bg-yellow-100 text-yellow-700' : 'bg-gray-100 text-gray-700'
+                                                    }`}>
+                                                    {intern.status}
+                                                </span>
+                                            </td>
+                                            <td className="px-2"><Button variant="outline" size="sm">View</Button></td>
+                                        </tr>
+                                    ))}
+                                    {recentApplications.length === 0 && (
+                                        <tr>
+                                            <td colSpan={6} className="py-8 text-center text-slate-500">No applications found.</td>
+                                        </tr>
+                                    )}
                                 </tbody>
                             </table>
                         </div>
