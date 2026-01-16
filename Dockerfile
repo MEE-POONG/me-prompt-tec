@@ -15,7 +15,7 @@ RUN \
   if [ -f pnpm-lock.yaml ]; then \
     corepack enable pnpm && pnpm i --frozen-lockfile; \
   elif [ -f package-lock.json ]; then \
-    npm ci; \
+    npm install; \
   else \
     npm i; \
   fi
