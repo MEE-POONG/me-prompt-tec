@@ -33,6 +33,7 @@ async function handler(req: AuthRequest, res: NextApiResponse) {
         email: true,
         role: true,
         isActive: true,
+        isVerified: true,
         createdAt: true,
         member: {
           select: {
