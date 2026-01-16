@@ -42,6 +42,7 @@ export default async function handler(
         passwordHash: true,
         role: true,
         isActive: true,
+        isVerified: true,
       },
     });
 
@@ -88,6 +89,7 @@ export default async function handler(
           id: user.id,
           email: user.email,
           role: user.role,
+          isVerified: user.isVerified,
         },
         accessToken,
         refreshToken,
