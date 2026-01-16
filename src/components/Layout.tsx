@@ -36,6 +36,23 @@ export default function Layout({
                 <title>{title}</title>
                 <meta name="description" content={description} />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta name="keywords" content="Me Prompt Technology, Software House, Web Development, Mobile App, AI, IoT, Digital Solution, Khon Kaen, รับทำเว็บไซต์, รับทำแอพพลิเคชั่น, ขอนแก่น" />
+                <meta name="author" content="Me Prompt Technology" />
+
+                {/* Open Graph / Facebook */}
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content="https://www.meprompt.tech/" />
+                <meta property="og:title" content={title} />
+                <meta property="og:description" content={description} />
+                <meta property="og:image" content="https://imagedelivery.net/QZ6TuL-3r02W7wQjQrv5DA/4500f402-5317-4976-905e-85191de7c700/public" />
+
+                {/* Twitter */}
+                <meta property="twitter:card" content="summary_large_image" />
+                <meta property="twitter:url" content="https://www.meprompt.tech/" />
+                <meta property="twitter:title" content={title} />
+                <meta property="twitter:description" content={description} />
+                <meta property="twitter:image" content="https://imagedelivery.net/QZ6TuL-3r02W7wQjQrv5DA/4500f402-5317-4976-905e-85191de7c700/public" />
+
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             {/* พื้นหลัง Aurora */}
