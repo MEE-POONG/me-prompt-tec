@@ -112,7 +112,7 @@ export default function InternSectionHome() {
                         <div className="grow border-t border-blue-600"></div>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                         {latestGenInterns.map((intern) => {
                             const displayName =
                                 intern.name.display ||
@@ -207,8 +207,8 @@ export default function InternSectionHome() {
                                 <button
                                     onClick={() => setViewMode("desktop")}
                                     className={`p-2 rounded-md ${viewMode === "desktop"
-                                            ? "bg-blue-600 text-white"
-                                            : "bg-gray-200 text-gray-600 hover:bg-gray-300"
+                                        ? "bg-blue-600 text-white"
+                                        : "bg-gray-200 text-gray-600 hover:bg-gray-300"
                                         } transition-colors`}
                                     aria-label="Desktop View"
                                 >
@@ -217,8 +217,8 @@ export default function InternSectionHome() {
                                 <button
                                     onClick={() => setViewMode("mobile")}
                                     className={`p-2 rounded-md ${viewMode === "mobile"
-                                            ? "bg-blue-600 text-white"
-                                            : "bg-gray-200 text-gray-600 hover:bg-gray-300"
+                                        ? "bg-blue-600 text-white"
+                                        : "bg-gray-200 text-gray-600 hover:bg-gray-300"
                                         } transition-colors`}
                                     aria-label="Mobile View"
                                 >
