@@ -20,7 +20,7 @@ export default function PartnersSection() {
       } catch (err) {
         console.error(err);
         setError(
-          "ไม่สามารถเชื่อมต่อกับระบบหลังบ้านได้ (กรุณาเปิด Server Port 3000)"
+          "ไม่สามารถเชื่อมต่อกับระบบหลังบ้านได้"
         );
       } finally {
         setLoading(false);
@@ -34,8 +34,8 @@ export default function PartnersSection() {
     partners.length === 1
       ? "grid-cols-1 max-w-md mx-auto"
       : partners.length === 2
-      ? "grid-cols-1 sm:grid-cols-2 max-w-3xl mx-auto"
-      : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto";
+        ? "grid-cols-1 sm:grid-cols-2 max-w-3xl mx-auto"
+        : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto";
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
