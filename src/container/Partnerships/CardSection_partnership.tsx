@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { getPartners, Partner } from "@/lib/partners-api";
@@ -55,7 +54,7 @@ export default function CardSection_partnership() {
       <div className="pointer-events-none absolute bottom-0 left-0 -ml-20 w-[500px] h-[500px] bg-purple-400/20 rounded-full blur-3xl opacity-50 mix-blend-multiply" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* Header Section */}
         <div className="text-center mb-16">
           <motion.div
@@ -64,13 +63,13 @@ export default function CardSection_partnership() {
             transition={{ duration: 0.6 }}
           >
             {/* ❌ ลบส่วน Academic Partners ออกแล้วครับ */}
-            
+
             <h1 className="text-4xl md:text-5xl font-black mb-6 tracking-tight">
               <span className="bg-clip-text text-transparent bg-linear-to-r from-blue-600 via-purple-600 to-pink-500 drop-shadow-sm">
                 ความร่วมมือกับสถาบันการศึกษา
               </span>
             </h1>
-            
+
             <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto font-light leading-relaxed">
               เราจับมือกับสถาบันชั้นนำเพื่อแลกเปลี่ยนองค์ความรู้ และร่วมกันพัฒนาศักยภาพคนรุ่นใหม่
               ให้พร้อมสำหรับการทำงานจริงในโลกเทคโนโลยี
@@ -90,23 +89,26 @@ export default function CardSection_partnership() {
             >
               {/* Glass Card Container */}
               <div className="h-full flex flex-col bg-white/70 backdrop-blur-xl border border-white/60 rounded-4xl overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(59,130,246,0.15)] transition-all duration-500 hover:-translate-y-2">
-                
+
                 {/* Logo Area */}
                 <div className="relative h-56 w-full bg-linear-to-b from-white to-slate-50/50 flex items-center justify-center p-8 group-hover:from-blue-50/30 group-hover:to-purple-50/30 transition-colors duration-500">
                   {/* Decorative Circle BG */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 scale-90 group-hover:scale-100">
                     <div className="w-40 h-40 bg-white rounded-full shadow-inner blur-xl" />
                   </div>
-                  
+
                   {/* Logo Image */}
                   <div className="relative w-full h-full flex items-center justify-center z-10 transition-transform duration-500 group-hover:scale-110">
                     {partner.logo ? (
-                      <Image
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
                         src={partner.logo}
                         alt={partner.name}
-                        width={200}
-                        height={200}
                         className="object-contain max-h-full drop-shadow-md"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).style.display = 'none';
+                          (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
+                        }}
                       />
                     ) : (
                       <div className="text-slate-300 font-bold text-xl">NO LOGO</div>
