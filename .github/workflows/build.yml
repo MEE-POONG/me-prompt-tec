@@ -61,6 +61,7 @@ jobs:
             # Run new container
             docker run -d \
               --name ${{ steps.repository-name.outputs.lowercase }} \
+              --network kong_kong-net \
               --restart=always \
               -p 7076:3000 \
               -e DATABASE_URL="${{ secrets.DATABASE_URL }}" \
