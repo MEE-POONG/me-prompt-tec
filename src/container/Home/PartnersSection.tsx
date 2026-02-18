@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { FaFacebook, FaExternalLinkAlt } from "react-icons/fa";
 import { motion, Variants } from "framer-motion";
@@ -111,12 +110,14 @@ export default function PartnersSection() {
             >
               {/* ---------- โซนรูปโลโก้ (ขยายให้เต็มกรอบมากขึ้น) ---------- */}
               <div className="relative w-full h-52 sm:h-60 md:h-64 px-4 sm:px-6 py-6 flex items-center justify-center bg-slate-50 group-hover:bg-slate-100/70 transition-colors duration-300">
-                <Image
-                  src={partner.logo || "/img/logo-placeholder.png"}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={partner.logo || "/image/logo.png"}
                   alt={partner.name}
-                  width={400}
-                  height={400}
                   className="w-full h-full max-w-full max-h-full object-contain drop-shadow-md transition-all duration-500 group-hover:scale-[1.06] group-hover:drop-shadow-xl"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/image/logo.png';
+                  }}
                 />
 
                 {/* Overlay ตอน Hover */}

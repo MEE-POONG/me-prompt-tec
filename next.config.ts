@@ -15,8 +15,20 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https' as const, // ✅
+        protocol: 'https' as const,
         hostname: 'imagedelivery.net',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https' as const,
+        hostname: '**', // Allow all HTTPS domains for partner logos
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'http' as const,
+        hostname: '**', // Allow all HTTP domains
         port: '',
         pathname: '/**',
       },
