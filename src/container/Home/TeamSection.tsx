@@ -8,6 +8,25 @@ import { FaXTwitter } from "react-icons/fa6";
 // (ต้อง npm install lucide-react ถ้ายังไม่มี)
 import { FolderKanban, X, Smartphone, Monitor } from "lucide-react"; // ⬅️ เพิ่ม Monitor, Smartphone
 
+const DEFAULT_AVATAR = "/image/default-avatar.svg";
+
+// Sub-component with image error fallback
+function MemberPhoto({ src, alt }: { src: string | undefined | null; alt: string }) {
+  const [imgSrc, setImgSrc] = useState<string>(src || DEFAULT_AVATAR);
+  return (
+    <Image
+      className="transition-transform duration-500 ease-in-out group-hover:scale-110"
+      src={imgSrc}
+      alt={alt}
+      fill
+      style={{ objectFit: "cover" }}
+      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      priority={false}
+      onError={() => setImgSrc(DEFAULT_AVATAR)}
+    />
+  );
+}
+
 export default function TeamSection() {
   // State สำหรับข้อมูล Members จาก API
   const [members, setMembers] = useState<Member[]>([]);
@@ -129,15 +148,7 @@ export default function TeamSection() {
                 className="relative aspect-9/12 rounded-2xl overflow-hidden shadow-xl w-full transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl group"
               >
                 {/* (Image - เหมือนเดิม) */}
-                <Image
-                  className="transition-transform duration-500 ease-in-out group-hover:scale-110"
-                  src={member.photo || "/image/default-avatar.jpg"}
-                  alt={displayName}
-                  fill
-                  style={{ objectFit: "cover" }}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  priority={false}
-                />
+                <MemberPhoto src={member.photo} alt={displayName} />
 
                 {/* (Overlay - เหมือนเดิม) */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 bg-linear-to-t from-black/80 via-black/60 to-transparent backdrop-blur-sm text-white transition-all duration-500 ease-in-out translate-y-full group-hover:translate-y-0">
@@ -250,22 +261,20 @@ export default function TeamSection() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => setViewMode("desktop")}
-                  className={`p-2 rounded-md ${
-                    viewMode === "desktop"
+                  className={`p-2 rounded-md ${viewMode === "desktop"
                       ? "bg-blue-600 text-white"
                       : "bg-gray-200 text-gray-600 hover:bg-gray-300"
-                  } transition-colors`}
+                    } transition-colors`}
                   aria-label="Desktop View"
                 >
                   <Monitor size={18} />
                 </button>
                 <button
                   onClick={() => setViewMode("mobile")}
-                  className={`p-2 rounded-md ${
-                    viewMode === "mobile"
+                  className={`p-2 rounded-md ${viewMode === "mobile"
                       ? "bg-blue-600 text-white"
                       : "bg-gray-200 text-gray-600 hover:bg-gray-300"
-                  } transition-colors`}
+                    } transition-colors`}
                   aria-label="Mobile View"
                 >
                   <Smartphone size={18} />
