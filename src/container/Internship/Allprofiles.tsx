@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { X, Smartphone, Monitor } from "lucide-react";
+import Image from "next/image";
+import { FaInstagram, FaGithub } from "react-icons/fa";
+import { FolderKanban, X, Smartphone, Monitor } from "lucide-react";
 import { Intern } from "@/types/intern";
-import InternCard from "@/components/InternCard";
 
 interface AllProfilesProps {
   interns: Intern[];
@@ -120,11 +121,78 @@ export default function AllProfiles({ }: AllProfilesProps) {
             </div>
 
             <div className="grid gap-8 justify-center grid-cols-[repeat(auto-fit,minmax(280px,auto))]">
-              {groupedInterns[gen].map((intern) => (
-                <div key={intern.id} className="w-[280px]">
-                  <InternCard intern={intern} onOpenModal={openModal} />
-                </div>
-              ))}
+              {groupedInterns[gen].map((intern) => {
+                const displayName =
+                  intern.name.display ||
+                  `${intern.name.first} ${intern.name.last}`;
+                const portfolioUrl = intern.portfolioSlug
+                  ? `https://portfolio.example.com/${intern.portfolioSlug}`
+                  : null;
+                const instagramUrl = intern.contact?.email
+                  ? `https://instagram.com/${intern.contact.email}`
+                  : null;
+                const githubUrl = intern.resume?.links?.find((link) =>
+                  link.label.toLowerCase().includes("github")
+                )?.url;
+
+                return (
+                  <div
+                    key={intern.id}
+                    className="w-[280px] relative aspect-9/12 rounded-2xl overflow-hidden shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-2 hover:shadow-2xl group"
+                  >
+                    <Image
+                      className="transition-transform duration-500 ease-in-out group-hover:scale-110"
+                      src={intern.avatar || "/image/default-avatar.jpg"}
+                      alt={displayName}
+                      fill
+                      style={{ objectFit: "cover" }}
+                    />
+
+                    <div className="absolute bottom-0 left-0 right-0 p-6 bg-linear-to-t from-black/80 via-black/60 to-transparent backdrop-blur-sm text-white transition-all duration-500 ease-in-out translate-y-full group-hover:translate-y-0">
+                      <h2 className="text-2xl font-bold text-white mb-1">
+                        {displayName}
+                      </h2>
+                      <p className="text-md font-medium text-blue-300 mb-4">
+                        {intern.major || "นักศึกษาฝึกงาน"}
+                      </p>
+
+                      <div className="flex justify-center gap-5 mt-4">
+                        {instagramUrl && (
+                          <a
+                            href={instagramUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-white/80 hover:text-white transition-all duration-300 ease-in-out hover:-translate-y-1"
+                            aria-label={`${displayName} Instagram`}
+                          >
+                            <FaInstagram size={24} />
+                          </a>
+                        )}
+                        {githubUrl && (
+                          <a
+                            href={githubUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-white/80 hover:text-white transition-all duration-300 ease-in-out hover:-translate-y-1"
+                            aria-label={`${displayName} GitHub`}
+                          >
+                            <FaGithub size={24} />
+                          </a>
+                        )}
+                        {portfolioUrl && (
+                          <button
+                            onClick={() => openModal(portfolioUrl)}
+                            className="text-white/80 hover:text-white transition-all duration-300 ease-in-out hover:-translate-y-1"
+                            aria-label={`${displayName} Portfolio`}
+                          >
+                            <FolderKanban size={24} />
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         ))}

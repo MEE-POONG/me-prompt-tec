@@ -55,7 +55,24 @@ async function handleGet(req: NextApiRequest, res: NextApiResponse) {
     orderBy: { createdAt: "desc" },
   });
 
-  return res.status(200).json({ data: partners });
+  // 👇 ดึงรูปภาพจาก CloudflareImage มาแปะ (ถ้าใน Partner.logo ยังไม่มี)
+  const partnerIds = partners.map((p) => p.id);
+  const cloudImages = await (prisma as any).cloudflareImage.findMany({
+    where: {
+      relatedId: { in: partnerIds },
+      relatedType: "partner",
+    },
+  });
+
+  const partnersWithImages = partners.map((partner) => {
+    const img = cloudImages.find((ci: any) => ci.relatedId === partner.id);
+    return {
+      ...partner,
+      logo: partner.logo || img?.publicUrl || null,
+    };
+  });
+
+  return res.status(200).json({ data: partnersWithImages });
 }
 
 // POST: สร้างพันธมิตรใหม่

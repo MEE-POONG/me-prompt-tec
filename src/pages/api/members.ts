@@ -64,10 +64,27 @@ export default async function handler(
       prisma.member.count({ where }),
     ]);
 
+    // 👇 ดึงรูปภาพจาก CloudflareImage มาแปะ (ถ้าใน Member.photo ยังไม่มี)
+    const memberIds = members.map((m) => m.id);
+    const cloudImages = await (prisma as any).cloudflareImage.findMany({
+      where: {
+        relatedId: { in: memberIds },
+        relatedType: 'member',
+      },
+    });
+
+    const membersWithImages = members.map((member) => {
+      const img = cloudImages.find((ci: any) => ci.relatedId === member.id);
+      return {
+        ...member,
+        photo: member.photo || img?.publicUrl || null,
+      };
+    });
+
     return res.status(200).json({
       success: true,
       data: {
-        members,
+        members: membersWithImages,
         pagination: {
           total,
           page: pageNum,

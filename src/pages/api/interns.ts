@@ -71,10 +71,27 @@ export default async function handler(
       prisma.intern.count({ where }),
     ]);
 
+    // 👇 ดึงรูปภาพจาก CloudflareImage มาแปะ (ถ้าใน Intern.avatar ยังไม่มี)
+    const internIds = interns.map((m) => m.id);
+    const cloudImages = await (prisma as any).cloudflareImage.findMany({
+      where: {
+        relatedId: { in: internIds },
+        relatedType: "intern",
+      },
+    });
+
+    const internsWithImages = interns.map((intern) => {
+      const img = cloudImages.find((ci: any) => ci.relatedId === intern.id);
+      return {
+        ...intern,
+        avatar: intern.avatar || img?.publicUrl || null,
+      };
+    });
+
     return res.status(200).json({
       success: true,
       data: {
-        interns,
+        interns: internsWithImages,
         pagination: {
           total,
           page: pageNum,
